@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "guru-able-v1.7.0": {
+    "engineerschoice": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -54,18 +54,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "guru-able-v1.7.0:build"
+            "browserTarget": "engineerschoice:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "guru-able-v1.7.0:build:production"
+              "browserTarget": "engineerschoice:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "guru-able-v1.7.0:build"
+            "browserTarget": "engineerschoice:build"
           }
         },
         "test": {
@@ -112,7 +112,7 @@
         }
       }
     },
-    "guru-able-v1.7.0-e2e": {
+    "engineerschoice-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -121,7 +121,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "guru-able-v1.7.0:serve"
+            "devServerTarget": "engineerschoice:serve"
           }
         },
         "lint": {
@@ -138,7 +138,7 @@
       }
     }
   },
-  "defaultProject": "guru-able-v1.7.0",
+  "defaultProject": "engineerschoice",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

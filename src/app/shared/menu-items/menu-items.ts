@@ -186,7 +186,7 @@ const MENUITEMS = [
       {
         state: 'Upgrade To Pro',
         short_label: 'U',
-        external: 'https://codedthemes.com/item/guru-able-admin-template/',
+        // external: 'https://codedthemes.com/item/guru-able-admin-template/',
         name: 'Upgrade To Pro',
         type: 'external',
         icon: 'ti-layout-list-post',

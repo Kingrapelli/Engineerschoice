@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('guru-able-v1.7.0 App', () => {
+describe('engineerschoice App', () => {
   let page: AppPage;
 
   beforeEach(() => {
