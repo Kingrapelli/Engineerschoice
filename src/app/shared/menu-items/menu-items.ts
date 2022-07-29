@@ -183,9 +183,9 @@ const MENUITEMS = [
         role:'',
         children: [
           {
-            state: 'univercities',
+            state: 'universities',
             short_label: 'U',
-            name: 'Univercities',
+            name: 'Universities',
             type: 'link',
             icon: 'ti-user',
             role:''
@@ -193,7 +193,7 @@ const MENUITEMS = [
         ]
       },
       {
-        state: 'book',
+        state: 'booking',
         short_label: 'A',
         name: 'Booking Section',
         type: 'sub',
@@ -201,20 +201,20 @@ const MENUITEMS = [
         role:'',
         children: [
           {
-            state: 'bookatrain',
+            state: 'train',
             type: 'link',
             name: 'Book a Train',
-            target: true
+            // target: true
           },{
-            state: 'bookaFlight',
+            state: 'flight',
             type: 'link',
             name: 'Book a Flight',
-            target: true
+            // target: true
           },{
-            state: 'bookaHotel',
+            state: 'hotel',
             type: 'link',
             name: 'Book a Hotel',
-            target: true
+            // target: true
           }
         ]
       },

@@ -5,12 +5,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes:Routes=[
   {
-    path:'univercities',
+    path:'universities',
     component:UnivercitiesComponent,
     data: {
-      breadcrumb: 'Univercities',
+      breadcrumb: 'Universities',
       icon: 'icofont-justify-all bg-c-green',
-      breadcrumb_caption: 'Below are list of Univercities',
+      breadcrumb_caption: 'Below are list of Universities',
       status: true
     }
   }

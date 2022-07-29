@@ -24,7 +24,7 @@ export class UnivercitiesComponent implements OnInit {
     const search = (this.search_univercities.nativeElement.value).toLowerCase();
     let search_input: string;
     let search_parent: any;
-    const friendList = document.querySelectorAll('.card .card-body .card-title');
+    const friendList = document.querySelectorAll('.card .card-body');
     Array.prototype.forEach.call(friendList, function(elements, index) {
       search_input = (elements.innerHTML).toLowerCase();
       search_parent = (elements.parentNode).parentNode;
