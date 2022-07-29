@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import '../../../../assets/charts/amchart/amcharts.js';
 import '../../../../assets/charts/amchart/gauge.js';
@@ -26,7 +26,8 @@ export class DashboardDefaultComponent implements OnInit {
   totalValueGraphData2 = buildChartJS('#fff', [10, 25, 35, 20, 10, 20, 15, 45, 15, 10], '#e55571', 'transparent');
   totalValueGraphOption = buildChartOption();
   localData:any;
-  constructor(private router:Router,private service:AuthService) { }
+  notifications:any;
+  constructor(private router:Router,private service:AuthService,private cdRef:ChangeDetectorRef) { }
 
   ngOnInit() {
     
@@ -299,8 +300,8 @@ export class DashboardDefaultComponent implements OnInit {
     });
   }
 
-  public get allData(){
-    return 
+  public get widgetCardsData(){
+    return this.service.widgetCardsData;
   }
 
   onTaskStatusChange(event) {

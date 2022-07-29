@@ -205,11 +205,11 @@
                       <div class="media-body">
                         <h5 class="notification-user">{{notification.userName}}</h5>
                         <p class="notification-msg">{{notification.message}}</p>
-                        <span class="notification-time">30 minutes ago</span>
+                        <span class="notification-time">{{notification.sentAt | date:'dd/MM/yy h:mm:ss a'}}</span>
                       </div>
                     </div>
                   </li>
-                  <li *ngIf="this.allNotifications == ( null || undefined)">
+                  <li *ngIf="this.allNotifications == ( null || undefined )">
                         <p class="notification-msg">No notifications found</p>
                   </li>
                   <!-- <li>
@@ -384,7 +384,7 @@
                   <div class="">
                     <div>
                       <p class="chat-cont">{{chatData.message}}</p>
-                      <p class="chat-time">{{chatData.sentAt | date:'hh:mm'}}</p>
+                      <p class="chat-time">{{chatData.sentAt | date:'hh:mm a'}}</p>
                     </div>
                   </div>
                 </div>
@@ -394,7 +394,7 @@
                   <div class="">
                     <div>
                       <p class="chat-cont">{{chatData.message}}</p>
-                      <p class="chat-time">{{chatData.sentAt | date:'hh:mm'}}</p>
+                      <p class="chat-time">{{chatData.sentAt | date:'hh:mm a'}}</p>
                     </div>
                   </div>
                 </div>

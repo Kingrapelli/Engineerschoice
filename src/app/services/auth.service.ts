@@ -18,8 +18,13 @@ export class AuthService {
   img6:any;
   img7:any;
   chat = [  ];
+  count:any =  0;
+  widgetCardsData:any={
+    count : this.count
+  };
   notifications = [
   ];
+  from = new Date();
   constructor(private router:Router) { 
     this.img1='/assets/images/avatar-1.jpg';
     this.img2='/assets/images/avatar-2.jpg';
@@ -139,10 +144,26 @@ export class AuthService {
       message : tmpCategoryMsg,
       userName : userData.firstName,
       userImage : userData.image,
-      sentTo : sendTo
+      sentTo : sendTo,
+      category : category,
+      sentAt : this.from.toUTCString()
     }
     this.notifications.unshift(tempNotification);
     console.log(this.notifications);
     localStorage.setItem('notifications',JSON.stringify(this.notifications));
+    this.getWidgetCardsData();
   }
+
+  getWidgetCardsData(){
+    this.notifications = JSON.parse(localStorage.getItem('notifications'));
+    for(let notification of this.notifications){
+      if(notification.category == 'Query'){
+        this.count++;
+      }
+    }
+    this.widgetCardsData = {
+      count : this.count
+    }
+  }
+
 }
