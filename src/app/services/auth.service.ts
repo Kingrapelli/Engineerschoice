@@ -82,7 +82,7 @@ export class AuthService {
         id : 3,
         "email":'superadmin@gmail.com',
         "username":'superAdmin',
-        "password": 'superAdmin',
+        "password": 'superAdmin@123',
         "loggedin": false,
         "active": false,
         "firstName": 'Super Admin',

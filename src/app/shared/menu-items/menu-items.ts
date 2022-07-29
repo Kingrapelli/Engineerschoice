@@ -24,6 +24,7 @@ export interface MainMenuItems {
   badge?: BadgeItem[];
   children?: ChildrenItems[];
   external?:any;
+  role?:any;
 }
 
 export interface Menu {
@@ -40,55 +41,104 @@ const MENUITEMS = [
         short_label: 'D',
         name: 'Dashboard',
         type: 'link',
-        icon: 'ti-home'
+        icon: 'ti-home',
+        role : ''
       },
       {
         state: 'basic',
         short_label: 'B',
-        name: 'Basic Components',
+        name: 'Notifications',
         type: 'sub',
         icon: 'ti-layout-grid2-alt',
+        role: '',
         children: [
           {
-            state: 'button',
-            name: 'Button'
+            state: 'government',
+            name: 'Government',
+            type: 'sub',
+            children: [
+              {
+                state: 'all',
+                name: 'All',
+                target : true
+              },
+              {
+                state: 'bySSC',
+                name: 'Based on SSC',
+                target : true
+              },
+              {
+                state: 'byDiploma',
+                name: 'Based on Diploma',
+                target : true
+              },
+              {
+                state: 'bySSC',
+                name: 'Based on SSC',
+                target : true
+              },
+              {
+                state: 'byGraduation',
+                name: 'Based on Graduation',
+                target : true
+              }
+            ]
           },
           {
-            state: 'typography',
-            name: 'Typography'
+            state: 'private',
+            name: 'Private',
+            type: 'sub',
+            children :[
+              {
+                state: 'it',
+                name: 'IT Sector',
+                target : true
+              },
+              {
+                state: 'civil',
+                name: 'Civil Sector',
+                target : true
+              }
+            ]
           }
         ]
       },
       {
-        state: 'notifications',
+        state: 'results',
         short_label: 'n',
-        name: 'Notifications',
+        name: 'Results',
         type: 'link',
-        icon: 'ti-crown'
+        icon: 'ti-crown',
+        role: ''
+      },
+      {
+        state: 'audits',
+        short_label: 'n',
+        name: 'Audits',
+        type: 'link',
+        icon: 'ti-layout-sidebar-left',
+        role : 'Super Admin'
       },
     ],
   },
   {
-    label: 'Tables',
-    main: [
-      {
-        state: 'bootstrap-table',
-        short_label: 'B',
-        name: 'Bootstrap Table',
-        type: 'link',
-        icon: 'ti-receipt'
-      }
-    ]
-  },
-  {
-    label: 'Map And Extra Pages ',
+    label: 'Career Growth',
     main: [
       {
         state: 'map',
         short_label: 'M',
-        name: 'Maps',
+        name: 'Career Map',
         type: 'link',
-        icon: 'ti-map-alt'
+        icon: 'ti-map-alt',
+        role:''
+      },
+      {
+        state: 'learn',
+        short_label: 'M',
+        name: 'Learn',
+        type: 'link',
+        icon: 'ti-receipt',
+        role:''
       },
       {
         state: 'authentication',
@@ -96,6 +146,7 @@ const MENUITEMS = [
         name: 'Authentication',
         type: 'sub',
         icon: 'ti-id-badge',
+        role:'',
         children: [
           {
             state: 'login',
@@ -115,7 +166,78 @@ const MENUITEMS = [
         short_label: 'U',
         name: 'User Profile',
         type: 'link',
-        icon: 'ti-user'
+        icon: 'ti-user',
+        role:''
+      }
+    ]
+  },
+  {
+    label: 'Find Out',
+    main: [
+      { 
+        state: 'findout',
+        short_label: 'A',
+        name: 'Colleges',
+        type: 'sub',
+        icon: 'ti-id-badge',
+        role:'',
+        children: [
+          {
+            state: 'univercities',
+            short_label: 'U',
+            name: 'Univercities',
+            type: 'link',
+            icon: 'ti-user',
+            role:''
+          }
+        ]
+      },
+      {
+        state: 'book',
+        short_label: 'A',
+        name: 'Booking Section',
+        type: 'sub',
+        icon: 'ti-id-badge',
+        role:'',
+        children: [
+          {
+            state: 'bookatrain',
+            type: 'link',
+            name: 'Book a Train',
+            target: true
+          },{
+            state: 'bookaFlight',
+            type: 'link',
+            name: 'Book a Flight',
+            target: true
+          },{
+            state: 'bookaHotel',
+            type: 'link',
+            name: 'Book a Hotel',
+            target: true
+          }
+        ]
+      },
+    ]
+  },
+  {
+    label: 'Jobs',
+    main: [
+      {
+        state: 'find-Jobs',
+        short_label: 'B',
+        name: 'Find Jobs',
+        type: 'link',
+        icon: 'ti-receipt',
+        role:''
+      },
+      {
+        state: 'events',
+        short_label: 'B',
+        name: 'Events',
+        type: 'link',
+        icon: 'ti-receipt',
+        role:''
       }
     ]
   },
@@ -128,6 +250,7 @@ const MENUITEMS = [
         name: 'Menu Levels',
         type: 'sub',
         icon: 'ti-direction-alt',
+        role:'',
         children: [
           {
             state: '',
@@ -177,7 +300,8 @@ const MENUITEMS = [
         short_label: 'S',
         name: 'Simple Page',
         type: 'link',
-        icon: 'ti-layout-sidebar-left'
+        icon: 'ti-layout-sidebar-left',
+        role:''
       }
     ]
   }, {
@@ -190,7 +314,8 @@ const MENUITEMS = [
         name: 'Upgrade To Pro',
         type: 'external',
         icon: 'ti-layout-list-post',
-        target: true
+        target: true,
+        role:''
       }
     ]
   }

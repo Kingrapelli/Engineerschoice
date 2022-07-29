@@ -27,6 +27,8 @@ export class DashboardDefaultComponent implements OnInit {
   totalValueGraphOption = buildChartOption();
   localData:any;
   notifications:any;
+  userData:any;
+  allUsers:any;
   constructor(private router:Router,private service:AuthService,private cdRef:ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -298,6 +300,8 @@ export class DashboardDefaultComponent implements OnInit {
         }
       ]
     });
+    this.userData = JSON.parse(localStorage.getItem('user'));
+    this.allUsers = JSON.parse(localStorage.getItem('users'));
   }
 
   public get widgetCardsData(){

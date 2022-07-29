@@ -48,7 +48,11 @@ const routes: Routes = [
       }, {
         path: 'simple-page',
         loadChildren: () => import('./pages/simple-page/simple-page.module').then(m => m.SimplePageModule)
-      }
+      },
+      {
+        path :'findout',
+        loadChildren:()=>import('./findout/findout.module').then(m=> m.FindoutModule)
+      },
     ]
   }
 ];

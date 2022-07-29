@@ -18,7 +18,7 @@
             <i class="ti-menu"></i>
           </a>
           <a [routerLink]="['/']">
-            <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo"/>
+            <img class="img-fluid" src="assets/images/images.png" alt="Theme-Logo" height="40px" width="200px" />
           </a>
           <a (click)="onMobileMenu()" class="mobile-options">
             <i class="ti-more"></i>
@@ -192,7 +192,7 @@
               <li class="header-notification">
                 <a href="javascript:;">
                   <i class="ti-bell"></i>
-                  <span class="badge bg-c-pink"></span>
+                  <span *ngIf="allNotifications != ''" class="badge bg-c-pink"></span>
                 </a>
                 <ul class="show-notification">
                   <li>
