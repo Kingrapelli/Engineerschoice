@@ -211,7 +211,7 @@ export class AdminComponent implements OnInit {
     }
     // console.log(tmpNotifications);
     // return this.notifications;
-    return tmpNotifications;
+    return (tmpNotifications || '');
   }
 
   async sendToAdmin(){
