@@ -183,13 +183,29 @@ const MENUITEMS = [
         role:'',
         children: [
           {
+            state: 'intermediate',
+            short_label: 'U',
+            name: 'Intermediate',
+            type: 'link',
+            icon: 'ti-user',
+            role:''
+          },
+          {
+            state: 'polytechnic',
+            short_label: 'U',
+            name: 'Diploma',
+            type: 'link',
+            icon: 'ti-user',
+            role:''
+          },
+          {
             state: 'universities',
             short_label: 'U',
             name: 'Universities',
             type: 'link',
             icon: 'ti-user',
             role:''
-          }
+          },
         ]
       },
       {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -27,18 +28,19 @@ export class ProfileComponent implements OnInit {
 
   public basicContent: string;
 
-
+  routedUser:any;
   public rowsOnPage = 10;
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
   profitChartOption: any;
   userData:any;
-  constructor() {
+  constructor(private service:AuthService) {
   }
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('user'));
+    this.routedUser = this.service.routedUser;
   }
 
   toggleEditProfile() {
@@ -50,5 +52,7 @@ export class ProfileComponent implements OnInit {
     this.editAboutIcon = (this.editAboutIcon === 'icofont-close') ? 'icofont-edit' : 'icofont-close';
     this.editAbout = !this.editAbout;
   }
-
+  ngOnDestroy(){
+    this.routedUser='';
+  }
 }

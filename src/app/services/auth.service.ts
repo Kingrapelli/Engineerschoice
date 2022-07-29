@@ -24,6 +24,7 @@ export class AuthService {
   };
   notifications = [
   ];
+  routedUser:any = '';
   from = new Date();
   constructor(private router:Router) { 
     this.img1='/assets/images/avatar-1.jpg';
@@ -166,6 +167,11 @@ export class AuthService {
     this.widgetCardsData = {
       count : count
     }
+  }
+
+  getRoutedUser(routedUser){
+    this.routedUser=routedUser;
+    this.router.navigate(['/user']);
   }
 
 }
