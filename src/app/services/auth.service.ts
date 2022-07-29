@@ -130,6 +130,7 @@ export class AuthService {
   }
 
   sendingMessageToAdmin(payload,id,sendTo,category){
+  let _from = new Date();
     console.log("payload",payload,id);
     let tmpCategoryMsg = '';
     if(category == 'Query'){
@@ -146,7 +147,7 @@ export class AuthService {
       userImage : userData.image,
       sentTo : sendTo,
       category : category,
-      sentAt : this.from.toUTCString()
+      sentAt : _from.toUTCString()
     }
     this.notifications.unshift(tempNotification);
     console.log(this.notifications);
@@ -155,14 +156,15 @@ export class AuthService {
   }
 
   getWidgetCardsData(){
+    let count = 0;
     this.notifications = JSON.parse(localStorage.getItem('notifications'));
     for(let notification of this.notifications){
       if(notification.category == 'Query'){
-        this.count++;
+        count++;
       }
     }
     this.widgetCardsData = {
-      count : this.count
+      count : count
     }
   }
 
