@@ -1,0 +1,85 @@
+<div class="row">
+    <span class="col-sm-12">
+        <div class="card-body">
+            <div class="right-icon-control">
+              <input class="form-control search-text" placeholder="Search Hotel or Location"
+               id="search-friends" #searchHotels (keyup)="searchHotelsList($event)">
+              <div class="form-icon">
+                <i class="icofont icofont-search"></i>
+              </div>
+            </div>
+        </div>
+    </span>
+    <span class="col-sm-12">
+        <span *ngFor="let hotel of allHotels">
+            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
+                <img class="card-img-top" src="{{hotel.image}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{hotel.name}}</h5>
+                  <p class="card-text">{{hotel.location}}</p>
+                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
+                </div>
+            </div>
+        </span>
+        <!-- <span>
+            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
+                <img class="card-img-top" src="../../../assets/images/hotels/hotel2.jfif" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Red Hat</h5>
+                  <p class="card-text">India</p>
+                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
+                </div>
+            </div>
+        </span>
+        <span>
+            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
+                <img class="card-img-top" src="../../../assets/images/hotels/hotel3.jfif" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Novotel</h5>
+                  <p class="card-text">Hyderabad</p>
+                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
+                </div>
+            </div>
+        </span>
+        <span>
+            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
+                <img class="card-img-top" src="../../../assets/images/hotels/hotel4.jfif" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">The New View</h5>
+                  <p class="card-text">Hyderabad</p>
+                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
+                </div>
+            </div>
+        </span>
+        <span>
+            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
+                <img class="card-img-top" src="../../../assets/images/hotels/hotel5.jfif" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Crowne Plaza</h5>
+                  <p class="card-text">Dubai</p>
+                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
+                </div>
+            </div>
+        </span>
+        <span>
+            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
+                <img class="card-img-top" src="../../../assets/images/hotels/hotel6.jfif" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">University Inn.</h5>
+                  <p class="card-text">United Kingdom</p>
+                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
+                </div>
+            </div>
+        </span>
+        <span>
+            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
+                <img class="card-img-top" src="../../../assets/images/hotels/hotel7.jfif" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Hotel Bliss</h5>
+                  <p class="card-text">Paris</p>
+                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
+                </div>
+            </div>
+        </span> -->
+    </span>
+</div>

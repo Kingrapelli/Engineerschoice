@@ -53,6 +53,10 @@ const routes: Routes = [
         path :'findout',
         loadChildren:()=>import('./findout/findout.module').then(m=> m.FindoutModule)
       },
+      {
+        path:'booking',
+        loadChildren:()=>import('./booking/booking.module').then(m=>m.BookingModule)
+      }
     ]
   }
 ];
