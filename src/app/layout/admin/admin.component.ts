@@ -219,6 +219,8 @@ export class AdminComponent implements OnInit {
     let sendTo = 3;
     let category = "Query";
     await this.service.sendingMessageToAdmin(this.contactUsForm.value,this.userData.id,sendTo,category);
+    this.contactUsForm.controls['message'].setValue('');
+    console.log('after setting to null',this.contactUsForm);
   }
 
   onResize(event) {
