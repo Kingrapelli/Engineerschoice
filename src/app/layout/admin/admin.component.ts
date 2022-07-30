@@ -274,20 +274,12 @@ export class AdminComponent implements OnInit {
       this.verticalNavType = 'offcanvas';
     }
     this.allUsers = JSON.parse(localStorage.getItem('users'));
-    // this.chat = JSON.parse(localStorage.getItem('chat'));
-    // this.chat.sort(function(a,b){
-    //   return b.sentAt - a.sentAt;
-    // });
     this.cdRef.detectChanges();
   }
 
   onMobileMenu() {
     this.isCollapsedMobile = this.isCollapsedMobile === 'yes-block' ? 'no-block' : 'yes-block';
     this.allUsers = JSON.parse(localStorage.getItem('users'));
-    // this.chat = JSON.parse(localStorage.getItem('chat'));
-    // this.chat.sort(function(a,b){
-    //   return b.sentAt - a.sentAt;
-    // });
     this.cdRef.detectChanges();
   }
 
@@ -302,10 +294,6 @@ export class AdminComponent implements OnInit {
 
   toggleChatInner(id:any) {
     this.allUsers = JSON.parse(localStorage.getItem('users'));
-    // this.chat = JSON.parse(localStorage.getItem('chat'));
-    // this.chat.sort(function(a,b){
-    //   return b.sentAt - a.sentAt;
-    // });
     this.chatInnerToggle = this.chatInnerToggle === 'off' ? 'on' : 'off';
     this.chatInnerToggleInverse = this.chatInnerToggleInverse === 'off' ? 'on' : 'off';
     if(id && this.chatInnerToggle){
@@ -355,7 +343,8 @@ export class AdminComponent implements OnInit {
     const search = (this.search_friends.nativeElement.value).toLowerCase();
     let search_input: string;
     let search_parent: any;
-    const friendList = document.querySelectorAll('.userlist-box .media-body .chat-header');
+    // const friendList = document.querySelectorAll('.userlist-box .media-body .chat-header');
+    const friendList = document.querySelectorAll('.userlist-box');
     Array.prototype.forEach.call(friendList, function(elements, index) {
       search_input = (elements.innerHTML).toLowerCase();
       search_parent = (elements.parentNode).parentNode;

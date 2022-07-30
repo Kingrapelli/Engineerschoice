@@ -1,4 +1,7 @@
-<div class="row">
+
+
+<div>
+  <div class="row">
     <span class="col-sm-12">
         <div class="card-body">
             <div class="right-icon-control">
@@ -17,69 +20,29 @@
                 <div class="card-body">
                   <h5 class="card-title">{{hotel.name}}</h5>
                   <p class="card-text">{{hotel.location}}</p>
-                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
+                  <a class="btn btn-primary btn-sm btn-block" (click)="openHotelDetails(hotel.id)">Go to page</a>
                 </div>
             </div>
         </span>
-        <!-- <span>
-            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
-                <img class="card-img-top" src="../../../assets/images/hotels/hotel2.jfif" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Red Hat</h5>
-                  <p class="card-text">India</p>
-                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
-                </div>
-            </div>
-        </span>
-        <span>
-            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
-                <img class="card-img-top" src="../../../assets/images/hotels/hotel3.jfif" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Novotel</h5>
-                  <p class="card-text">Hyderabad</p>
-                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
-                </div>
-            </div>
-        </span>
-        <span>
-            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
-                <img class="card-img-top" src="../../../assets/images/hotels/hotel4.jfif" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">The New View</h5>
-                  <p class="card-text">Hyderabad</p>
-                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
-                </div>
-            </div>
-        </span>
-        <span>
-            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
-                <img class="card-img-top" src="../../../assets/images/hotels/hotel5.jfif" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Crowne Plaza</h5>
-                  <p class="card-text">Dubai</p>
-                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
-                </div>
-            </div>
-        </span>
-        <span>
-            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
-                <img class="card-img-top" src="../../../assets/images/hotels/hotel6.jfif" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">University Inn.</h5>
-                  <p class="card-text">United Kingdom</p>
-                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
-                </div>
-            </div>
-        </span>
-        <span>
-            <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
-                <img class="card-img-top" src="../../../assets/images/hotels/hotel7.jfif" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Hotel Bliss</h5>
-                  <p class="card-text">Paris</p>
-                  <a href="#" class="btn btn-primary btn-sm btn-block">Go to page</a>
-                </div>
-            </div>
-        </span> -->
     </span>
+  </div>
+
+  <!-- rightbar chat start -->
+  <div [@slideInOut]="verticalPlacement === 'right' ? chatToggleInverse : chatToggle" id="sidebar" class="users p-chat-user">
+    <div class="had-container">
+      <div class="card card_main p-fixed users-main">
+        <div class="user-box" style="margin:5px">
+          <div (click)="closeHotelDetails()" style="margin:5px;cursor:pointer">
+            Close
+          </div>
+          
+          <img src="{{hotelData.image}}" style="height:180px !important;width:300px !important">
+          <div style="margin:5px">
+            <span style="float:left;font-weight: bold;">{{hotelData.name}}</span>
+            <span style="float:right">{{hotelData.location}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
