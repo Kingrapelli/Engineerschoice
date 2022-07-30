@@ -108,60 +108,6 @@ export class AuthService {
         "mobile" : 9703773058,
         "chat" : [{}],
         'reviews':[
-          {
-            sentTo: 1,
-            sentBy: 2,
-            senderFirstName:'Naveen Kumar',
-            message: "test review ----- 1",
-            rating : 3,
-            senderImage : this.img2,
-            category:'review',
-            sendAt: this.from.toUTCString(),
-            "replies":[
-              {
-                sentTo: 1,
-                sentBy: 1,
-                senderFirstName:'Admin',
-                message: "test reply review ----- 1",
-                rating : 2,
-                senderImage : this.img1,
-                category:'review',
-                sendAt: this.from.toUTCString(),
-                "replies":[
-                  {
-
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            sentTo: 1,
-            sentBy: 3,
-            senderFirstName:'Super Admin',
-            message: "test review ----- 2",
-            rating : 4,
-            senderImage : this.img3,
-            category:'review',
-            sendAt: this.from.toUTCString(),
-            "replies":[
-              {
-                sentTo: 1,
-                sentBy: 2,
-                senderFirstName:'Naveen Kumar',
-                message: "test review ----- 1",
-                rating : 3,
-                senderImage : this.img2,
-                category:'review',
-                sendAt: this.from.toUTCString(),
-                "replies":[
-                  {
-    
-                  }
-                ] 
-              }
-            ]
-          }
         ]
       }
     ]
@@ -194,14 +140,16 @@ export class AuthService {
   }
 
   sendingMessageToAdmin(payload,id,sendTo,category){
-  let _from = new Date();
-    console.log("payload",payload,id);
+    let _from = new Date();
     let tmpCategoryMsg = '';
     if(category == 'Query'){
       tmpCategoryMsg = "Query : " + payload.message;
     }
     else if(category == 'message'){
       tmpCategoryMsg = 'sent you message : '+ payload.message;
+    }
+    else if(category == 'Review'){
+      tmpCategoryMsg = 'Given review : '+ payload.message;
     }
     let userData = JSON.parse(localStorage.getItem('user'));
     let tempNotification = {
@@ -256,19 +204,20 @@ export class AuthService {
       parentId : tmpParentId,
       replies: []
     }
-    // for(let user of allUsers){
-    //   if(user.id == userData.id)
-    //     user.reviews.push(tmpReview);
-    // }
     for(let user of allUsers){
       if(payload.sentTo == user.id)
         user.reviews.push(tmpReview);
     }
     userData.reviews.push(tmpReview);
-    console.log(userData);
     localStorage.setItem('user',JSON.stringify(userData));
     localStorage.setItem('users',JSON.stringify(allUsers));
-    // console.log(payload);
+    if(payload.sentTo != userData.id){
+      let category = 'Review';
+      let tmpMessage={
+        message:payload.message
+      }
+      this.sendingMessageToAdmin(tmpMessage,userData.id,payload.sentTo,category);
+    }
   }
 
 }
