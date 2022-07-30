@@ -1,5 +1,6 @@
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { HotelsService } from '../hotels.service';
 
 @Component({
@@ -63,31 +64,30 @@ export class HotelsComponent implements OnInit {
   chatToggleInverse: string;
   chatToggle: string;
   hotelData:any={};
-  constructor(private service:HotelsService) {
+  hotelBookingForm:any
+  constructor(private service:HotelsService,private formBuilder:FormBuilder) {
     this.verticalPlacement = 'left';
     this.chatToggleInverse = 'in';
     this.chatToggle = 'out';
    }
 
   ngOnInit() {
-    this.loadAllUnivercities();
+    this.hotelBookingForm= this.formBuilder.group({
+      noOfRooms:[''],
+      fromDate:[''],
+      toDate:[''],
+      cost:['']
+    })
   }
 
   public get allHotels(){
     return this.service.allHotels;
   }
 
-  loadAllUnivercities(){
-    // this.findOutService.getAllUnivercities().subscribe((_res:any)=>{
-    //   this.allUnivercities=_res;
-    // })
-  }
-
   searchHotelsList(e: Event){
     const search = (this.searchHotels.nativeElement.value).toLowerCase();
     let search_input: string;
     let search_parent: any;
-    // let hotelList:any;
     const hotelList = document.querySelectorAll('.card .card-body');
 
     Array.prototype.forEach.call((hotelList), function(elements, index) {
@@ -124,7 +124,5 @@ export class HotelsComponent implements OnInit {
       if(id == hotel.id)
       this.hotelData=hotel;
     }
-    console.log(this.hotelData);
-
   }
 }

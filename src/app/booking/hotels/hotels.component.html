@@ -38,8 +38,19 @@
           
           <img src="{{hotelData.image}}" style="height:180px !important;width:300px !important">
           <div style="margin:5px">
-            <span style="float:left;font-weight: bold;">{{hotelData.name}}</span>
-            <span style="float:right">{{hotelData.location}}</span>
+            <div style="font-weight: bold;">{{hotelData.name}}</div>
+            <div>{{hotelData.location}}</div>
+          </div>
+          <div style="margin:5px">
+            <form action="" [formGroup]="hotelBookingForm">
+              <span>
+                <label for="noOfRooms">Number Of Rooms:</label>
+                <input class="form-control" type="text" name="" id="noOfRooms" formControlName="noOfRooms" style="width: 80px !important;height:30px !important">
+              </span>
+              <div style="margin:5px">
+                <button class="btn btn-primary btn-sm btn-block">Book</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

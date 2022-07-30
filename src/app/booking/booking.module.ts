@@ -4,6 +4,8 @@ import { HotelsComponent } from './hotels/hotels.component';
 import { FlightsComponent } from './flights/flights.component';
 import { TrainsComponent } from './trains/trains.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes:Routes=[
   {
@@ -42,7 +44,10 @@ const routes:Routes=[
   declarations: [HotelsComponent, FlightsComponent, TrainsComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class BookingModule { }
