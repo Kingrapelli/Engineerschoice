@@ -1,26 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {animate, style, transition, trigger} from '@angular/animations';
+import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
-import { FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
-  animations: [
-    trigger('fadeInOutTranslate', [
-      transition(':enter', [
-        style({opacity: 0}),
-        animate('400ms ease-in-out', style({opacity: 1}))
-      ]),
-      transition(':leave', [
-        style({transform: 'translate(0)'}),
-        animate('400ms ease-in-out', style({opacity: 0}))
-      ])
-    ])
-  ]
+  selector: 'app-friendprofile',
+  templateUrl: './friendprofile.component.html',
+  styleUrls: ['./friendprofile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class FriendprofileComponent implements OnInit {
+
   editProfile = true;
   editProfileIcon = 'icofont-edit';
 
@@ -39,11 +27,11 @@ export class ProfileComponent implements OnInit {
   allUsers:any;
   sendReviewForm:any;
   constructor(private service:AuthService,private formBuilder:FormBuilder) {
-    
   }
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('user'));
+    this.routedUser = this.service.routedUser;
     this.allUsers = JSON.parse(localStorage.getItem('users'));
     this.sendReviewForm=this.formBuilder.group({
       message:['']
@@ -54,7 +42,7 @@ export class ProfileComponent implements OnInit {
     this.userData = JSON.parse(localStorage.getItem('user'));
     let _date = new Date();
     let tmpReview={
-      sentTo : this.userData.id,
+      sentTo : this.routedUser.id,
       sentBy : this.userData.id,
       senderFirstName: this.userData.firstName,
       message:this.sendReviewForm.value.message,
@@ -69,8 +57,9 @@ export class ProfileComponent implements OnInit {
 
   public get allReplies(){
     this.userData = JSON.parse(localStorage.getItem('user'));
+    this.allUsers = JSON.parse(localStorage.getItem('users'));
     let tmpReviews:any;
-    tmpReviews= this.userData.reviews;
+    tmpReviews= this.routedUser.reviews;
     let tmpReplies=[];
     for(let review of tmpReviews){
       for(let i=0;i<review.replies.length;i++){
@@ -82,8 +71,13 @@ export class ProfileComponent implements OnInit {
 
   public get allReviews(){
     this.userData = JSON.parse(localStorage.getItem('user'));
+    this.allUsers = JSON.parse(localStorage.getItem('users'));
     let tmpReviews:any;
-    tmpReviews= this.userData.reviews;
+    for(let user of this.allUsers){
+      if(this.routedUser.id == user.id){
+        tmpReviews= user.reviews;
+      }
+    }
     return tmpReviews;
   }
 
@@ -96,4 +90,8 @@ export class ProfileComponent implements OnInit {
     this.editAboutIcon = (this.editAboutIcon === 'icofont-close') ? 'icofont-edit' : 'icofont-close';
     this.editAbout = !this.editAbout;
   }
+  ngOnDestroy(){
+    this.routedUser='';
+  }
+
 }

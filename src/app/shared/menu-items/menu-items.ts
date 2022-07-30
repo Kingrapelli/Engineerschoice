@@ -47,7 +47,7 @@ const MENUITEMS = [
       {
         state: 'basic',
         short_label: 'B',
-        name: 'Notifications',
+        name: 'Job Notifications',
         type: 'sub',
         icon: 'ti-layout-grid2-alt',
         role: '',
@@ -161,14 +161,22 @@ const MENUITEMS = [
           }
         ]
       },
-      {
-        state: 'user',
-        short_label: 'U',
-        name: 'User Profile',
-        type: 'link',
-        icon: 'ti-user',
-        role:''
-      }
+      // {
+      //   state: 'user-profile',
+      //   short_label: 'U',
+      //   name: 'User Profile',
+      //   type: 'link',
+      //   icon: 'ti-user',
+      //   role:''
+      // },
+      // {
+      //   state: 'friend-profile',
+      //   short_label: 'U',
+      //   name: 'Friend Profile',
+      //   type: 'link',
+      //   icon: 'ti-user',
+      //   role:''
+      // }
     ]
   },
   {
@@ -183,13 +191,29 @@ const MENUITEMS = [
         role:'',
         children: [
           {
+            state: 'intermediate',
+            short_label: 'U',
+            name: 'Intermediate',
+            type: 'link',
+            icon: 'ti-user',
+            role:''
+          },
+          {
+            state: 'polytechnic',
+            short_label: 'U',
+            name: 'Diploma',
+            type: 'link',
+            icon: 'ti-user',
+            role:''
+          },
+          {
             state: 'universities',
             short_label: 'U',
             name: 'Universities',
             type: 'link',
             icon: 'ti-user',
             role:''
-          }
+          },
         ]
       },
       {

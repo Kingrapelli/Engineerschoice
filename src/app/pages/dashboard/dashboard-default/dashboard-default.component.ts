@@ -313,6 +313,15 @@ export class DashboardDefaultComponent implements OnInit {
     parentNode.classList.toggle('done-task');
   }
 
+  getUserId(id:any){
+    let routerUser ;
+    for(let user of this.allUsers){
+      if(id == user.id){
+        routerUser=user;
+      }
+    }
+    this.service.getRoutedUser(routerUser);
+  }
 }
 
 function getRandomData() {

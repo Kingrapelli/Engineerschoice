@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: ProfileComponent,
     data: {
-      breadcrumb: 'Profile',
+      breadcrumb: 'User Profile',
       icon: 'icofont-justify-all bg-c-green',
       breadcrumb_caption: 'Below are details of User - Profile',
       status: true

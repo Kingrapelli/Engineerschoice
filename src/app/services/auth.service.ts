@@ -19,11 +19,13 @@ export class AuthService {
   img7:any;
   chat = [  ];
   count:any =  0;
+  parentId=1;
   widgetCardsData:any={
     count : this.count
   };
   notifications = [
   ];
+  routedUser:any = '';
   from = new Date();
   constructor(private router:Router) { 
     this.img1='/assets/images/avatar-1.jpg';
@@ -54,7 +56,10 @@ export class AuthService {
         "designation": 'Admin',
         "image" : this.img1,
         "mobile" : 9985464746,
-        'chat':[{}]
+        'chat':[{}],
+        'reviews':[
+          
+        ]
       },
       {
         id: 2,
@@ -70,13 +75,16 @@ export class AuthService {
         "maritalStatus" : 'Single',
         "twitter":'Kingrapelli',
         "skype" : 'Kingrapelli@gmail.com',
-        "location" : 'Bangalore, Telangana',
+        "location" : 'Bangalore, Karnataka',
         "website" : "wwww.kingrapelli.com",
         "role": 'User',
         "designation": 'Software Developer',
         "image" : this.img2,
         "mobile" : 9160148391,
-        "chat" : [{}]
+        "chat" : [{}],
+        'reviews':[
+         
+        ]
       },
       {
         id : 3,
@@ -98,7 +106,63 @@ export class AuthService {
         "designation": 'IT person',
         "image" : this.img3,
         "mobile" : 9703773058,
-        "chat" : [{}]
+        "chat" : [{}],
+        'reviews':[
+          {
+            sentTo: 1,
+            sentBy: 2,
+            senderFirstName:'Naveen Kumar',
+            message: "test review ----- 1",
+            rating : 3,
+            senderImage : this.img2,
+            category:'review',
+            sendAt: this.from.toUTCString(),
+            "replies":[
+              {
+                sentTo: 1,
+                sentBy: 1,
+                senderFirstName:'Admin',
+                message: "test reply review ----- 1",
+                rating : 2,
+                senderImage : this.img1,
+                category:'review',
+                sendAt: this.from.toUTCString(),
+                "replies":[
+                  {
+
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            sentTo: 1,
+            sentBy: 3,
+            senderFirstName:'Super Admin',
+            message: "test review ----- 2",
+            rating : 4,
+            senderImage : this.img3,
+            category:'review',
+            sendAt: this.from.toUTCString(),
+            "replies":[
+              {
+                sentTo: 1,
+                sentBy: 2,
+                senderFirstName:'Naveen Kumar',
+                message: "test review ----- 1",
+                rating : 3,
+                senderImage : this.img2,
+                category:'review',
+                sendAt: this.from.toUTCString(),
+                "replies":[
+                  {
+    
+                  }
+                ] 
+              }
+            ]
+          }
+        ]
       }
     ]
     localStorage.setItem('users',JSON.stringify(this.users));
@@ -166,6 +230,45 @@ export class AuthService {
     this.widgetCardsData = {
       count : count
     }
+  }
+
+  getRoutedUser(routedUser){
+    this.routedUser=routedUser;
+    console.log('before navigating')
+    this.router.navigate(['/friend-profile']);
+  }
+
+  sendReview(payload){
+    let userData = JSON.parse(localStorage.getItem('user'));
+    let allUsers = JSON.parse(localStorage.getItem('users'));
+
+    let tmpParentId=userData.reviews.length+this.parentId;
+    // console.log(userData.reviews.length);
+    let tmpReview = {
+      sentTo : payload.sentTo,
+      sentBy : payload.sentBy,
+      senderFirstName: payload.senderFirstName,
+      message: payload.message,
+      rating : 3,
+      senderImage : payload.senderImage,
+      category : 'review',
+      sendAt: payload.sendAt,
+      parentId : tmpParentId,
+      replies: []
+    }
+    // for(let user of allUsers){
+    //   if(user.id == userData.id)
+    //     user.reviews.push(tmpReview);
+    // }
+    for(let user of allUsers){
+      if(payload.sentTo == user.id)
+        user.reviews.push(tmpReview);
+    }
+    userData.reviews.push(tmpReview);
+    console.log(userData);
+    localStorage.setItem('user',JSON.stringify(userData));
+    localStorage.setItem('users',JSON.stringify(allUsers));
+    // console.log(payload);
   }
 
 }

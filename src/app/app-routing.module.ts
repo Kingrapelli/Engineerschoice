@@ -43,8 +43,11 @@ const routes: Routes = [
         path: 'map',
         loadChildren: () => import('./pages/map/google-map/google-map.module').then(m => m.GoogleMapModule),
       }, {
-        path: 'user',
+        path: 'user-profile',
         loadChildren: () => import('./pages/user/profile/profile.module').then(m => m.ProfileModule)
+      }, {
+        path: 'friend-profile',
+        loadChildren: () => import('./pages/user/friendprofile/friendprofile.module').then(m => m.FriendprofileModule)
       }, {
         path: 'simple-page',
         loadChildren: () => import('./pages/simple-page/simple-page.module').then(m => m.SimplePageModule)
