@@ -28,26 +28,43 @@
   </div>
 
   <!-- rightbar chat start -->
-  <div [@slideInOut]="verticalPlacement === 'right' ? chatToggleInverse : chatToggle" id="sidebar" class="users p-chat-user">
-    <div class="had-container">
-      <div class="card card_main p-fixed users-main">
-        <div class="user-box" style="margin:5px">
+  <div [@slideInOut]="verticalPlacement === 'right' ? chatToggleInverse : chatToggle" id="sidebar" class="users p-chat-user" style="width:350px !important;overflow-x: hidden;">
+    <div class="had-container" style="width:350px !important">
+      <div class="card card_main p-fixed users-main" style="width:350px !important">
+        <div class="user-box" style="margin:5px;overflow-y:auto">
           <div (click)="closeHotelDetails()" style="margin:5px;cursor:pointer">
             Close
           </div>
           
-          <img src="{{hotelData.image}}" style="height:180px !important;width:300px !important">
-          <div style="margin:5px">
-            <div style="font-weight: bold;">{{hotelData.name}}</div>
-            <div>{{hotelData.location}}</div>
+          <img src="{{hotelData.image}}" style="height:180px !important;width:340px !important">
+          <div style="margin:5px;" class="row">
+            <div class="col-7" style="font-weight: bold;">{{hotelData.name}}</div>
+            <div class="col-5">{{hotelData.location}}</div>
           </div>
-          <div style="margin:5px">
-            <form action="" [formGroup]="hotelBookingForm">
-              <span>
-                <label for="noOfRooms">Number Of Rooms:</label>
-                <input class="form-control" type="text" name="" id="noOfRooms" formControlName="noOfRooms" style="width: 80px !important;height:30px !important">
-              </span>
-              <div style="margin:5px">
+          <div style="margin:5px;margin-top: 20px;">
+            <form action="" [formGroup]="hotelBookingForm" (ngSubmit)="bookingHotel()">
+              
+              <div class="row" style="margin-bottom: 5px;">
+                <label for="noOfRooms" class="col-5"><sup class="text-danger">*</sup>No of Rooms:</label>
+                <input class="form-control col-6" type="number" name="" id="noOfRooms" formControlName="noOfRooms" (keyup)="getCostValue()"
+                 style="width: 80px !important;height:30px !important">
+              </div>
+              <div class="row" style="margin-bottom: 5px;">
+                <label for="fromDate" class="col-5"><sup class="text-danger">*</sup>From Date:</label>
+                <input class="form-control col-6" type="date" name="" id="fromDate" formControlName="fromDate" style="width: 80px !important;">
+              </div>
+              <div class="row" style="margin-bottom: 5px;">
+                <label for="toDate" class="col-5"><sup class="text-danger">*</sup>To Date:</label>
+                <input class="form-control col-6" type="date" name="" id="toDate" formControlName="toDate" style="width: 80px !important;">
+              </div>
+              <div class="row" style="margin-bottom: 5px;">
+                <label for="cost" class="col-5">Cost:</label>
+                <input class="form-control col-6" type="text" [(ngModel)]="cost" name="" id="cost" disabled
+                  formControlName="cost" style="width: 80px !important;">
+                <p><small>&nbsp;&nbsp;&nbsp; cost will vary based on type of room</small></p>
+              </div>
+              
+              <div style="margin-top:5px">
                 <button class="btn btn-primary btn-sm btn-block">Book</button>
               </div>
             </form>

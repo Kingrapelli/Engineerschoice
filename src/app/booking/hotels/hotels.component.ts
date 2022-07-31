@@ -1,6 +1,7 @@
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 import { HotelsService } from '../hotels.service';
 
 @Component({
@@ -64,8 +65,11 @@ export class HotelsComponent implements OnInit {
   chatToggleInverse: string;
   chatToggle: string;
   hotelData:any={};
-  hotelBookingForm:any
-  constructor(private service:HotelsService,private formBuilder:FormBuilder) {
+  hotelBookingForm:any;
+  public config: any;
+  cost:any = 0;
+  revenue:any;
+  constructor(private service:HotelsService,private formBuilder:FormBuilder,private authService:AuthService) {
     this.verticalPlacement = 'left';
     this.chatToggleInverse = 'in';
     this.chatToggle = 'out';
@@ -73,11 +77,16 @@ export class HotelsComponent implements OnInit {
 
   ngOnInit() {
     this.hotelBookingForm= this.formBuilder.group({
+      typeOfRoom:[''],
       noOfRooms:[''],
       fromDate:[''],
       toDate:[''],
-      cost:['']
+      cost:['0']
     })
+  }
+
+  getCostValue(){
+    this.cost= (this.hotelBookingForm.controls['noOfRooms'].value) * 360;
   }
 
   public get allHotels(){
@@ -103,13 +112,29 @@ export class HotelsComponent implements OnInit {
     });
   }
 
+  bookingHotel(){
+    let formValue=this.hotelBookingForm.value;
+    this.revenue=(formValue.cost/100)*10;
+    let tmpBooking={
+      typeOfRoom:formValue.typeOfRoom,
+      noOfRooms: formValue.noOfRooms,
+      fromDate : formValue.fromDate,
+      toDate : formValue.toDate,
+      cost : formValue.cost,
+      category : 'hotel'
+    }
+    this.authService.saveIntoBookings(tmpBooking,this.revenue, this.hotelData);
+    this.chatToggle = 'out';
+    alert(this.hotelData.name + "hotel booked successfully");
+  }
+
   // toggleChat(id) {
   //   this.chatToggle = this.chatToggle === 'out' ? 'in' : 'out';
   //   this.chatToggleInverse = this.chatToggleInverse === 'out' ? 'in' : 'out';
   //   this.getHotelDetails(id);
   // }
 
-  openHotelDetails(id) {
+  openHotelDetails(id:any) {
     this.chatToggle =  'in';
     // this.chatToggleInverse = this.chatToggleInverse === 'out' ? 'in' : 'out';
     this.getHotelDetails(id);
@@ -119,7 +144,7 @@ export class HotelsComponent implements OnInit {
     this.chatToggle = 'out';
   }
 
-  getHotelDetails(id){
+  getHotelDetails(id:any){
     for(let hotel of this.allHotels){
       if(id == hotel.id)
       this.hotelData=hotel;

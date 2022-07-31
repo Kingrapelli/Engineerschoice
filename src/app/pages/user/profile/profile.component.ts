@@ -38,6 +38,8 @@ export class ProfileComponent implements OnInit {
   userData:any;
   allUsers:any;
   sendReviewForm:any;
+  sendReplyForm:any;
+  openReplyChat:any= false;
   constructor(private service:AuthService,private formBuilder:FormBuilder) {
     
   }
@@ -48,6 +50,13 @@ export class ProfileComponent implements OnInit {
     this.sendReviewForm=this.formBuilder.group({
       message:['']
     })
+    this.sendReplyForm=this.formBuilder.group({
+      message:['']
+    })
+  }
+  
+  settingOpenReplyChat(){
+    this.openReplyChat=this.openReplyChat == true ? false : true;
   }
 
   sendReview(){

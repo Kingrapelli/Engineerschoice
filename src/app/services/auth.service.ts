@@ -25,6 +25,9 @@ export class AuthService {
   };
   notifications = [
   ];
+  revenue:any;
+  tmpRevenue:any=0;
+  allBookings:any =[];
   routedUser:any = '';
   from = new Date();
   constructor(private router:Router) { 
@@ -57,9 +60,8 @@ export class AuthService {
         "image" : this.img1,
         "mobile" : 9985464746,
         'chat':[{}],
-        'reviews':[
-          
-        ]
+        'reviews':[],
+        "userBookings":[]
       },
       {
         id: 2,
@@ -82,9 +84,8 @@ export class AuthService {
         "image" : this.img2,
         "mobile" : 9160148391,
         "chat" : [{}],
-        'reviews':[
-         
-        ]
+        'reviews':[],
+        "userBookings":[]
       },
       {
         id : 3,
@@ -107,13 +108,38 @@ export class AuthService {
         "image" : this.img3,
         "mobile" : 9703773058,
         "chat" : [{}],
-        'reviews':[
-        ]
+        'reviews':[],
+        "userBookings":[]
+      },
+      {
+        id : 4,
+        "email":'rajkumar@gmail.com',
+        "username":'rajkumar',
+        "password": 'rajkumar@12',
+        "loggedin": false,
+        "active": false,
+        "firstName": 'Raj Kumar',
+        "lastName" : 'Dusa',
+        "gender" : 'Male',
+        "dob" : '09/09/1997',
+        "maritalStatus" : 'Single',
+        "twitter":'rajKumar12345',
+        "skype" : 'rajkumar@gmail.com',
+        "location" : 'Karimnagar, Telangana',
+        "website" : "wwww.dusaraj.com",
+        "role": 'User',
+        "designation": 'Civil Engineer',
+        "image" : this.img4,
+        "mobile" : 8500034567,
+        "chat" : [{}],
+        'reviews':[],
+        "userBookings":[]
       }
     ]
     localStorage.setItem('users',JSON.stringify(this.users));
     localStorage.setItem('chat',JSON.stringify(this.chat));
     localStorage.setItem('notifications',JSON.stringify(this.notifications));
+    localStorage.setItem('allBookings',JSON.stringify(this.allBookings));
   }
 
   signIn(username:any,password:any){
@@ -151,6 +177,10 @@ export class AuthService {
     else if(category == 'Review'){
       tmpCategoryMsg = 'Given review : '+ payload.message;
     }
+    else if(category == 'hotel'){
+      tmpCategoryMsg = 'Booked '+ category + ' :'+ payload.message;
+    }
+
     let userData = JSON.parse(localStorage.getItem('user'));
     let tempNotification = {
       sendBy : id,
@@ -164,11 +194,12 @@ export class AuthService {
     this.notifications.unshift(tempNotification);
     console.log(this.notifications);
     localStorage.setItem('notifications',JSON.stringify(this.notifications));
-    this.getWidgetCardsData();
+    this.getWidgetCardsData(0);
   }
 
-  getWidgetCardsData(){
+  getWidgetCardsData(revenue){
     let count = 0;
+    this.tmpRevenue = this.tmpRevenue + revenue;
     this.notifications = JSON.parse(localStorage.getItem('notifications'));
     for(let notification of this.notifications){
       if(notification.category == 'Query'){
@@ -176,7 +207,8 @@ export class AuthService {
       }
     }
     this.widgetCardsData = {
-      count : count
+      count : count,
+      revenue : this.tmpRevenue
     }
   }
 
@@ -218,6 +250,29 @@ export class AuthService {
       }
       this.sendingMessageToAdmin(tmpMessage,userData.id,payload.sentTo,category);
     }
+  }
+
+  saveIntoBookings(payload,revenue,hotelData){
+    let _from = new Date();
+    this.allBookings= JSON.parse(localStorage.getItem('allBookings'));
+    let userData = JSON.parse(localStorage.getItem('user'));
+    let allUsers = JSON.parse(localStorage.getItem('users'));
+    console.log(payload,revenue);
+    let tmpBookings={
+      userId : userData.id,
+      userName : userData.firstName,
+      userImage : userData.image,
+      typeOfRoom : payload.typeOfRoom,
+      noOfRooms : payload.noOfRooms,
+      fromDate : payload.fromDate,
+      toDate : payload.toDate,
+      const : payload.cost,
+      bookedAt : _from.toUTCString()
+    }
+    this.allBookings.push(tmpBookings);
+    this.getWidgetCardsData(revenue);
+    let tmpPayload = { message: hotelData.name };
+    this.sendingMessageToAdmin(tmpPayload,userData.id,3,payload.category);
   }
 
 }
