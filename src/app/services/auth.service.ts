@@ -25,6 +25,9 @@ export class AuthService {
   };
   notifications = [
   ];
+  revenue:any;
+  tmpRevenue:any=0;
+  allBookings:any =[];
   routedUser:any = '';
   from = new Date();
   constructor(private router:Router) { 
@@ -35,6 +38,9 @@ export class AuthService {
     this.img5='/assets/images/avatar-5.jpg';
     this.img6='/assets/images/avatar-6.jpg';
     this.img7='/assets/images/avatar-7.jpg';
+    let naveen='/assets/images/naveen.jpeg';
+    let raj='/assets/images/raj.jpeg';
+    let srikanth='./assets/images/srikanth.jpeg';
     this.users=[
       {
         id : 1,
@@ -54,12 +60,11 @@ export class AuthService {
         "website" : "wwww.admin.com",
         "role": 'Admin',
         "designation": 'Admin',
-        "image" : this.img1,
+        "image" : srikanth,
         "mobile" : 9985464746,
         'chat':[{}],
-        'reviews':[
-          
-        ]
+        'reviews':[],
+        "userBookings":[]
       },
       {
         id: 2,
@@ -79,12 +84,11 @@ export class AuthService {
         "website" : "wwww.kingrapelli.com",
         "role": 'User',
         "designation": 'Software Developer',
-        "image" : this.img2,
+        "image" : naveen,
         "mobile" : 9160148391,
         "chat" : [{}],
-        'reviews':[
-         
-        ]
+        'reviews':[],
+        "userBookings":[]
       },
       {
         id : 3,
@@ -104,16 +108,41 @@ export class AuthService {
         "website" : "wwww.superadmin.com",
         "role": 'Super Admin',
         "designation": 'IT person',
-        "image" : this.img3,
+        "image" : this.img7,
         "mobile" : 9703773058,
         "chat" : [{}],
-        'reviews':[
-        ]
+        'reviews':[],
+        "userBookings":[]
+      },
+      {
+        id : 4,
+        "email":'rajkumar@gmail.com',
+        "username":'rajkumar',
+        "password": 'rajkumar@12',
+        "loggedin": false,
+        "active": false,
+        "firstName": 'Raj Kumar',
+        "lastName" : 'Dusa',
+        "gender" : 'Male',
+        "dob" : '09/09/1997',
+        "maritalStatus" : 'Single',
+        "twitter":'rajKumar12345',
+        "skype" : 'rajkumar@gmail.com',
+        "location" : 'Karimnagar, Telangana',
+        "website" : "wwww.dusaraj.com",
+        "role": 'User',
+        "designation": 'Civil Engineer',
+        "image" : raj,
+        "mobile" : 8500034567,
+        "chat" : [{}],
+        'reviews':[],
+        "userBookings":[]
       }
     ]
     localStorage.setItem('users',JSON.stringify(this.users));
     localStorage.setItem('chat',JSON.stringify(this.chat));
     localStorage.setItem('notifications',JSON.stringify(this.notifications));
+    localStorage.setItem('allBookings',JSON.stringify(this.allBookings));
   }
 
   signIn(username:any,password:any){
@@ -151,6 +180,10 @@ export class AuthService {
     else if(category == 'Review'){
       tmpCategoryMsg = 'Given review : '+ payload.message;
     }
+    else if(category == 'hotel'){
+      tmpCategoryMsg = 'Booked '+ category + ' :'+ payload.message;
+    }
+
     let userData = JSON.parse(localStorage.getItem('user'));
     let tempNotification = {
       sendBy : id,
@@ -164,11 +197,12 @@ export class AuthService {
     this.notifications.unshift(tempNotification);
     console.log(this.notifications);
     localStorage.setItem('notifications',JSON.stringify(this.notifications));
-    this.getWidgetCardsData();
+    this.getWidgetCardsData(0);
   }
 
-  getWidgetCardsData(){
+  getWidgetCardsData(revenue){
     let count = 0;
+    this.tmpRevenue = this.tmpRevenue + revenue;
     this.notifications = JSON.parse(localStorage.getItem('notifications'));
     for(let notification of this.notifications){
       if(notification.category == 'Query'){
@@ -176,7 +210,8 @@ export class AuthService {
       }
     }
     this.widgetCardsData = {
-      count : count
+      count : count,
+      revenue : this.tmpRevenue
     }
   }
 
@@ -191,7 +226,6 @@ export class AuthService {
     let allUsers = JSON.parse(localStorage.getItem('users'));
 
     let tmpParentId=userData.reviews.length+this.parentId;
-    // console.log(userData.reviews.length);
     let tmpReview = {
       sentTo : payload.sentTo,
       sentBy : payload.sentBy,
@@ -208,7 +242,12 @@ export class AuthService {
       if(payload.sentTo == user.id)
         user.reviews.push(tmpReview);
     }
+    // for(let user of allUsers){
+    //   if(payload.sentBy == user.id)
+    //     user.reviews.push(tmpReview);
+    // }
     userData.reviews.push(tmpReview);
+    console.log(userData);
     localStorage.setItem('user',JSON.stringify(userData));
     localStorage.setItem('users',JSON.stringify(allUsers));
     if(payload.sentTo != userData.id){
@@ -218,6 +257,59 @@ export class AuthService {
       }
       this.sendingMessageToAdmin(tmpMessage,userData.id,payload.sentTo,category);
     }
+  }
+
+  public get userDetails(){
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+  public get allUserDetails(){
+    return JSON.parse(localStorage.getItem('users'));
+  }
+
+  sendingReplyToReview(payload,parentId){
+    console.log(this.allUserDetails);
+    let tmpReview = {
+      sentTo : payload.sentTo,
+      sentBy : payload.sentBy,
+      senderFirstName: payload.senderFirstName,
+      message: payload.message,
+      rating : 3,
+      senderImage : payload.senderImage,
+      category : payload.category,
+      sendAt: payload.sendAt,
+      parentId : parentId
+    }
+    // console.log(tmpReview);
+    for(let user of this.allUserDetails){
+      if(user.id == tmpReview.sentBy){
+        // console.log(user.reviews)
+        
+      }
+    }
+  }
+
+  saveIntoBookings(payload,revenue,hotelData){
+    let _from = new Date();
+    this.allBookings= JSON.parse(localStorage.getItem('allBookings'));
+    let userData = JSON.parse(localStorage.getItem('user'));
+    let allUsers = JSON.parse(localStorage.getItem('users'));
+    console.log(payload,revenue);
+    let tmpBookings={
+      userId : userData.id,
+      userName : userData.firstName,
+      userImage : userData.image,
+      typeOfRoom : payload.typeOfRoom,
+      noOfRooms : payload.noOfRooms,
+      fromDate : payload.fromDate,
+      toDate : payload.toDate,
+      const : payload.cost,
+      bookedAt : _from.toUTCString()
+    }
+    this.allBookings.push(tmpBookings);
+    this.getWidgetCardsData(revenue);
+    let tmpPayload = { message: hotelData.name };
+    this.sendingMessageToAdmin(tmpPayload,userData.id,3,payload.category);
   }
 
 }

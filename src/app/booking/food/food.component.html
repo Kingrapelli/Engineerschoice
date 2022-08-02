@@ -1,0 +1,36 @@
+<div>
+    <div class="row">
+        <span class="col-sm-12">
+            <div class="card-body">
+                <div class="right-icon-control">
+                    <input class="form-control search-text" placeholder="Search Restaurant or Location or Veg/Nonveg" id="search-friends"
+                        #searchRestaurant (keyup)="searchRestaurants($event)">
+                    <div class="form-icon">
+                        <i class="icofont icofont-search"></i>
+                    </div>
+                </div>
+            </div>
+        </span>
+        <span class="col-sm-12">
+            <span *ngFor="let restaurant of allRestaurants">
+                <div class="card show" style="width: 23.4rem; margin-right:8px;margin-left:8px">
+                    <img class="card-img-top" src="{{restaurant.image}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{restaurant.name}}</h5>
+                        <p class="card-text"><span class="ti-location-pin"></span> {{restaurant.location}}</p>
+                        <span class="row" *ngFor="let categories of restaurant.categories">
+                            <div class="col-4" *ngIf="categories.category == 'Veg'">
+                                <!-- <p class="card-text"><span class="live-status bg-success"></span>{{categories.category}}</p> -->
+                                <p class="card-text">{{categories.category}}</p>
+                            </div>
+                            <div class="col-8" *ngIf="categories.category == 'Nonveg'">
+                                <p class="card-text">{{categories.category}}</p>
+                            </div>
+                        </span>
+                        <a class="btn btn-primary btn-sm btn-block" routerLink="/booking/restaurant-details/{{restaurant.id}}">Book</a>
+                    </div>
+                </div>
+            </span>
+        </span>
+    </div>
+</div>

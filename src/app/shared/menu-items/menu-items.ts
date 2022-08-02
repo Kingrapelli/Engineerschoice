@@ -49,7 +49,7 @@ const MENUITEMS = [
         short_label: 'B',
         name: 'Job Notifications',
         type: 'sub',
-        icon: 'ti-layout-grid2-alt',
+        icon: 'ti-announcement',
         role: '',
         children: [
           {
@@ -60,27 +60,22 @@ const MENUITEMS = [
               {
                 state: 'all',
                 name: 'All',
-                target : true
               },
               {
                 state: 'bySSC',
                 name: 'Based on SSC',
-                target : true
               },
               {
                 state: 'byDiploma',
                 name: 'Based on Diploma',
-                target : true
               },
               {
-                state: 'bySSC',
-                name: 'Based on SSC',
-                target : true
+                state: 'byInter',
+                name: 'Based on Inter',
               },
               {
                 state: 'byGraduation',
                 name: 'Based on Graduation',
-                target : true
               }
             ]
           },
@@ -92,12 +87,10 @@ const MENUITEMS = [
               {
                 state: 'it',
                 name: 'IT Sector',
-                target : true
               },
               {
                 state: 'civil',
                 name: 'Civil Sector',
-                target : true
               }
             ]
           }
@@ -108,7 +101,7 @@ const MENUITEMS = [
         short_label: 'n',
         name: 'Results',
         type: 'link',
-        icon: 'ti-crown',
+        icon: 'ti-receipt',
         role: ''
       },
       {
@@ -137,7 +130,7 @@ const MENUITEMS = [
         short_label: 'M',
         name: 'Learn',
         type: 'link',
-        icon: 'ti-receipt',
+        icon: 'ti-notepad',
         role:''
       },
       {
@@ -227,17 +220,22 @@ const MENUITEMS = [
           {
             state: 'train',
             type: 'link',
-            name: 'Book a Train',
+            name: 'Train',
             // target: true
           },{
             state: 'flight',
             type: 'link',
-            name: 'Book a Flight',
+            name: 'Flight',
             // target: true
           },{
             state: 'hotel',
             type: 'link',
-            name: 'Book a Hotel',
+            name: 'Hotels',
+            // target: true
+          },{
+            state: 'food',
+            type: 'link',
+            name: 'Food',
             // target: true
           }
         ]
@@ -252,7 +250,7 @@ const MENUITEMS = [
         short_label: 'B',
         name: 'Find Jobs',
         type: 'link',
-        icon: 'ti-receipt',
+        icon: 'ti-stats-up',
         role:''
       },
       {
@@ -260,75 +258,76 @@ const MENUITEMS = [
         short_label: 'B',
         name: 'Events',
         type: 'link',
-        icon: 'ti-receipt',
+        icon: 'ti-menu-alt',
         role:''
       }
     ]
   },
+  // {
+  //   label: 'Other',
+  //   main: [
+  //     {
+  //       state: '',
+  //       short_label: 'M',
+  //       name: 'Menu Levels',
+  //       type: 'sub',
+  //       icon: 'ti-direction-alt',
+  //       role:'',
+  //       children: [
+  //         {
+  //           state: '',
+  //           name: 'Menu Level 2.1',
+  //           target: true
+  //         }, {
+  //           state: '',
+  //           name: 'Menu Level 2.2',
+  //           type: 'sub',
+  //           children: [
+  //             {
+  //               state: '',
+  //               name: 'Menu Level 2.2.1',
+  //               target: true
+  //             },
+  //             {
+  //               state: '',
+  //               name: 'Menu Level 2.2.2',
+  //               target: true
+  //             }
+  //           ]
+  //         }, {
+  //           state: '',
+  //           name: 'Menu Level 2.3',
+  //           target: true
+  //         }, {
+  //           state: '',
+  //           name: 'Menu Level 2.4',
+  //           type: 'sub',
+  //           children: [
+  //             {
+  //               state: '',
+  //               name: 'Menu Level 2.4.1',
+  //               target: true
+  //             },
+  //             {
+  //               state: '',
+  //               name: 'Menu Level 2.4.2',
+  //               target: true
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       state: 'simple-page',
+  //       short_label: 'S',
+  //       name: 'Simple Page',
+  //       type: 'link',
+  //       icon: 'ti-layout-sidebar-left',
+  //       role:''
+  //     }
+  //   ]
+  // }, 
   {
-    label: 'Other',
-    main: [
-      {
-        state: '',
-        short_label: 'M',
-        name: 'Menu Levels',
-        type: 'sub',
-        icon: 'ti-direction-alt',
-        role:'',
-        children: [
-          {
-            state: '',
-            name: 'Menu Level 2.1',
-            target: true
-          }, {
-            state: '',
-            name: 'Menu Level 2.2',
-            type: 'sub',
-            children: [
-              {
-                state: '',
-                name: 'Menu Level 2.2.1',
-                target: true
-              },
-              {
-                state: '',
-                name: 'Menu Level 2.2.2',
-                target: true
-              }
-            ]
-          }, {
-            state: '',
-            name: 'Menu Level 2.3',
-            target: true
-          }, {
-            state: '',
-            name: 'Menu Level 2.4',
-            type: 'sub',
-            children: [
-              {
-                state: '',
-                name: 'Menu Level 2.4.1',
-                target: true
-              },
-              {
-                state: '',
-                name: 'Menu Level 2.4.2',
-                target: true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        state: 'simple-page',
-        short_label: 'S',
-        name: 'Simple Page',
-        type: 'link',
-        icon: 'ti-layout-sidebar-left',
-        role:''
-      }
-    ]
-  }, {
     label: 'Support',
     main: [
       {

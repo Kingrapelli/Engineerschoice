@@ -296,7 +296,7 @@
             <div class="main-friend-list scroll-window">
               <perfect-scrollbar [style.max-width]="'100%'" [config]="config">
                 <div *ngFor="let user of allUsers">
-                  <div *ngIf="user.id != userData.id">
+                  <div *ngIf="user.id != userData.id" class="show">
                     <div (click)="toggleChatInner(user.id)" class="media userlist-box" data-id="1" placement="left" ngbTooltip="{{user.firstName}}">
                       <a class="media-left" href="javascript:;">
                         <img class="media-object " src="{{user.image}}" alt="Generic placeholder image">
