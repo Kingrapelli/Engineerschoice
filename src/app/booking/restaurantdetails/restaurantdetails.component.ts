@@ -64,6 +64,10 @@ export class RestaurantdetailsComponent implements OnInit {
   verticalPlacement: string; /* left(default), right */
   chatToggleInverse: string;
   chatToggle: string;
+  totalCost=0;
+  CGST=0;
+  SGST=0;
+  serviceCharges=0;
   @ViewChild('searchFoods', /* TODO: add static flag */ {static: false}) searchFoods: ElementRef;
   constructor(private foodService:FoodService,private activatedRoute:ActivatedRoute) { 
     this.verticalPlacement = 'left';
@@ -134,8 +138,16 @@ export class RestaurantdetailsComponent implements OnInit {
       if(booking.quantity != 0)
         this.bookings.push(booking);
     }
-    console.log(this.bookings);
+    let tmpCost=0;
+    for(let item of this.bookings){
+      tmpCost= tmpCost+(item.cost * item.quantity);
+    }
+    this.CGST=(tmpCost/100)*2;
+    this.SGST=(tmpCost/100)*5;
+    this.serviceCharges=20;
+    this.totalCost=tmpCost+this.CGST+this.SGST+this.serviceCharges;
   }
+
   bookingDetails(){
     if(this.bookings.length == 0){
       alert("Please order anything")
@@ -143,6 +155,7 @@ export class RestaurantdetailsComponent implements OnInit {
     else
       this.chatToggle =  'in';
   }
+
   closeBookingDetails(){
     this.chatToggle = 'out';
   }
