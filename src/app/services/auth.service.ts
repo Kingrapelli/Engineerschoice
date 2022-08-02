@@ -38,6 +38,9 @@ export class AuthService {
     this.img5='/assets/images/avatar-5.jpg';
     this.img6='/assets/images/avatar-6.jpg';
     this.img7='/assets/images/avatar-7.jpg';
+    let naveen='/assets/images/naveen.jpeg';
+    let raj='/assets/images/raj.jpeg';
+    let srikanth='./assets/images/srikanth.jpeg';
     this.users=[
       {
         id : 1,
@@ -57,7 +60,7 @@ export class AuthService {
         "website" : "wwww.admin.com",
         "role": 'Admin',
         "designation": 'Admin',
-        "image" : this.img1,
+        "image" : srikanth,
         "mobile" : 9985464746,
         'chat':[{}],
         'reviews':[],
@@ -81,7 +84,7 @@ export class AuthService {
         "website" : "wwww.kingrapelli.com",
         "role": 'User',
         "designation": 'Software Developer',
-        "image" : this.img2,
+        "image" : naveen,
         "mobile" : 9160148391,
         "chat" : [{}],
         'reviews':[],
@@ -105,7 +108,7 @@ export class AuthService {
         "website" : "wwww.superadmin.com",
         "role": 'Super Admin',
         "designation": 'IT person',
-        "image" : this.img3,
+        "image" : this.img7,
         "mobile" : 9703773058,
         "chat" : [{}],
         'reviews':[],
@@ -129,7 +132,7 @@ export class AuthService {
         "website" : "wwww.dusaraj.com",
         "role": 'User',
         "designation": 'Civil Engineer',
-        "image" : this.img4,
+        "image" : raj,
         "mobile" : 8500034567,
         "chat" : [{}],
         'reviews':[],
@@ -223,7 +226,6 @@ export class AuthService {
     let allUsers = JSON.parse(localStorage.getItem('users'));
 
     let tmpParentId=userData.reviews.length+this.parentId;
-    // console.log(userData.reviews.length);
     let tmpReview = {
       sentTo : payload.sentTo,
       sentBy : payload.sentBy,
@@ -240,7 +242,12 @@ export class AuthService {
       if(payload.sentTo == user.id)
         user.reviews.push(tmpReview);
     }
+    // for(let user of allUsers){
+    //   if(payload.sentBy == user.id)
+    //     user.reviews.push(tmpReview);
+    // }
     userData.reviews.push(tmpReview);
+    console.log(userData);
     localStorage.setItem('user',JSON.stringify(userData));
     localStorage.setItem('users',JSON.stringify(allUsers));
     if(payload.sentTo != userData.id){
@@ -249,6 +256,36 @@ export class AuthService {
         message:payload.message
       }
       this.sendingMessageToAdmin(tmpMessage,userData.id,payload.sentTo,category);
+    }
+  }
+
+  public get userDetails(){
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+  public get allUserDetails(){
+    return JSON.parse(localStorage.getItem('users'));
+  }
+
+  sendingReplyToReview(payload,parentId){
+    console.log(this.allUserDetails);
+    let tmpReview = {
+      sentTo : payload.sentTo,
+      sentBy : payload.sentBy,
+      senderFirstName: payload.senderFirstName,
+      message: payload.message,
+      rating : 3,
+      senderImage : payload.senderImage,
+      category : payload.category,
+      sendAt: payload.sendAt,
+      parentId : parentId
+    }
+    // console.log(tmpReview);
+    for(let user of this.allUserDetails){
+      if(user.id == tmpReview.sentBy){
+        // console.log(user.reviews)
+        
+      }
     }
   }
 

@@ -19,7 +19,7 @@
                 <img class="card-img-top" src="{{hotel.image}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{hotel.name}}</h5>
-                  <p class="card-text">{{hotel.location}}</p>
+                  <p class="card-text"><span class="ti-location-pin"></span> {{hotel.location}}</p>
                   <a class="btn btn-primary btn-sm btn-block" (click)="openHotelDetails(hotel.id)">Go to page</a>
                 </div>
             </div>
@@ -33,13 +33,13 @@
       <div class="card card_main p-fixed users-main" style="width:350px !important">
         <div class="user-box" style="margin:5px;overflow-y:auto">
           <div (click)="closeHotelDetails()" style="margin:5px;cursor:pointer">
-            Close
+            <i class="ti-close"></i>
           </div>
           
           <img src="{{hotelData.image}}" style="height:180px !important;width:340px !important">
           <div style="margin:5px;" class="row">
             <div class="col-7" style="font-weight: bold;">{{hotelData.name}}</div>
-            <div class="col-5">{{hotelData.location}}</div>
+            <div class="col-5"><i class="ti-location-pin"></i> {{hotelData.location}}</div>
           </div>
           <div style="margin:5px;margin-top: 20px;">
             <form action="" [formGroup]="hotelBookingForm" (ngSubmit)="bookingHotel()">

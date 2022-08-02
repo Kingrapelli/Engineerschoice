@@ -448,11 +448,11 @@
                           <p class="m-b-0">{{review.message}}</p>
                           <div class="m-b-25">
                             <span><a href="javascript:;" class="m-r-10 f-12" (click)="settingOpenReplyChat()">Reply</a></span><span *ngIf="userData?.id == review?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
-                            <div *ngIf="openReplyChat == true">
-                              <div class="input-group input-group-button input-group-primary">
-                                <span class="input-group-prepend"><label class="input-group-text" (click)="sendReview()"><i class="icofont icofont-comment"></i></label></span>
+                            <div>
+                              <div class="input-group input-group-button input-group-primary" id="reveiw.parentId">
+                                <span class="input-group-prepend"><label class="input-group-text" (click)="sendReply(review.parentId)"><i class="icofont icofont-comment"></i></label></span>
                                 <form [formGroup]="sendReplyForm">
-                                  <input type="text" class="form-control" placeholder="Write Comment" formControlName="message" style="height:60px;width:930px">
+                                  <input type="text" class="form-control" placeholder="Write Reply" formControlName="replyMessage" style="height:60px;width:930px">
                                 </form>
                               </div>
                             </div>
@@ -474,8 +474,8 @@
                               </div>
                               <p class="m-b-0">{{replies.message}}</p>
                               <div class="m-b-25">
-                                <span><a href="javascript:;" class="m-r-10 f-12" (click)="settingOpenReplyChat()">Reply</a></span><span *ngIf="userData?.id == replies?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
-                                <div *ngIf="openReplyChat == true">
+                                <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span *ngIf="userData?.id == replies?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
+                                <!-- <div *ngIf="openReplyChat == true">
                                   <div class="input-group input-group-button input-group-primary">
                                     <span class="input-group-prepend"><label class="input-group-text" (click)="sendReview()"><i class="icofont icofont-comment"></i></label></span>
                                     <form [formGroup]="sendReplyForm">
@@ -485,7 +485,7 @@
                                                    <button type="button" class="btn btn-primary"><i class="icofont icofont-plus"></i>note</button>
                                     </label></span>
                                   </div>
-                                </div>
+                                </div> -->
                               </div>
                               <hr>
   

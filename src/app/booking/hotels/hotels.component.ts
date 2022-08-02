@@ -114,7 +114,7 @@ export class HotelsComponent implements OnInit {
 
   bookingHotel(){
     let formValue=this.hotelBookingForm.value;
-    this.revenue=(formValue.cost/100)*10;
+    this.revenue=(formValue.cost/100)*5;
     let tmpBooking={
       typeOfRoom:formValue.typeOfRoom,
       noOfRooms: formValue.noOfRooms,

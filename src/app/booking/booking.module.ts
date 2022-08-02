@@ -6,6 +6,8 @@ import { TrainsComponent } from './trains/trains.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FoodComponent } from './food/food.component';
+import { RestaurantdetailsComponent } from './restaurantdetails/restaurantdetails.component';
 
 const routes:Routes=[
   {
@@ -37,11 +39,31 @@ const routes:Routes=[
       breadcrumb_caption: 'Below are list of Hotels',
       status: true
     }
+  },
+  {
+    path:'food',
+    component:FoodComponent,
+    data: {
+      breadcrumb: 'Food Section',
+      icon: 'icofont-justify-all bg-c-green',
+      breadcrumb_caption: 'Below are list of Restaurants',
+      status: true
+    }
+  },
+  {
+    path:'restaurant-details/:id',
+    component:RestaurantdetailsComponent,
+    data: {
+      breadcrumb: 'Restaurants',
+      icon: 'icofont-justify-all bg-c-green',
+      breadcrumb_caption: 'Below are list of Food items',
+      status: true
+    }
   }
 ]
 
 @NgModule({
-  declarations: [HotelsComponent, FlightsComponent, TrainsComponent],
+  declarations: [HotelsComponent, FlightsComponent, TrainsComponent, FoodComponent, RestaurantdetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

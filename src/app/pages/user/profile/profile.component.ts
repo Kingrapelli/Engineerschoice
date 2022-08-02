@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 import { AuthService } from '../../../services/auth.service';
 import { FormBuilder, FormControl } from '@angular/forms';
@@ -40,7 +40,8 @@ export class ProfileComponent implements OnInit {
   sendReviewForm:any;
   sendReplyForm:any;
   openReplyChat:any= false;
-  constructor(private service:AuthService,private formBuilder:FormBuilder) {
+  constructor(private service:AuthService,private formBuilder:FormBuilder,
+    private cdRef:ChangeDetectorRef) {
     
   }
 
@@ -51,7 +52,7 @@ export class ProfileComponent implements OnInit {
       message:['']
     })
     this.sendReplyForm=this.formBuilder.group({
-      message:['']
+      replyMessage:['']
     })
   }
   
@@ -74,6 +75,26 @@ export class ProfileComponent implements OnInit {
     }
     this.service.sendReview(tmpReview);
     this.sendReviewForm.controls['message'].setValue('');
+    this.cdRef.detectChanges();
+  }
+
+  sendReply(parentId){
+    // this.userData = this.userDetails;
+    let _date = new Date();
+    let tmpReply={
+      sentTo : this.userData.id,
+      sentBy : this.userData.id,
+      senderFirstName: this.userData.firstName,
+      message:this.sendReplyForm.value.replyMessage,
+      rating : 3,
+      senderImage : this.userData.image,
+      category : 'reply',
+      sendAt: _date.toUTCString()
+    }
+    this.service.sendingReplyToReview(tmpReply,parentId);
+    this.sendReplyForm.controls['replyMessage'].setValue('');
+    this.openReplyChat = false;
+    this.cdRef.detectChanges();
   }
 
   public get allReplies(){
@@ -89,10 +110,13 @@ export class ProfileComponent implements OnInit {
     return tmpReplies;
   }
 
+  public get userDetails(){
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
   public get allReviews(){
-    this.userData = JSON.parse(localStorage.getItem('user'));
     let tmpReviews:any;
-    tmpReviews= this.userData.reviews;
+    tmpReviews= this.userDetails.reviews;
     return tmpReviews;
   }
 
