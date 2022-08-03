@@ -41,6 +41,7 @@ export class AuthService {
     let naveen='/assets/images/naveen.jpeg';
     let raj='/assets/images/raj.jpeg';
     let srikanth='./assets/images/srikanth.jpeg';
+    let sai='./assets/images/sai.jpeg';
     this.users=[
       {
         id : 1,
@@ -134,6 +135,30 @@ export class AuthService {
         "designation": 'Civil Engineer',
         "image" : raj,
         "mobile" : 8500034567,
+        "chat" : [{}],
+        'reviews':[],
+        "userBookings":[]
+      },
+      {
+        id : 5,
+        "email":'sai@gmail.com',
+        "username":'saikumar',
+        "password": 'lagishetti@12',
+        "loggedin": false,
+        "active": false,
+        "firstName": 'Sai Kumar',
+        "lastName" : 'Lagishetti',
+        "gender" : 'Male',
+        "dob" : '29/04/1997',
+        "maritalStatus" : 'Single',
+        "twitter":'sailagishetti45',
+        "skype" : 'saikumar@gmail.com',
+        "location" : 'Sircilla, Telangana',
+        "website" : "wwww.lagishetti.com",
+        "role": 'User',
+        "designation": 'Assistant Manager',
+        "image" : sai,
+        "mobile" : 9533409061,
         "chat" : [{}],
         'reviews':[],
         "userBookings":[]
