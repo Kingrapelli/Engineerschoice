@@ -56,6 +56,7 @@ import { FoodService } from '../food.service';
     ])
   ]
 })
+
 export class RestaurantdetailsComponent implements OnInit {
   // allRestaurants:any;
   restaurantData:any;
@@ -69,14 +70,17 @@ export class RestaurantdetailsComponent implements OnInit {
   SGST=0;
   serviceCharges=0;
   @ViewChild('searchFoods', /* TODO: add static flag */ {static: false}) searchFoods: ElementRef;
+
   constructor(private foodService:FoodService,private activatedRoute:ActivatedRoute) { 
     this.verticalPlacement = 'left';
     this.chatToggleInverse = 'in';
     this.chatToggle = 'out';
   }
+  
   public get allRestaurants(){
     return this.foodService.restaurants;
   }
+
   ngOnInit() {
     const id =  parseInt(this.activatedRoute.snapshot.paramMap.get('id')); 
     for(let restaurant of this.allRestaurants){
@@ -150,7 +154,7 @@ export class RestaurantdetailsComponent implements OnInit {
 
   bookingDetails(){
     if(this.bookings.length == 0){
-      alert("Please order anything")
+      alert("Please add anything")
     }
     else
       this.chatToggle =  'in';
@@ -160,9 +164,13 @@ export class RestaurantdetailsComponent implements OnInit {
     this.chatToggle = 'out';
   }
 
+  navigateToPaymentGateway(){
+
+  }
+
   ngOnDestroy(){
     for(let item of this.restaurantData.items){
-      item=0;
+      item.quantity=0;
     }
   }
 }
