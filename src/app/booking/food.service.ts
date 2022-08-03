@@ -87,7 +87,72 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/kritinga1.jfif',
-      "categories" : [{category:'Nonveg'}]
+      "categories" : [{category:'Nonveg'}],
+      "items":[
+        {
+          id:1,
+          name : "Chapati with Chicken Curry",
+          image:"assets/images/foods/lunch/nonveg/chapatinonveg.jfif",
+          cost : 120,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Chicken Manchuriyan",
+          image:"assets/images/foods/lunch/nonveg/chickenmanchuriyan.jfif",
+          cost :  100,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Chicken Dum Biryani",
+          image:"assets/images/foods/lunch/nonveg/dumbiryani.jfif",
+          cost : 200,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Fish Biryani",
+          image:"assets/images/foods/lunch/nonveg/fishbiryani.jfif",
+          cost : 240,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Mutton Keema Biryani",
+          image:"assets/images/foods/lunch/nonveg/keemabiryani.jfif",
+          cost : 220,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Mutton Biryani",
+          image:"assets/images/foods/lunch/nonveg/muttonbiryani.jfif",
+          cost : 220,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Parota with chicken curry",
+          image:"assets/images/foods/lunch/nonveg/parotanonveg.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Prawns Biryani",
+          image:"assets/images/foods/lunch/nonveg/prawnsbiryani.jfif",
+          cost : 240,
+          quantity:0,
+        },
+        {
+          id:9,
+          name : "Chicken Tikka Biryani",
+          image:"assets/images/foods/lunch/nonveg/tikkabiryani.jfif",
+          cost : 220,
+          quantity:0,
+        }
+      ]
     },
     {
       id:3,
@@ -96,7 +161,58 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/chillies.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Chapati with Veg Curry",
+          image:"assets/images/foods/lunch/veg/chapativeg.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Mashroom Biryani",
+          image:"assets/images/foods/lunch/veg/mashroomBiryani.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Paneer Biryani",
+          image:"assets/images/foods/lunch/veg/paneerBiryani.jfif",
+          cost : 180,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Parota with Aalu curry",
+          image:"assets/images/foods/lunch/veg/parotawithaalu.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Veg Biryani",
+          image:"assets/images/foods/lunch/veg/vegBiryani.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Veg Manchuriyan",
+          image:"assets/images/foods/lunch/veg/vegmanchuriyan.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Meals",
+          image:"assets/images/foods/lunch/veg/vegMeals.jfif",
+          cost : 80,
+          quantity:0,
+        },
+      ]
     },
     {
       id:4,
@@ -105,7 +221,58 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/kritinga2.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Chapati with Veg Curry",
+          image:"assets/images/foods/lunch/veg/chapativeg.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Mashroom Biryani",
+          image:"assets/images/foods/lunch/veg/mashroomBiryani.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Paneer Biryani",
+          image:"assets/images/foods/lunch/veg/paneerBiryani.jfif",
+          cost : 180,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Parota with Aalu curry",
+          image:"assets/images/foods/lunch/veg/parotawithaalu.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Veg Biryani",
+          image:"assets/images/foods/lunch/veg/vegBiryani.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Veg Manchuriyan",
+          image:"assets/images/foods/lunch/veg/vegmanchuriyan.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Meals",
+          image:"assets/images/foods/lunch/veg/vegMeals.jfif",
+          cost : 80,
+          quantity:0,
+        },
+      ]
     },
     {
       id:5,
@@ -114,7 +281,72 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/mrcb.jfif',
-      "categories" : [{category:'Nonveg'}]
+      "categories" : [{category:'Nonveg'}],
+      "items":[
+        {
+          id:1,
+          name : "Chapati with Chicken Curry",
+          image:"assets/images/foods/lunch/nonveg/chapatinonveg.jfif",
+          cost : 100,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Chicken Manchuriyan",
+          image:"assets/images/foods/lunch/nonveg/chickenmanchuriyan.jfif",
+          cost :  100,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Chicken Dum Biryani",
+          image:"assets/images/foods/lunch/nonveg/dumbiryani.jfif",
+          cost : 180,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Fish Biryani",
+          image:"assets/images/foods/lunch/nonveg/fishbiryani.jfif",
+          cost : 220,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Mutton Keema Biryani",
+          image:"assets/images/foods/lunch/nonveg/keemabiryani.jfif",
+          cost : 190,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Mutton Biryani",
+          image:"assets/images/foods/lunch/nonveg/muttonbiryani.jfif",
+          cost : 200,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Parota with chicken curry",
+          image:"assets/images/foods/lunch/nonveg/parotanonveg.jfif",
+          cost : 120,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Prawns Biryani",
+          image:"assets/images/foods/lunch/nonveg/prawnsbiryani.jfif",
+          cost : 180,
+          quantity:0,
+        },
+        {
+          id:9,
+          name : "Chicken Tikka Biryani",
+          image:"assets/images/foods/lunch/nonveg/tikkabiryani.jfif",
+          cost : 200,
+          quantity:0,
+        }
+      ]
     },
     {
       id:6,
@@ -123,7 +355,72 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/paradise1.jfif',
-      "categories" : [{category:'Nonveg'}]
+      "categories" : [{category:'Nonveg'}],
+      "items":[
+        {
+          id:1,
+          name : "Chapati with Chicken Curry",
+          image:"assets/images/foods/lunch/nonveg/chapatinonveg.jfif",
+          cost : 150,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Chicken Manchuriyan",
+          image:"assets/images/foods/lunch/nonveg/chickenmanchuriyan.jfif",
+          cost :  120,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Chicken Dum Biryani",
+          image:"assets/images/foods/lunch/nonveg/dumbiryani.jfif",
+          cost : 220,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Fish Biryani",
+          image:"assets/images/foods/lunch/nonveg/fishbiryani.jfif",
+          cost : 250,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Mutton Keema Biryani",
+          image:"assets/images/foods/lunch/nonveg/keemabiryani.jfif",
+          cost : 250,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Mutton Biryani",
+          image:"assets/images/foods/lunch/nonveg/muttonbiryani.jfif",
+          cost : 280,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Parota with chicken curry",
+          image:"assets/images/foods/lunch/nonveg/parotanonveg.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Prawns Biryani",
+          image:"assets/images/foods/lunch/nonveg/prawnsbiryani.jfif",
+          cost : 220,
+          quantity:0,
+        },
+        {
+          id:9,
+          name : "Chicken Tikka Biryani",
+          image:"assets/images/foods/lunch/nonveg/tikkabiryani.jfif",
+          cost : 230,
+          quantity:0,
+        }
+      ]
     },
     {
       id:7,
@@ -132,7 +429,72 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/paradise2.jfif',
-      "categories" : [{category:'Nonveg'}]
+      "categories" : [{category:'Nonveg'}],
+      "items":[
+        {
+          id:1,
+          name : "Chapati with Chicken Curry",
+          image:"assets/images/foods/lunch/nonveg/chapatinonveg.jfif",
+          cost : 150,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Chicken Manchuriyan",
+          image:"assets/images/foods/lunch/nonveg/chickenmanchuriyan.jfif",
+          cost :  120,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Chicken Dum Biryani",
+          image:"assets/images/foods/lunch/nonveg/dumbiryani.jfif",
+          cost : 220,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Fish Biryani",
+          image:"assets/images/foods/lunch/nonveg/fishbiryani.jfif",
+          cost : 250,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Mutton Keema Biryani",
+          image:"assets/images/foods/lunch/nonveg/keemabiryani.jfif",
+          cost : 250,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Mutton Biryani",
+          image:"assets/images/foods/lunch/nonveg/muttonbiryani.jfif",
+          cost : 280,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Parota with chicken curry",
+          image:"assets/images/foods/lunch/nonveg/parotanonveg.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Prawns Biryani",
+          image:"assets/images/foods/lunch/nonveg/prawnsbiryani.jfif",
+          cost : 220,
+          quantity:0,
+        },
+        {
+          id:9,
+          name : "Chicken Tikka Biryani",
+          image:"assets/images/foods/lunch/nonveg/tikkabiryani.jfif",
+          cost : 230,
+          quantity:0,
+        }
+      ]
     },
     {
       id:8,
@@ -141,7 +503,58 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/pistahouse.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Chapati with Veg Curry",
+          image:"assets/images/foods/lunch/veg/chapativeg.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Mashroom Biryani",
+          image:"assets/images/foods/lunch/veg/mashroomBiryani.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Paneer Biryani",
+          image:"assets/images/foods/lunch/veg/paneerBiryani.jfif",
+          cost : 180,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Parota with Aalu curry",
+          image:"assets/images/foods/lunch/veg/parotawithaalu.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Veg Biryani",
+          image:"assets/images/foods/lunch/veg/vegBiryani.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Veg Manchuriyan",
+          image:"assets/images/foods/lunch/veg/vegmanchuriyan.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Meals",
+          image:"assets/images/foods/lunch/veg/vegMeals.jfif",
+          cost : 80,
+          quantity:0,
+        },
+      ]
     },
     {
       id:9,
@@ -150,7 +563,65 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/anand.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Idly",
+          image:"assets/images/foods/tiffins/idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Vada",
+          image:"assets/images/foods/tiffins/vada.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Sambar Idly",
+          image:"assets/images/foods/tiffins/sambar_idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Puri",
+          image:"assets/images/foods/tiffins/puri.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Poha",
+          image:"assets/images/foods/tiffins/poha.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Masala Dosa",
+          image:"assets/images/foods/tiffins/masalaDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Onion Dosa",
+          image:"assets/images/foods/tiffins/onionDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Ravva Dosa",
+          image:"assets/images/foods/tiffins/ravvaDosa.jfif",
+          cost : 45,
+          quantity:0,
+        }
+      ]
     },
     {
       id:10,
@@ -159,7 +630,65 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/classictiffins.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Idly",
+          image:"assets/images/foods/tiffins/idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Vada",
+          image:"assets/images/foods/tiffins/vada.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Sambar Idly",
+          image:"assets/images/foods/tiffins/sambar_idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Puri",
+          image:"assets/images/foods/tiffins/puri.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Poha",
+          image:"assets/images/foods/tiffins/poha.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Masala Dosa",
+          image:"assets/images/foods/tiffins/masalaDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Onion Dosa",
+          image:"assets/images/foods/tiffins/onionDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Ravva Dosa",
+          image:"assets/images/foods/tiffins/ravvaDosa.jfif",
+          cost : 45,
+          quantity:0,
+        }
+      ]
     },
     {
       id:11,
@@ -168,7 +697,114 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/gravity.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Idly",
+          image:"assets/images/foods/tiffins/idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Vada",
+          image:"assets/images/foods/tiffins/vada.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Sambar Idly",
+          image:"assets/images/foods/tiffins/sambar_idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Puri",
+          image:"assets/images/foods/tiffins/puri.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Poha",
+          image:"assets/images/foods/tiffins/poha.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Masala Dosa",
+          image:"assets/images/foods/tiffins/masalaDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Onion Dosa",
+          image:"assets/images/foods/tiffins/onionDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Ravva Dosa",
+          image:"assets/images/foods/tiffins/ravvaDosa.jfif",
+          cost : 45,
+          quantity:0,
+        },
+        {
+          id:9,
+          name : "Chapati with Veg Curry",
+          image:"assets/images/foods/lunch/veg/chapativeg.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:10,
+          name : "Mashroom Biryani",
+          image:"assets/images/foods/lunch/veg/mashroomBiryani.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:11,
+          name : "Paneer Biryani",
+          image:"assets/images/foods/lunch/veg/paneerBiryani.jfif",
+          cost : 180,
+          quantity:0,
+        },
+        {
+          id:12,
+          name : "Parota with Aalu curry",
+          image:"assets/images/foods/lunch/veg/parotawithaalu.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:13,
+          name : "Veg Biryani",
+          image:"assets/images/foods/lunch/veg/vegBiryani.jfif",
+          cost : 160,
+          quantity:0,
+        },
+        {
+          id:14,
+          name : "Veg Manchuriyan",
+          image:"assets/images/foods/lunch/veg/vegmanchuriyan.jfif",
+          cost : 90,
+          quantity:0,
+        },
+        {
+          id:15,
+          name : "Meals",
+          image:"assets/images/foods/lunch/veg/vegMeals.jfif",
+          cost : 80,
+          quantity:0,
+        }
+      ]
     },
     {
       id:12,
@@ -177,7 +813,65 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/narayanatiffins.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Idly",
+          image:"assets/images/foods/tiffins/idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Vada",
+          image:"assets/images/foods/tiffins/vada.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Sambar Idly",
+          image:"assets/images/foods/tiffins/sambar_idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Puri",
+          image:"assets/images/foods/tiffins/puri.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Poha",
+          image:"assets/images/foods/tiffins/poha.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Masala Dosa",
+          image:"assets/images/foods/tiffins/masalaDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Onion Dosa",
+          image:"assets/images/foods/tiffins/onionDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Ravva Dosa",
+          image:"assets/images/foods/tiffins/ravvaDosa.jfif",
+          cost : 45,
+          quantity:0,
+        }
+      ]
     },
     {
       id:13,
@@ -186,7 +880,65 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/purnatiffins.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Idly",
+          image:"assets/images/foods/tiffins/idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Vada",
+          image:"assets/images/foods/tiffins/vada.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Sambar Idly",
+          image:"assets/images/foods/tiffins/sambar_idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Puri",
+          image:"assets/images/foods/tiffins/puri.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Poha",
+          image:"assets/images/foods/tiffins/poha.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Masala Dosa",
+          image:"assets/images/foods/tiffins/masalaDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Onion Dosa",
+          image:"assets/images/foods/tiffins/onionDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Ravva Dosa",
+          image:"assets/images/foods/tiffins/ravvaDosa.jfif",
+          cost : 45,
+          quantity:0,
+        }
+      ]
     },
     {
       id:14,
@@ -195,7 +947,65 @@ export class FoodService {
       "opensAt" : '11:00 AM',
       "closesAt" : '10:00 PM',
       "image" : 'assets/images/restaurants/anand.jfif',
-      "categories" : [{category:'Veg'}]
+      "categories" : [{category:'Veg'}],
+      "items":[
+        {
+          id:1,
+          name : "Idly",
+          image:"assets/images/foods/tiffins/idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:2,
+          name : "Vada",
+          image:"assets/images/foods/tiffins/vada.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:3,
+          name : "Sambar Idly",
+          image:"assets/images/foods/tiffins/sambar_idly.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:4,
+          name : "Puri",
+          image:"assets/images/foods/tiffins/puri.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:5,
+          name : "Poha",
+          image:"assets/images/foods/tiffins/poha.jfif",
+          cost : 30,
+          quantity:0,
+        },
+        {
+          id:6,
+          name : "Masala Dosa",
+          image:"assets/images/foods/tiffins/masalaDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:7,
+          name : "Onion Dosa",
+          image:"assets/images/foods/tiffins/onionDosa.jfif",
+          cost : 40,
+          quantity:0,
+        },
+        {
+          id:8,
+          name : "Ravva Dosa",
+          image:"assets/images/foods/tiffins/ravvaDosa.jfif",
+          cost : 45,
+          quantity:0,
+        }
+      ]
     }
   ];
   constructor() {}
