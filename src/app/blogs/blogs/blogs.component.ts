@@ -160,6 +160,10 @@ export class BlogsComponent implements OnInit {
     return likes.find(id => id === this.userData.id);
   }
 
+  getDisLikesData(dislikes){
+    return dislikes.find(id=> id === this.userData.id);
+  }
+
   dislikeBlog(id){
     for(let blog of this.allBlogs){
       if(blog.id == id){
