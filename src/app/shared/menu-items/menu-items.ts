@@ -105,6 +105,14 @@ const MENUITEMS = [
         role: ''
       },
       {
+        state: 'blogs',
+        short_label: 'n',
+        name: 'Blogs',
+        type: 'link',
+        icon: 'ti-receipt',
+        role: ''
+      },
+      {
         state: 'audits',
         short_label: 'n',
         name: 'Audits',
@@ -217,6 +225,12 @@ const MENUITEMS = [
         icon: 'ti-id-badge',
         role:'',
         children: [
+          {
+            state: 'bus',
+            type: 'link',
+            name: 'Bus',
+            // target: true
+          },
           {
             state: 'train',
             type: 'link',

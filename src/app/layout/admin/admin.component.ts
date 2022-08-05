@@ -214,6 +214,16 @@ export class AdminComponent implements OnInit {
     return (tmpNotifications || '');
   }
 
+  getUserId(id:any){
+    let routerUser ;
+    for(let user of this.allUsers){
+      if(id == user.id){
+        routerUser=user;
+      }
+    }
+    this.service.getRoutedUser(routerUser);
+  }
+
   async sendToAdmin(){
     console.log(this.contactUsForm.value);
     let sendTo = 3;
