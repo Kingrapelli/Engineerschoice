@@ -13,6 +13,7 @@ export class BlogsService {
       content:"my first photo",
       sendAt:this.date.toUTCString(),
       sentBy:"Raj Kumar",
+      location:"Hyderabad",
       likes:[],
       dislikes:[]
     },{
@@ -22,6 +23,7 @@ export class BlogsService {
       content:"my Second photo",
       sendAt:this.date.toUTCString(),
       sentBy: "Admin",
+      location:"Hyderabad",
       likes:[],
       dislikes:[]
     },{
@@ -31,6 +33,7 @@ export class BlogsService {
       content:"Added dish in Abhiruchi hotel",
       sendAt:this.date.toUTCString(),
       sentBy: "Super Admin",
+      location:"Hyderabad",
       likes:[],
       dislikes:[]
     },

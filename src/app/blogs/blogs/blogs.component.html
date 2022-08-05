@@ -3,13 +3,6 @@
         <span style="float:right"><a class="btn btn-primary btn-sm btn-block" (click)="openAddBlog()">Add</a></span>
     </div>
     <div *ngFor="let blog of allBlogs" style="float: center;">
-        <!-- <div class="blogs">
-           <img src="{{blog.image}}" alt="" height="220px" width="300px" style="float:left">
-           <div style="margin-left:310px">
-            <p>{{blog.content}}</p>
-            <p>{{blog.sendAt | date :'hh:mm a'}}</p>
-           </div>
-        </div> -->
         <div class="card mb-3" style="max-width:600px !important">
             <img class="card-img-top" src="{{blog.image}}" alt="Card image cap" height="220px" width="300px">
             <div class="card-body" style="padding:10px !important">
@@ -23,6 +16,9 @@
                         <p class="card-text"><small class="text-muted">{{blog.sendAt | date :'dd/MM/yy hh:mm a'}}</small></p>
                     </div>
                     <div class="col-3">
+                        <div class="row">
+                            <p class="card-text"><i class="ti-location-pin"></i> {{blog.location}}</p>
+                        </div>
                         <div class="row">
                             <p>{{blog.likes.length || ""}}</p>
                             <span style="margin: 2px;" (click)="deLikeTheBlog(blog.id,blog.likes)" *ngIf="getLikesData(blog.likes)">
@@ -69,6 +65,10 @@
                         <div>
                             <label for="content">Content</label>
                             <input type="text" name="" id="content" formControlName="content" class="form-control" placeholder="add content...." required>
+                        </div>
+                        <div>
+                            <label for="location">Location</label>
+                            <input type="text" name="" id="location" formControlName="location" class="form-control" placeholder="add location...." required>
                         </div>
                         <div style="margin-top:10px;">
                             <input type="file" name="" id="" formControlName="image" (change)="readUrl($event)" required>

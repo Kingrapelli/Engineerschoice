@@ -74,6 +74,7 @@ export class BlogsComponent implements OnInit {
   ngOnInit() {
     this.addBlogForm=this.formBuilder.group({
       image:[''],
+      location:[''],
       content:['']
     })
   }
@@ -104,9 +105,10 @@ export class BlogsComponent implements OnInit {
       "content": this.addBlogForm.value.content,
       "sendAt":date.toUTCString(),
       "sentBy":this.userData.firstName,
+      "location":this.addBlogForm.value.location,
       likes :[],
       dislikes:[]
-    }
+    };
     this.blogsService.addBlog(tmpBlog);
     this.addBlogForm.reset();
     this.chatToggle = 'out';
