@@ -76,7 +76,6 @@ export class BlogsComponent implements OnInit {
       image:[''],
       content:['']
     })
-    console.log(this.allBlogs);
   }
 
   public get userData(){
@@ -133,13 +132,11 @@ export class BlogsComponent implements OnInit {
       if(blog.id == id){
         for(let i=0;i<blog.dislikes.length;i++){
           if(blog.dislikes[i]==this.userData.id){
-            let slicedDisLikes=blog.likes.splice(this.userData.id,1);
-            blog.dislikes=slicedDisLikes;
+            blog.dislikes.splice(i,1);
           }
         }
       }
     }
-    console.log(this.allBlogs);
   }
 
   deLikeTheBlog(id,likes){
@@ -147,13 +144,11 @@ export class BlogsComponent implements OnInit {
       if(blog.id == id){
         for(let i=0;i<blog.likes.length;i++){
           if(blog.likes[i]==this.userData.id){
-            let slicedLikes=blog.likes.splice(this.userData.id,1);
-            blog.likes=slicedLikes;
+            blog.likes.splice(i,1);
           }
         }
       }
     }
-    console.log(this.allBlogs);
   }
 
   getLikesData(likes){
@@ -174,13 +169,11 @@ export class BlogsComponent implements OnInit {
       if(blog.id == id){
         for(let i=0;i<blog.likes.length;i++){
           if(blog.likes[i]==this.userData.id){
-            let slicedLikes=blog.likes.splice(this.userData.id,1);
-            blog.likes=slicedLikes;
+            blog.likes.splice(i,1);
           }
         }
       }
     }
-    console.log(this.allBlogs);
   }
 
   dedislikeBlog(id){
@@ -188,13 +181,11 @@ export class BlogsComponent implements OnInit {
       if(blog.id == id){
         for(let i=0;i<blog.dislikes.length;i++){
           if(blog.dislikes[i]==this.userData.id){
-            let slicedDisLikes=blog.dislikes.splice(this.userData.id,1);
-            blog.dislikes=slicedDisLikes;
+            blog.dislikes.splice(i,1);
           }
         }
       }
     }
-    console.log(this.allBlogs);
   }
   
 }
