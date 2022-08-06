@@ -64,7 +64,7 @@ export class RestaurantdetailsComponent implements OnInit {
   bookings:any[]=[];
   verticalPlacement: string; /* left(default), right */
   chatToggleInverse: string;
-  chatToggle: string;
+  orderDetailsToggle: string;
   totalCost=0;
   CGST=0;
   SGST=0;
@@ -73,8 +73,7 @@ export class RestaurantdetailsComponent implements OnInit {
 
   constructor(private foodService:FoodService,private activatedRoute:ActivatedRoute) { 
     this.verticalPlacement = 'left';
-    this.chatToggleInverse = 'in';
-    this.chatToggle = 'out';
+    this.orderDetailsToggle = 'out';
   }
   
   public get allRestaurants(){
@@ -157,11 +156,11 @@ export class RestaurantdetailsComponent implements OnInit {
       alert("Please add anything")
     }
     else
-      this.chatToggle =  'in';
+      this.orderDetailsToggle =  'in';
   }
 
   closeBookingDetails(){
-    this.chatToggle = 'out';
+    this.orderDetailsToggle = 'out';
   }
 
   navigateToPaymentGateway(){
