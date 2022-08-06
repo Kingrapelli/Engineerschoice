@@ -8,13 +8,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FoodComponent } from './food/food.component';
 import { RestaurantdetailsComponent } from './restaurantdetails/restaurantdetails.component';
-import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';;
+import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
+import { BusComponent } from './bus/bus.component';;
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
 const routes:Routes=[
+  {
+    path:'bus',
+    component:BusComponent,
+    data: {
+      breadcrumb: 'Buses',
+      icon: 'icofont-justify-all bg-c-green',
+      breadcrumb_caption: 'Below are list of Buses',
+      status: true
+    }
+  },
   {
     path:'train',
     component:TrainsComponent,
@@ -68,7 +79,7 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [HotelsComponent, FlightsComponent, TrainsComponent, FoodComponent, RestaurantdetailsComponent],
+  declarations: [HotelsComponent, FlightsComponent, TrainsComponent, FoodComponent, RestaurantdetailsComponent, BusComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
