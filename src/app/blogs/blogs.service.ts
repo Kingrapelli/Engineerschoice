@@ -8,6 +8,7 @@ export class BlogsService {
   blogs=[
     {
       id:1,
+      senderId:2,
       senderImage:'',
       image:'assets/images/avatar-1.jpg',
       content:"my first photo",
@@ -18,6 +19,7 @@ export class BlogsService {
       dislikes:[]
     },{
       id:2,
+      senderId:1,
       senderImage:'',
       image:'assets/images/avatar-2.jpg',
       content:"my Second photo",
@@ -28,6 +30,7 @@ export class BlogsService {
       dislikes:[]
     },{
       id:3,
+      senderId:3,
       senderImage:'',
       image:'assets/images/foods/lunch/nonveg/keemabiryani.jfif',
       content:"Added dish in Abhiruchi hotel",

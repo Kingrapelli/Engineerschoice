@@ -208,6 +208,9 @@ export class AuthService {
     else if(category == 'hotel'){
       tmpCategoryMsg = 'Booked '+ category + ' :'+ payload.message;
     }
+    else if(category == "blog"){
+      tmpCategoryMsg = payload.message;
+    }
 
     let userData = JSON.parse(localStorage.getItem('user'));
     let tempNotification = {
