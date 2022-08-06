@@ -1,6 +1,7 @@
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 import { BlogsService } from '../blogs.service';
 
 @Component({
@@ -65,7 +66,8 @@ export class BlogsComponent implements OnInit {
   url:any;
   isLiked=false;
   isDisliked=false;
-  constructor(private blogsService:BlogsService,private formBuilder:FormBuilder) { 
+  constructor(private blogsService:BlogsService,
+    private formBuilder:FormBuilder,private authService:AuthService) { 
     this.verticalPlacement = 'left';
     this.chatToggleInverse = 'in';
     this.chatToggle = 'out';
@@ -74,9 +76,9 @@ export class BlogsComponent implements OnInit {
   ngOnInit() {
     this.addBlogForm=this.formBuilder.group({
       image:[''],
+      location:[''],
       content:['']
     })
-    console.log(this.allBlogs);
   }
 
   public get userData(){
@@ -100,14 +102,16 @@ export class BlogsComponent implements OnInit {
     let id=this.blogsService.blogs.length+1;
     let tmpBlog={
       id : id,
+      "senderId":this.userData.id,
       "senderImage" : this.userData.image,
       "image":this.url,
       "content": this.addBlogForm.value.content,
       "sendAt":date.toUTCString(),
       "sentBy":this.userData.firstName,
+      "location":this.addBlogForm.value.location,
       likes :[],
       dislikes:[]
-    }
+    };
     this.blogsService.addBlog(tmpBlog);
     this.addBlogForm.reset();
     this.chatToggle = 'out';
@@ -123,7 +127,7 @@ export class BlogsComponent implements OnInit {
     }
   }
 
-  likeTheBlog(id,likes){
+  likeTheBlog(id,senderId){
     for(let blog of this.allBlogs){
       if(blog.id == id){
         blog.likes.push(this.userData.id);
@@ -133,27 +137,32 @@ export class BlogsComponent implements OnInit {
       if(blog.id == id){
         for(let i=0;i<blog.dislikes.length;i++){
           if(blog.dislikes[i]==this.userData.id){
-            let slicedDisLikes=blog.likes.splice(this.userData.id,1);
-            blog.dislikes=slicedDisLikes;
+            blog.dislikes.splice(i,1);
           }
         }
       }
     }
-    console.log(this.allBlogs);
+    let payload:any
+    for(let blog of this.allBlogs){
+      if(blog.id == id){
+        payload = {
+          message:"Liked your blog: "+blog.content,
+        }
+      }
+    }
+    this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
   }
 
-  deLikeTheBlog(id,likes){
+  deLikeTheBlog(id,senderId){
     for(let blog of this.allBlogs){
       if(blog.id == id){
         for(let i=0;i<blog.likes.length;i++){
           if(blog.likes[i]==this.userData.id){
-            let slicedLikes=blog.likes.splice(this.userData.id,1);
-            blog.likes=slicedLikes;
+            blog.likes.splice(i,1);
           }
         }
       }
     }
-    console.log(this.allBlogs);
   }
 
   getLikesData(likes){
@@ -164,7 +173,7 @@ export class BlogsComponent implements OnInit {
     return dislikes.find(id=> id === this.userData.id);
   }
 
-  dislikeBlog(id){
+  dislikeBlog(id,senderId){
     for(let blog of this.allBlogs){
       if(blog.id == id){
         blog.dislikes.push(this.userData.id);
@@ -174,13 +183,21 @@ export class BlogsComponent implements OnInit {
       if(blog.id == id){
         for(let i=0;i<blog.likes.length;i++){
           if(blog.likes[i]==this.userData.id){
-            let slicedLikes=blog.likes.splice(this.userData.id,1);
-            blog.likes=slicedLikes;
+            blog.likes.splice(i,1);
           }
         }
       }
     }
-    console.log(this.allBlogs);
+    let payload:any
+    for(let blog of this.allBlogs){
+      if(blog.id == id){
+        payload = {
+          message:"Disliked your blog: "+blog.content,
+        }
+      }
+    }
+    
+    this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
   }
 
   dedislikeBlog(id){
@@ -188,13 +205,11 @@ export class BlogsComponent implements OnInit {
       if(blog.id == id){
         for(let i=0;i<blog.dislikes.length;i++){
           if(blog.dislikes[i]==this.userData.id){
-            let slicedDisLikes=blog.dislikes.splice(this.userData.id,1);
-            blog.dislikes=slicedDisLikes;
+            blog.dislikes.splice(i,1);
           }
         }
       }
     }
-    console.log(this.allBlogs);
   }
   
 }
