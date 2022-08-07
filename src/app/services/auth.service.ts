@@ -65,7 +65,11 @@ export class AuthService {
         "mobile" : 9985464746,
         'chat':[{}],
         'reviews':[],
-        "userBookings":[]
+        "userBookings":[],
+        "notifications":{
+          "blogs":false,
+          "chats":false,
+        }
       },
       {
         id: 2,
@@ -89,7 +93,11 @@ export class AuthService {
         "mobile" : 9160148391,
         "chat" : [{}],
         'reviews':[],
-        "userBookings":[]
+        "userBookings":[],
+        "notifications":{
+          "blogs":true,
+          "chats":false,
+        }
       },
       {
         id : 3,
@@ -113,7 +121,11 @@ export class AuthService {
         "mobile" : 9703773058,
         "chat" : [{}],
         'reviews':[],
-        "userBookings":[]
+        "userBookings":[],
+        "notifications":{
+          "blogs":false,
+          "chats":false,
+        }
       },
       {
         id : 4,
@@ -137,7 +149,11 @@ export class AuthService {
         "mobile" : 8500034567,
         "chat" : [{}],
         'reviews':[],
-        "userBookings":[]
+        "userBookings":[],
+        "notifications":{
+          "blogs":false,
+          "chats":false,
+        }
       },
       {
         id : 5,
@@ -161,7 +177,11 @@ export class AuthService {
         "mobile" : 9533409061,
         "chat" : [{}],
         'reviews':[],
-        "userBookings":[]
+        "userBookings":[],
+        "notifications":{
+          "blogs":false,
+          "chats":false,
+        }
       }
     ]
     localStorage.setItem('users',JSON.stringify(this.users));

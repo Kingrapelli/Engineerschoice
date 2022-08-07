@@ -66,6 +66,9 @@ export class BlogsComponent implements OnInit {
   url:any;
   isLiked=false;
   isDisliked=false;
+  blogType:any;
+  typeOfBlog=["Hotels","Restaurants","Buses","Jobs","Results"];
+  default: string = 'Hotels';
   constructor(private blogsService:BlogsService,
     private formBuilder:FormBuilder,private authService:AuthService) { 
     this.verticalPlacement = 'left';
@@ -75,10 +78,12 @@ export class BlogsComponent implements OnInit {
 
   ngOnInit() {
     this.addBlogForm=this.formBuilder.group({
+      typeOfRoom:[''],
       image:[''],
       location:[''],
       content:['']
-    })
+    });
+    // this.addBlogForm.controls['typeOfRoom'].setValue(this.default, {onlySelf: true});
   }
 
   public get userData(){
@@ -109,9 +114,12 @@ export class BlogsComponent implements OnInit {
       "sendAt":date.toUTCString(),
       "sentBy":this.userData.firstName,
       "location":this.addBlogForm.value.location,
+      // "typeOfBlog":this.addBlogForm.value.typeOfBlog,
+      "typeOfBlog":this.blogType,
       likes :[],
       dislikes:[]
     };
+    console.log(tmpBlog);
     this.blogsService.addBlog(tmpBlog);
     this.addBlogForm.reset();
     this.chatToggle = 'out';

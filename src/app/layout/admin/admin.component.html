@@ -228,7 +228,7 @@
                 </a>
                 <ul class="show-notification profile-notification">
                   <li>
-                    <a [routerLink]="['/crm-contact']">
+                    <a [routerLink]="['/settings']">
                       <i class="ti-settings"></i> Settings
                     </a>
                   </li>
@@ -265,7 +265,10 @@
       <div class="had-container">
         <div class="card card_main p-fixed users-main">
           <div class="user-box">
-            <div class="card-body">
+            <div style="margin:5px 5px 0px 5px">
+              <i class="ti-close" style='cursor:pointer;' (click)="closeChatDetails()"></i>
+            </div>
+            <div class="card-body" style="padding-top: 10px !important;">
               <div class="right-icon-control">
                 <input class="form-control search-text" placeholder="Search Friend" id="search-friends" #searchFriends (keyup)="searchFriendList($event)">
                 <div class="form-icon">

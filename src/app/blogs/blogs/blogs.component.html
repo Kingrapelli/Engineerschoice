@@ -17,6 +17,9 @@
                     </div>
                     <div class="col-3">
                         <div class="row">
+                            <p class="card-title">{{blog.typeOfBlog}}</p>
+                        </div>
+                        <div class="row">
                             <p class="card-text"><i class="ti-location-pin"></i> {{blog.location}}</p>
                         </div>
                         <div class="row">
@@ -62,6 +65,11 @@
                 <i class="ti-close" style='cursor:pointer;' (click)="closeAddBlog()"></i>
                 <div style="margin:5px;padding:10px;border:1px solid;border-radius: 5px;">
                     <form [formGroup]="addBlogForm" (ngSubmit)="onSubmitAddBlog()">
+                        <div>
+                            <select formControlName="typeOfRoom" class="form-control" [(ngModel)]="blogType" aria-placeholder="Select type of blog">
+                                <option *ngFor="let blogType of typeOfBlog">{{blogType}}</option>
+                            </select>
+                        </div>
                         <div>
                             <label for="content">Content</label>
                             <input type="text" name="" id="content" formControlName="content" class="form-control" placeholder="add content...." required>

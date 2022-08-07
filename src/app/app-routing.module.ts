@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {AdminComponent} from './layout/admin/admin.component';
 import {AuthComponent} from './layout/auth/auth.component';
 import { LoginComponent } from './login/login.component';
+import { SettingsComponent } from './shared/settings/settings.component';
 
 const routes: Routes = [
   // {
@@ -63,6 +64,15 @@ const routes: Routes = [
       {
         path:'blogs',
         loadChildren:()=>import('./blogs/blogs.module').then(m=> m.BlogsModule)
+      },{
+        path:'settings',
+        component:SettingsComponent,
+        data: {
+          breadcrumb: 'Settings',
+          icon: 'icofont-justify-all bg-c-green',
+          breadcrumb_caption: 'Here you can change the settings',
+          status: true
+        }
       }
     ]
   }
