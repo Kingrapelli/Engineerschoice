@@ -67,8 +67,8 @@ export class AuthService {
         'reviews':[],
         "userBookings":[],
         "notifications":{
-          "blogs":false,
-          "chats":false,
+          "blogs":true,
+          "chats":true,
         }
       },
       {
@@ -95,8 +95,8 @@ export class AuthService {
         'reviews':[],
         "userBookings":[],
         "notifications":{
-          "blogs":true,
-          "chats":false,
+          "blogs":false,
+          "chats":true,
         }
       },
       {
@@ -123,8 +123,8 @@ export class AuthService {
         'reviews':[],
         "userBookings":[],
         "notifications":{
-          "blogs":false,
-          "chats":false,
+          "blogs":true,
+          "chats":true,
         }
       },
       {
@@ -151,8 +151,8 @@ export class AuthService {
         'reviews':[],
         "userBookings":[],
         "notifications":{
-          "blogs":false,
-          "chats":false,
+          "blogs":true,
+          "chats":true,
         }
       },
       {
@@ -179,8 +179,8 @@ export class AuthService {
         'reviews':[],
         "userBookings":[],
         "notifications":{
-          "blogs":false,
-          "chats":false,
+          "blogs":true,
+          "chats":true,
         }
       }
     ]

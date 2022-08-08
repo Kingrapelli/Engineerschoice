@@ -135,7 +135,17 @@ export class BlogsComponent implements OnInit {
     }
   }
 
+  public get allUsers(){
+    return JSON.parse(localStorage.getItem('users'));
+  }
+
   likeTheBlog(id,senderId){
+    let senderUserData;
+    for(let user of this.allUsers){
+      if(user.id == senderId){
+        senderUserData = user;
+      }
+    }
     for(let blog of this.allBlogs){
       if(blog.id == id){
         blog.likes.push(this.userData.id);
@@ -158,7 +168,9 @@ export class BlogsComponent implements OnInit {
         }
       }
     }
-    this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
+    if(senderUserData.notifications.blogs == true){
+      this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
+    }
   }
 
   deLikeTheBlog(id,senderId){
@@ -182,6 +194,12 @@ export class BlogsComponent implements OnInit {
   }
 
   dislikeBlog(id,senderId){
+    let senderUserData;
+    for(let user of this.allUsers){
+      if(user.id == senderId){
+        senderUserData = user;
+      }
+    }
     for(let blog of this.allBlogs){
       if(blog.id == id){
         blog.dislikes.push(this.userData.id);
@@ -205,7 +223,9 @@ export class BlogsComponent implements OnInit {
       }
     }
     
-    this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
+    if(senderUserData.notifications.blogs == true){
+      this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
+    }
   }
 
   dedislikeBlog(id){

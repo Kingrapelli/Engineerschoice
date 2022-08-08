@@ -3,12 +3,12 @@
     <div class="row" style="margin:20px">
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input col-6" id="blogs" (change)="eventCheckforBlogs($event)"
-             [checked]="userData.notifications.blogs == true">
+             [checked]="userData.notifications.blogs == true" [(ngModel)]="userData.notifications.blogs">
             <label class="custom-control-label col-6" for="blogs">Blogs</label>
         </div>
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input col-6" id="chats" (change)="eventCheckforChats($event)"
-             [checked]="userData.notifications.chats == true">
+             [checked]="userData.notifications.chats == true" [(ngModel)]="userData.notifications.chats">
             <label class="custom-control-label col-6" for="chats">Chats</label>
         </div>
     </div>
