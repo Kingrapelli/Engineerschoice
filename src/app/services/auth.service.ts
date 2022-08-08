@@ -69,6 +69,13 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "busses":true,
+          "trains":true,
+          "flights":true,
+          "hotels":true,
+          "restaurants":true,
+          "jobs":true,
+          "results":true
         }
       },
       {
@@ -95,8 +102,15 @@ export class AuthService {
         'reviews':[],
         "userBookings":[],
         "notifications":{
-          "blogs":false,
+          "blogs":true,
           "chats":true,
+          "busses":true,
+          "trains":true,
+          "flights":true,
+          "hotels":true,
+          "restaurants":true,
+          "jobs":true,
+          "results":true
         }
       },
       {
@@ -125,6 +139,13 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "busses":true,
+          "trains":true,
+          "flights":true,
+          "hotels":true,
+          "restaurants":true,
+          "jobs":true,
+          "results":true
         }
       },
       {
@@ -153,6 +174,13 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "busses":true,
+          "trains":true,
+          "flights":true,
+          "hotels":true,
+          "restaurants":true,
+          "jobs":true,
+          "results":true
         }
       },
       {
@@ -181,6 +209,13 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "busses":true,
+          "trains":true,
+          "flights":true,
+          "hotels":true,
+          "restaurants":true,
+          "jobs":true,
+          "results":true
         }
       }
     ]

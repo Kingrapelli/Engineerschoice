@@ -9,6 +9,13 @@ import { AuthService } from '../../services/auth.service';
 export class SettingsComponent implements OnInit {
   blogs:boolean;
   chats:boolean;
+  busses:boolean;
+  trains:boolean;
+  flights:boolean;
+  hotels:boolean;
+  restaurants:boolean;
+  jobs:boolean;
+  results:boolean;
   constructor(private authService:AuthService) { }
 
   ngOnInit() {
@@ -32,6 +39,41 @@ export class SettingsComponent implements OnInit {
     this.userData.notifications.chats=this.chats;
   }
 
+  eventCheckforBusses(event){
+    this.busses=event.target.checked;
+    this.userData.notifications.busses=this.busses;
+  }
+
+  eventCheckforTrains(event){
+    this.trains=event.target.checked;
+    this.userData.notifications.trains=this.trains;
+  }
+
+  eventCheckforFlights(event){
+    this.flights=event.target.checked;
+    this.userData.notifications.flights=this.flights;
+  }
+
+  eventCheckforHotels(event){
+    this.hotels=event.target.checked;
+    this.userData.notifications.hotels=this.hotels;
+  }
+
+  eventCheckforRestaurants(event){
+    this.restaurants=event.target.checked;
+    this.userData.notifications.restaurants=this.restaurants;
+  }
+
+  eventCheckforJobs(event){
+    this.jobs=event.target.checked;
+    this.userData.notifications.jobs=this.jobs;
+  }
+
+  eventCheckforResults(event){
+    this.results=event.target.checked;
+    this.userData.notifications.results=this.results;
+  }
+
   saveSettings(){
     let tmpUser=this.userData;
     let tmpAllUsers=this.allUsers;
@@ -41,15 +83,51 @@ export class SettingsComponent implements OnInit {
     if(this.chats === undefined){
       this.chats=this.userData.notifications.chats;
     }
+    if(this.busses === undefined){
+      this.busses=this.userData.notifications.busses;
+    }
+    if(this.trains === undefined){
+      this.trains=this.userData.notifications.trains;
+    }
+    if(this.flights === undefined){
+      this.flights=this.userData.notifications.flights;
+    }
+    if(this.hotels === undefined){
+      this.hotels=this.userData.notifications.hotels;
+    }
+    if(this.restaurants === undefined){
+      this.restaurants=this.userData.notifications.restaurants;
+    }
+    if(this.jobs === undefined){
+      this.jobs=this.userData.notifications.jobs;
+    }
+    if(this.results === undefined){
+      this.results=this.userData.notifications.results;
+    }
     for(let user of tmpAllUsers){
       if(user.id == this.userData.id){
         user.notifications.blogs=this.blogs;
         user.notifications.chats=this.chats;
+        user.notifications.busses=this.busses;
+        user.notifications.trains=this.trains;
+        user.notifications.flights=this.flights;
+        user.notifications.hotels=this.hotels;
+        user.notifications.restaurants=this.restaurants;
+        user.notifications.jobs=this.jobs;
+        user.notifications.results=this.results;
       }
     }
     tmpUser.notifications.blogs=this.blogs;
     tmpUser.notifications.chats=this.chats;
+    tmpUser.notifications.busses=this.busses;
+    tmpUser.notifications.trains=this.trains;
+    tmpUser.notifications.flights=this.flights;
+    tmpUser.notifications.hotels=this.hotels;
+    tmpUser.notifications.restaurants=this.restaurants;
+    tmpUser.notifications.jobs=this.jobs;
+    tmpUser.notifications.results=this.results;
     localStorage.setItem('user',JSON.stringify(tmpUser));
     localStorage.setItem('users',JSON.stringify(tmpAllUsers));
+    alert('Settings saved...')
   }
 }

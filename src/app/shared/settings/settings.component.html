@@ -1,15 +1,53 @@
 <div class="col-12" style="margin:20px">
     Notifications: 
     <div class="row" style="margin:20px">
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input col-6" id="blogs" (change)="eventCheckforBlogs($event)"
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="blogs" (change)="eventCheckforBlogs($event)"
              [checked]="userData.notifications.blogs == true" [(ngModel)]="userData.notifications.blogs">
-            <label class="custom-control-label col-6" for="blogs">Blogs</label>
+            <label class="custom-control-label" for="blogs">Blogs</label>
         </div>
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input col-6" id="chats" (change)="eventCheckforChats($event)"
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="chats" (change)="eventCheckforChats($event)"
              [checked]="userData.notifications.chats == true" [(ngModel)]="userData.notifications.chats">
-            <label class="custom-control-label col-6" for="chats">Chats</label>
+            <label class="custom-control-label" for="chats">Chats</label>
+        </div>
+    </div>
+    Bookings:
+    <div class="row" style="margin:20px">
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="busses" (change)="eventCheckforBusses($event)"
+             [checked]="userData.notifications.busses == true" [(ngModel)]="userData.notifications.busses">
+            <label class="custom-control-label" for="busses">Busses</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="trains" (change)="eventCheckforTrains($event)"
+             [checked]="userData.notifications.trains == true" [(ngModel)]="userData.notifications.trains">
+            <label class="custom-control-label" for="trains">Trains</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="flights" (change)="eventCheckforFlights($event)"
+             [checked]="userData.notifications.flights == true" [(ngModel)]="userData.notifications.flights">
+            <label class="custom-control-label" for="flights">Flights</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="hotels" (change)="eventCheckforHotels($event)"
+             [checked]="userData.notifications.hotels == true" [(ngModel)]="userData.notifications.hotels">
+            <label class="custom-control-label" for="hotels">Hotels</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="restaurants" (change)="eventCheckforRestaurants($event)"
+             [checked]="userData.notifications.restaurants == true" [(ngModel)]="userData.notifications.restaurants">
+            <label class="custom-control-label" for="restaurants">Restaurants</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="jobs" (change)="eventCheckforJobs($event)"
+             [checked]="userData.notifications.jobs == true" [(ngModel)]="userData.notifications.jobs">
+            <label class="custom-control-label" for="jobs">Jobs</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="results" (change)="eventCheckforResults($event)"
+             [checked]="userData.notifications.results == true" [(ngModel)]="userData.notifications.results">
+            <label class="custom-control-label" for="results">Results</label>
         </div>
     </div>
     <div>
