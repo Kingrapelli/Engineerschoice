@@ -290,10 +290,6 @@ export class AuthService {
       if(payload.sentTo == user.id)
         user.reviews.push(tmpReview);
     }
-    // for(let user of allUsers){
-    //   if(payload.sentBy == user.id)
-    //     user.reviews.push(tmpReview);
-    // }
     userData.reviews.push(tmpReview);
     console.log(userData);
     localStorage.setItem('user',JSON.stringify(userData));
