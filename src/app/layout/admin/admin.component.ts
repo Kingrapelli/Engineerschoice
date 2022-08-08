@@ -293,6 +293,11 @@ export class AdminComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
+  closeChatDetails(){
+    this.chatToggle = 'out';
+    this.chatToggleInverse='out';
+  }
+
   toggleChat() {
     this.chatToggle = this.chatToggle === 'out' ? 'in' : 'out';
     this.chatToggleInverse = this.chatToggleInverse === 'out' ? 'in' : 'out';

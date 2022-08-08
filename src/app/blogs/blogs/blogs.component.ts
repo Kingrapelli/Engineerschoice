@@ -66,6 +66,9 @@ export class BlogsComponent implements OnInit {
   url:any;
   isLiked=false;
   isDisliked=false;
+  blogType:any;
+  typeOfBlog=["Hotels","Restaurants","Buses","Jobs","Results"];
+  default: string = 'Hotels';
   constructor(private blogsService:BlogsService,
     private formBuilder:FormBuilder,private authService:AuthService) { 
     this.verticalPlacement = 'left';
@@ -75,10 +78,12 @@ export class BlogsComponent implements OnInit {
 
   ngOnInit() {
     this.addBlogForm=this.formBuilder.group({
+      typeOfRoom:[''],
       image:[''],
       location:[''],
       content:['']
-    })
+    });
+    // this.addBlogForm.controls['typeOfRoom'].setValue(this.default, {onlySelf: true});
   }
 
   public get userData(){
@@ -109,9 +114,12 @@ export class BlogsComponent implements OnInit {
       "sendAt":date.toUTCString(),
       "sentBy":this.userData.firstName,
       "location":this.addBlogForm.value.location,
+      // "typeOfBlog":this.addBlogForm.value.typeOfBlog,
+      "typeOfBlog":this.blogType,
       likes :[],
       dislikes:[]
     };
+    console.log(tmpBlog);
     this.blogsService.addBlog(tmpBlog);
     this.addBlogForm.reset();
     this.chatToggle = 'out';
@@ -127,7 +135,17 @@ export class BlogsComponent implements OnInit {
     }
   }
 
+  public get allUsers(){
+    return JSON.parse(localStorage.getItem('users'));
+  }
+
   likeTheBlog(id,senderId){
+    let senderUserData;
+    for(let user of this.allUsers){
+      if(user.id == senderId){
+        senderUserData = user;
+      }
+    }
     for(let blog of this.allBlogs){
       if(blog.id == id){
         blog.likes.push(this.userData.id);
@@ -150,7 +168,9 @@ export class BlogsComponent implements OnInit {
         }
       }
     }
-    this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
+    if(senderUserData.notifications.blogs == true){
+      this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
+    }
   }
 
   deLikeTheBlog(id,senderId){
@@ -174,6 +194,12 @@ export class BlogsComponent implements OnInit {
   }
 
   dislikeBlog(id,senderId){
+    let senderUserData;
+    for(let user of this.allUsers){
+      if(user.id == senderId){
+        senderUserData = user;
+      }
+    }
     for(let blog of this.allBlogs){
       if(blog.id == id){
         blog.dislikes.push(this.userData.id);
@@ -197,7 +223,9 @@ export class BlogsComponent implements OnInit {
       }
     }
     
-    this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
+    if(senderUserData.notifications.blogs == true){
+      this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
+    }
   }
 
   dedislikeBlog(id){

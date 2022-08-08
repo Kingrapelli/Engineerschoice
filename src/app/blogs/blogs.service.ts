@@ -15,6 +15,7 @@ export class BlogsService {
       sendAt:this.date.toUTCString(),
       sentBy:"Raj Kumar",
       location:"Hyderabad",
+      typeOfBlog:"Pictures",
       likes:[],
       dislikes:[]
     },{
@@ -26,6 +27,7 @@ export class BlogsService {
       sendAt:this.date.toUTCString(),
       sentBy: "Admin",
       location:"Hyderabad",
+      typeOfBlog:"Pictures",
       likes:[],
       dislikes:[]
     },{
@@ -37,6 +39,7 @@ export class BlogsService {
       sendAt:this.date.toUTCString(),
       sentBy: "Super Admin",
       location:"Hyderabad",
+      typeOfBlog:"Pictures",
       likes:[],
       dislikes:[]
     },
