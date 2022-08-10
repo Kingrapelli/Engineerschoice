@@ -1,15 +1,63 @@
 <div class="col-12" style="margin:20px">
-    Notifications: 
+    <!-- <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="notifications" (change)="eventCheckforNotifications($event)"
+        [checked]="allNotification == true" [(ngModel)]="allNotification">
+        <label for="notifications" class="custom-control-label"> Notifications: </label>
+    </div> -->
+    Notifications:
     <div class="row" style="margin:20px">
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input col-6" id="blogs" (change)="eventCheckforBlogs($event)"
-             [checked]="userData.notifications.blogs == true" [(ngModel)]="userData.notifications.blogs">
-            <label class="custom-control-label col-6" for="blogs">Blogs</label>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="blogs" (change)="eventCheckforBlogs($event)"
+             [checked]="userData.notifications.blogs == true" [(ngModel)]="userData.notifications.blogs" style="cursor: pointer;">
+            <label class="custom-control-label" for="blogs" style="cursor: pointer;">Blogs</label>
         </div>
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input col-6" id="chats" (change)="eventCheckforChats($event)"
-             [checked]="userData.notifications.chats == true" [(ngModel)]="userData.notifications.chats">
-            <label class="custom-control-label col-6" for="chats">Chats</label>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="chats" (change)="eventCheckforChats($event)"
+             [checked]="userData.notifications.chats == true" [(ngModel)]="userData.notifications.chats" style="cursor: pointer;">
+            <label class="custom-control-label" for="chats" style="cursor: pointer;">Chats</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="reviews" (change)="eventCheckforReviews($event)"
+             [checked]="userData.notifications.reviews == true" [(ngModel)]="userData.notifications.reviews" style="cursor: pointer;">
+            <label class="custom-control-label" for="reviews" style="cursor: pointer;">Reviews</label>
+        </div>
+    </div>
+    Blog Categories:
+    <div class="row" style="margin:20px">
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="busses" (change)="eventCheckforBusses($event)"
+             [checked]="userData.notifications.busses == true" [(ngModel)]="userData.notifications.busses" style="cursor: pointer;">
+            <label class="custom-control-label" for="busses" style="cursor: pointer;">Busses</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="trains" (change)="eventCheckforTrains($event)"
+             [checked]="userData.notifications.trains == true" [(ngModel)]="userData.notifications.trains" style="cursor: pointer;">
+            <label class="custom-control-label" for="trains" style="cursor: pointer;">Trains</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="flights" (change)="eventCheckforFlights($event)"
+             [checked]="userData.notifications.flights == true" [(ngModel)]="userData.notifications.flights" style="cursor: pointer;">
+            <label class="custom-control-label" for="flights" style="cursor: pointer;">Flights</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="hotels" (change)="eventCheckforHotels($event)"
+             [checked]="userData.notifications.hotels == true" [(ngModel)]="userData.notifications.hotels" style="cursor: pointer;">
+            <label class="custom-control-label" for="hotels" style="cursor: pointer;">Hotels</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="restaurants" (change)="eventCheckforRestaurants($event)"
+             [checked]="userData.notifications.restaurants == true" [(ngModel)]="userData.notifications.restaurants" style="cursor: pointer;">
+            <label class="custom-control-label" for="restaurants" style="cursor: pointer;">Restaurants</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="jobs" (change)="eventCheckforJobs($event)"
+             [checked]="userData.notifications.jobs == true" [(ngModel)]="userData.notifications.jobs" style="cursor: pointer;">
+            <label class="custom-control-label" for="jobs" style="cursor: pointer;">Jobs</label>
+        </div>
+        <div class="custom-control custom-switch col-3">
+            <input type="checkbox" class="custom-control-input" id="results" (change)="eventCheckforResults($event)"
+             [checked]="userData.notifications.results == true" [(ngModel)]="userData.notifications.results" style="cursor: pointer;">
+            <label class="custom-control-label" for="results" style="cursor: pointer;">Results</label>
         </div>
     </div>
     <div>

@@ -67,7 +67,7 @@ export class BlogsComponent implements OnInit {
   isLiked=false;
   isDisliked=false;
   blogType:any;
-  typeOfBlog=["Hotels","Restaurants","Buses","Jobs","Results"];
+  typeOfBlog=["Busses","Trains","Flights","Hotels","Restaurants","Jobs","Results"];
   default: string = 'Hotels';
   constructor(private blogsService:BlogsService,
     private formBuilder:FormBuilder,private authService:AuthService) { 

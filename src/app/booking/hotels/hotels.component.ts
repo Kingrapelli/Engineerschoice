@@ -1,5 +1,5 @@
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { HotelsService } from '../hotels.service';
@@ -69,7 +69,10 @@ export class HotelsComponent implements OnInit {
   public config: any;
   cost:any = 0;
   revenue:any;
-  constructor(private service:HotelsService,private formBuilder:FormBuilder,private authService:AuthService) {
+  roomCost:any;
+  selectedTypeOfRoom;
+  constructor(private service:HotelsService,private formBuilder:FormBuilder,
+    private authService:AuthService,private cdRef:ChangeDetectorRef) {
     this.verticalPlacement = 'left';
     this.chatToggleInverse = 'in';
     this.chatToggle = 'out';
@@ -78,15 +81,25 @@ export class HotelsComponent implements OnInit {
   ngOnInit() {
     this.hotelBookingForm= this.formBuilder.group({
       typeOfRoom:[''],
-      noOfRooms:[''],
+      noOfRooms:[1],
       fromDate:[''],
       toDate:[''],
       cost:['0']
     })
   }
 
-  getCostValue(){
-    this.cost= (this.hotelBookingForm.controls['noOfRooms'].value) * 360;
+  getCostValue(value){
+    console.log(value);
+    for(let typeOfRoom of this.hotelData.typeOfRooms){
+      if(typeOfRoom.type == value){
+        this.roomCost=typeOfRoom.cost;
+      }
+    }
+    this.countCost();
+  }
+  
+  countCost(){
+    this.cost= (this.hotelBookingForm.controls['noOfRooms'].value) * this.roomCost;
   }
 
   public get allHotels(){
@@ -149,5 +162,6 @@ export class HotelsComponent implements OnInit {
       if(id == hotel.id)
       this.hotelData=hotel;
     }
+    this.cdRef.detectChanges();
   }
 }

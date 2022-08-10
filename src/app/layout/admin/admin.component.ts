@@ -347,10 +347,16 @@ export class AdminComponent implements OnInit {
     }
     console.log(this.allUsers);
     this.chatForm.reset();
-    // console.log(this.chat);
-    // localStorage.setItem('chat',JSON.stringify(this.chat));
     localStorage.setItem('users',JSON.stringify(this.allUsers));
-    this.service.sendingMessageToAdmin(tmpMsg,userId,openChatUserId,category);
+    let openChatUser;
+    for(let user of this.allUsers){
+      if(user.id == openChatUserId){
+        openChatUser=user;
+      }
+    }
+    if(openChatUser.notifications.chats === true){
+      this.service.sendingMessageToAdmin(tmpMsg,userId,openChatUserId,category);
+    }
     this.cdRef.detectChanges();
   }
 
