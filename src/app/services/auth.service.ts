@@ -69,6 +69,7 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "reviews":true,
           "busses":true,
           "trains":true,
           "flights":true,
@@ -104,6 +105,7 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "reviews":true,
           "busses":true,
           "trains":true,
           "flights":true,
@@ -139,6 +141,7 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "reviews":true,
           "busses":true,
           "trains":true,
           "flights":true,
@@ -174,6 +177,7 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "reviews":true,
           "busses":true,
           "trains":true,
           "flights":true,
@@ -209,6 +213,7 @@ export class AuthService {
         "notifications":{
           "blogs":true,
           "chats":true,
+          "reviews":true,
           "busses":true,
           "trains":true,
           "flights":true,
@@ -334,7 +339,13 @@ export class AuthService {
       let tmpMessage={
         message:payload.message
       }
-      this.sendingMessageToAdmin(tmpMessage,userData.id,payload.sentTo,category);
+      for(let user of allUsers){
+        if(payload.sentTo == user.id){
+          if(user.notifications.reviews == true){
+            this.sendingMessageToAdmin(tmpMessage,userData.id,payload.sentTo,category);
+          }
+        }
+      }
     }
   }
 

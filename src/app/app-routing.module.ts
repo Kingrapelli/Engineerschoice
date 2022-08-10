@@ -62,6 +62,10 @@ const routes: Routes = [
         loadChildren:()=>import('./booking/booking.module').then(m=>m.BookingModule)
       },
       {
+        path:'events',
+        loadChildren:()=>import('./events/events.module').then(m=>m.EventsModule)
+      },
+      {
         path:'blogs',
         loadChildren:()=>import('./blogs/blogs.module').then(m=> m.BlogsModule)
       },{

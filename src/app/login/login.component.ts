@@ -21,9 +21,11 @@ export class LoginComponent implements OnInit {
     this.localData = JSON.parse(localStorage.getItem('user'));
     console.log(this.localData);
     // console.log(this.localData.loggedin);
-    if(this.localData.loggedin == true){
-      this.router.navigate(['/dashboard']);
-    };
+    if(this.localData != null){
+      if(this.localData.loggedin == true){
+        this.router.navigate(['/dashboard']);
+      };
+    }
     document.querySelector('body').setAttribute('themebg-pattern', 'theme1');
     this.logInForm = this.formBuilder.group({
       email:['',Validators.required],

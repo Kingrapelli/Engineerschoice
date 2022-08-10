@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 export class SettingsComponent implements OnInit {
   blogs:boolean;
   chats:boolean;
+  reviews:boolean;
   busses:boolean;
   trains:boolean;
   flights:boolean;
@@ -16,11 +17,20 @@ export class SettingsComponent implements OnInit {
   restaurants:boolean;
   jobs:boolean;
   results:boolean;
+  allNotification:boolean=false;
   constructor(private authService:AuthService) { }
 
   ngOnInit() {
-   
+   if((this.userData.notifications.blogs == true) && (this.userData.notifications.blogs == true)){
+    this.allNotification=true;
+   }
   }
+
+  eventCheckforNotifications(event){
+    this.userData.notifications.blogs=true;
+    this.userData.notifications.chats=true;
+  }
+
   public get userData(){
     return JSON.parse(localStorage.getItem('user'));
   }
@@ -37,6 +47,11 @@ export class SettingsComponent implements OnInit {
   eventCheckforChats(event){
     this.chats=event.target.checked;
     this.userData.notifications.chats=this.chats;
+  }
+
+  eventCheckforReviews(event){
+    this.reviews=event.target.checked;
+    this.userData.notifications.reviews=this.reviews;
   }
 
   eventCheckforBusses(event){
@@ -83,6 +98,9 @@ export class SettingsComponent implements OnInit {
     if(this.chats === undefined){
       this.chats=this.userData.notifications.chats;
     }
+    if(this.reviews === undefined){
+      this.reviews=this.userData.notifications.reviews;
+    }
     if(this.busses === undefined){
       this.busses=this.userData.notifications.busses;
     }
@@ -108,6 +126,7 @@ export class SettingsComponent implements OnInit {
       if(user.id == this.userData.id){
         user.notifications.blogs=this.blogs;
         user.notifications.chats=this.chats;
+        user.notifications.reviews=this.reviews;
         user.notifications.busses=this.busses;
         user.notifications.trains=this.trains;
         user.notifications.flights=this.flights;
@@ -119,6 +138,7 @@ export class SettingsComponent implements OnInit {
     }
     tmpUser.notifications.blogs=this.blogs;
     tmpUser.notifications.chats=this.chats;
+    tmpUser.notifications.reviews=this.reviews;
     tmpUser.notifications.busses=this.busses;
     tmpUser.notifications.trains=this.trains;
     tmpUser.notifications.flights=this.flights;

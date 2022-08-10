@@ -43,10 +43,16 @@
           </div>
           <div style="margin:5px;margin-top: 20px;">
             <form action="" [formGroup]="hotelBookingForm" (ngSubmit)="bookingHotel()">
-              
+              <div class="row" style="margin-bottom: 5px;">
+                <label for="typeOfRoom" class="col-5"><sup class="text-danger">*</sup>Type of Room:</label>
+                <select name="" id="typeOfRoom" formControlName="typeOfRoom" (change)="getCostValue($event.target.value)" [ngModel]="selectedTypeOfRoom"
+                 class="form-control" style="width: 180px !important;height:30px !important">
+                  <option *ngFor="let typeOfRoom of hotelData.typeOfRooms" value="{{typeOfRoom.type}}">{{typeOfRoom.type}}  - {{typeOfRoom.cost}}/-</option>
+                </select>
+              </div>
               <div class="row" style="margin-bottom: 5px;">
                 <label for="noOfRooms" class="col-5"><sup class="text-danger">*</sup>No of Rooms:</label>
-                <input class="form-control col-6" type="number" name="" id="noOfRooms" formControlName="noOfRooms" (keyup)="getCostValue()"
+                <input class="form-control col-6" type="number" name="" id="noOfRooms" formControlName="noOfRooms" (keyup)="countCost()"
                  style="width: 80px !important;height:30px !important">
               </div>
               <div class="row" style="margin-bottom: 5px;">
