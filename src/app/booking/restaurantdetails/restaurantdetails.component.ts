@@ -69,7 +69,7 @@ export class RestaurantdetailsComponent implements OnInit {
   CGST=0;
   SGST=0;
   serviceCharges=0;
-  @ViewChild('searchFoods', /* TODO: add static flag */ {static: false}) searchFoods: ElementRef;
+  @ViewChild('searchFoods') searchFoods: ElementRef;
 
   constructor(private foodService:FoodService,private activatedRoute:ActivatedRoute) { 
     this.verticalPlacement = 'left';

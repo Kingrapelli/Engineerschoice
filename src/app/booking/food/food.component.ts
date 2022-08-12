@@ -10,7 +10,7 @@ export class FoodComponent implements OnInit {
   // allRestaurants:any;
   isVeg:any=false;
   isNonVeg:any=false;
-  @ViewChild('searchRestaurant', /* TODO: add static flag */ {static: false}) searchRestaurant: ElementRef;
+  @ViewChild('searchRestaurant') searchRestaurant: ElementRef;
 
   constructor(private foodService:FoodService) { }
 

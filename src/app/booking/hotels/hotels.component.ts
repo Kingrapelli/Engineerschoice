@@ -60,7 +60,7 @@ import { HotelsService } from '../hotels.service';
 export class HotelsComponent implements OnInit {
 
   allUnivercities:any;
-  @ViewChild('searchHotels', /* TODO: add static flag */ {static: false}) searchHotels: ElementRef;
+  @ViewChild('searchHotels') searchHotels: ElementRef;
   verticalPlacement: string; /* left(default), right */
   chatToggleInverse: string;
   chatToggle: string;

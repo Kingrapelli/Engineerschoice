@@ -8,7 +8,7 @@ import { FindoutService } from '../findout.service';
 })
 export class UnivercitiesComponent implements OnInit {
   allUnivercities:any;
-  @ViewChild('searchUnivercities', /* TODO: add static flag */ {static: false}) search_univercities: ElementRef;
+  @ViewChild('searchUnivercities') search_univercities: ElementRef;
 
   constructor(private findOutService:FindoutService) { }
 
