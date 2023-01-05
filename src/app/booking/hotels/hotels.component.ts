@@ -1,6 +1,6 @@
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { HotelsService } from '../hotels.service';
 
@@ -80,10 +80,10 @@ export class HotelsComponent implements OnInit {
 
   ngOnInit() {
     this.hotelBookingForm= this.formBuilder.group({
-      typeOfRoom:[''],
+      typeOfRoom:['',Validators.required],
       noOfRooms:[1],
-      fromDate:[''],
-      toDate:[''],
+      fromDate:['', Validators.required],
+      toDate:['', Validators.required],
       cost:['0']
     })
   }
@@ -138,7 +138,7 @@ export class HotelsComponent implements OnInit {
     }
     this.authService.saveIntoBookings(tmpBooking,this.revenue, this.hotelData);
     this.chatToggle = 'out';
-    alert(this.hotelData.name + "hotel booked successfully");
+    alert(this.hotelData.name + " hotel booked successfully");
   }
 
   // toggleChat(id) {

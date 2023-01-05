@@ -1,6 +1,6 @@
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { BlogsService } from '../blogs.service';
 
@@ -69,7 +69,12 @@ export class BlogsComponent implements OnInit {
   blogType:any;
   typeOfBlog=["Busses","Trains","Flights","Hotels","Restaurants","Jobs","Results"];
   default: string = 'Hotels';
-  constructor(private blogsService:BlogsService,
+  user:any;
+  allBlogs:any;
+  formData = new FormData();
+  @ViewChild('fileInput', { static: false }) fileInputRef: ElementRef;
+  
+  constructor(private blogsService:BlogsService, private cdRef : ChangeDetectorRef,
     private formBuilder:FormBuilder,private authService:AuthService) { 
     this.verticalPlacement = 'left';
     this.chatToggleInverse = 'in';
@@ -79,19 +84,29 @@ export class BlogsComponent implements OnInit {
   ngOnInit() {
     this.addBlogForm=this.formBuilder.group({
       typeOfRoom:[''],
-      image:[''],
+      image:['', Validators.required],
       location:[''],
       content:['']
     });
+    this.getUser();
+    this.getAllBlogs();
     // this.addBlogForm.controls['typeOfRoom'].setValue(this.default, {onlySelf: true});
+    setInterval(() => {
+      this.getAllBlogs();
+    }, 2000);
   }
 
-  public get userData(){
-    return JSON.parse(localStorage.getItem('user'));
+  async getUser(){
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    this.authService.getUserById(this.authService.user ? this.authService.user.id : localUser.id).subscribe(res=>{
+      this.user = res;
+    });
   }
 
-  public get allBlogs(){
-    return this.blogsService.blogs;
+  getAllBlogs(){
+    this.blogsService.getAllBlogs().subscribe((res:any)=>{
+      this.allBlogs = res;
+    })
   }
 
   openAddBlog(){
@@ -100,144 +115,61 @@ export class BlogsComponent implements OnInit {
 
   closeAddBlog(){
     this.chatToggle = 'out';
+    // this.addBlogForm.reset();
+    this.fileInputRef.nativeElement.value = "";
+    this.addBlogForm.controls['image'].reset();
+    this.formData.delete('image');
   }
 
   onSubmitAddBlog(){
     let date = new Date();
-    let id=this.blogsService.blogs.length+1;
-    let tmpBlog={
-      id : id,
-      "senderId":this.userData.id,
-      "senderImage" : this.userData.image,
-      "image":this.url,
+    let tmpBlog:any={
+      "senderId":this.user._id,
+      "senderImage" : this.user.image,
+      "image": null,
       "content": this.addBlogForm.value.content,
       "sendAt":date.toUTCString(),
-      "sentBy":this.userData.firstName,
+      "sentBy":this.user.firstName,
       "location":this.addBlogForm.value.location,
-      // "typeOfBlog":this.addBlogForm.value.typeOfBlog,
       "typeOfBlog":this.blogType,
       likes :[],
       dislikes:[]
     };
-    console.log(tmpBlog);
-    this.blogsService.addBlog(tmpBlog);
+    this.formData.append('blog',JSON.stringify(tmpBlog));
+    this.blogsService.addBlog(this.formData).subscribe(res=>{
+      this.getAllBlogs();
+    });
     this.addBlogForm.reset();
-    this.chatToggle = 'out';
+    // this.chatToggle = 'out';
+    this.closeAddBlog();
   }
 
-  readUrl(event:any) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: ProgressEvent) => {
-        this.url = (<FileReader>event.target).result;
-      }
-      reader.readAsDataURL(event.target.files[0]);
-    }
+  readUrl(e:any) {
+    this.formData.append('image',e.target.files[0]);
   }
 
   public get allUsers(){
     return JSON.parse(localStorage.getItem('users'));
   }
 
-  likeTheBlog(id,senderId){
-    let senderUserData;
-    for(let user of this.allUsers){
-      if(user.id == senderId){
-        senderUserData = user;
-      }
-    }
-    for(let blog of this.allBlogs){
-      if(blog.id == id){
-        blog.likes.push(this.userData.id);
-      }
-    }
-    for(let blog of this.allBlogs){
-      if(blog.id == id){
-        for(let i=0;i<blog.dislikes.length;i++){
-          if(blog.dislikes[i]==this.userData.id){
-            blog.dislikes.splice(i,1);
-          }
-        }
-      }
-    }
-    let payload:any
-    for(let blog of this.allBlogs){
-      if(blog.id == id){
-        payload = {
-          message:"Liked your blog: "+blog.content,
-        }
-      }
-    }
-    if(senderUserData.notifications.blogs == true){
-      this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
-    }
-  }
-
-  deLikeTheBlog(id,senderId){
-    for(let blog of this.allBlogs){
-      if(blog.id == id){
-        for(let i=0;i<blog.likes.length;i++){
-          if(blog.likes[i]==this.userData.id){
-            blog.likes.splice(i,1);
-          }
-        }
-      }
-    }
-  }
-
   getLikesData(likes){
-    return likes.find(id => id === this.userData.id);
+    return likes.find(id => id === this.user._id);
   }
 
   getDisLikesData(dislikes){
-    return dislikes.find(id=> id === this.userData.id);
+    return dislikes.find(id=> id === this.user._id);
   }
 
-  dislikeBlog(id,senderId){
-    let senderUserData;
-    for(let user of this.allUsers){
-      if(user.id == senderId){
-        senderUserData = user;
-      }
+  performLikesForBlog(id, senderid, functionname){
+    let params = {
+      id : id,
+      senderid : senderid,
+      userid : this.user._id,
+      functionname : functionname
     }
-    for(let blog of this.allBlogs){
-      if(blog.id == id){
-        blog.dislikes.push(this.userData.id);
-      }
-    }
-    for(let blog of this.allBlogs){
-      if(blog.id == id){
-        for(let i=0;i<blog.likes.length;i++){
-          if(blog.likes[i]==this.userData.id){
-            blog.likes.splice(i,1);
-          }
-        }
-      }
-    }
-    let payload:any
-    for(let blog of this.allBlogs){
-      if(blog.id == id){
-        payload = {
-          message:"Disliked your blog: "+blog.content,
-        }
-      }
-    }
-    
-    if(senderUserData.notifications.blogs == true){
-      this.authService.sendingMessageToAdmin(payload,this.userData.id,senderId,"blog");
-    }
+    let _params = this.authService.commonParams({id, senderid, functionname});
+    this.blogsService.performLikesForBlog(params).subscribe(res=>{
+      this.getAllBlogs();
+    })
   }
-
-  dedislikeBlog(id){
-    for(let blog of this.allBlogs){
-      if(blog.id == id){
-        for(let i=0;i<blog.dislikes.length;i++){
-          if(blog.dislikes[i]==this.userData.id){
-            blog.dislikes.splice(i,1);
-          }
-        }
-      }
-    }
-  }
-  
 }

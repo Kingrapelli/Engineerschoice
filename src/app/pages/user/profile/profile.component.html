@@ -10,20 +10,29 @@
             <div class="col-md-12">
               <div class="media-left">
                 <a href="javascript:;" class="profile-image">
-                  <img class="user-img img-radius" src="{{userData.image}}" alt="user-img" height="110px" width="110px">
+                  <label class="hoverable" for="fileInput1">
+                    <img class="user-img img-radius" src="{{this.user.image}}" alt="user-img" height="110px" width="110px">
+                    <div class="hover-text ti-pencil"> Edit</div>
+                    <div class="background"></div>
+                  </label>
                 </a>
+                <input type="file" style="position:absolute;right: 2; top:2px ;color: black;" id="fileInput1"
+                                          accept="images/*" #fileInput (change)="readUrl($event)" required>
+                <!-- <a href="javascript:;" class="profile-image">
+                  <div class="hoverable" for="fileInput">
+                    <img class="user-img img-radius" src="{{this.user.image}}" alt="user-img" height="110px" width="110px">
+                    <div class="hover-text ti-pencil"> Edit</div>
+                    <div class="background"></div>
+                  </div>
+                  <input type="file" style="position:absolute;right: 2; top:2px ;color: black;" id="fileInput"
+                      accept="images/*" #fileInput (change)="readUrl($event)" required>
+                </a> -->
               </div>
               <div class="media-body row">
                 <div class="col-lg-12">
                   <div class="user-title">
-                    <h2>{{userData.firstName}}</h2>
-                    <span class="text-white">{{userData.designation}}</span>
-                  </div>
-                </div>
-                <div>
-                  <div class="pull-right cover-btn">
-                    <!-- <button type="button" class="btn btn-primary m-b-10 m-r-10"><i class="icofont icofont-plus"></i> Follow</button> -->
-                    <!-- <button type="button" class="btn btn-primary m-b-10"><i class="icofont icofont-ui-messaging"></i> Message</button> -->
+                    <h2>{{user.firstName}}</h2>
+                    <span class="text-white">{{user.designation}}</span>
                   </div>
                 </div>
               </div>
@@ -61,23 +70,23 @@
                                     <tbody>
                                     <tr>
                                       <th scope="row">Full Name</th>
-                                      <td>{{userData.firstName}} {{userData.lastName}}</td>
+                                      <td>{{user.firstName}} {{user.lastName}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Gender</th>
-                                      <td>{{userData.gender}}</td>
+                                      <td>{{user.gender}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Birth Date</th>
-                                      <td>{{userData.dob}}</td>
+                                      <td>{{user.dob}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Marital Status</th>
-                                      <td>{{userData.maritalStatus}}</td>
+                                      <td>{{user.maritalStatus}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Location</th>
-                                      <td>{{userData.location}}</td>
+                                      <td>{{user.location}}</td>
                                     </tr>
                                     </tbody>
                                   </table>
@@ -90,23 +99,23 @@
                                     <tbody>
                                     <tr>
                                       <th scope="row">Email</th>
-                                      <td><a href="javascript:;">{{userData.email}}</a></td>
+                                      <td><a href="javascript:;">{{user.email}}</a></td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Mobile Number</th>
-                                      <td>{{userData.mobile}}</td>
+                                      <td>{{user.mobile}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Twitter</th>
-                                      <td>{{userData.twitter}}</td>
+                                      <td>{{user.twitter}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Skype</th>
-                                      <td>{{userData.skype}}</td>
+                                      <td>{{user.skype}}</td>
                                     </tr>
                                     <tr>
                                       <th scope="row">Website</th>
-                                      <td><a href="javascript:;">{{userData.website}}</a></td>
+                                      <td><a href="javascript:;">{{user.website}}</a></td>
                                     </tr>
                                     </tbody>
                                   </table>
@@ -123,7 +132,7 @@
                       <!-- end of row -->
                     </div>
                     <!-- end of view-info -->
-                    <div class="edit-info" *ngIf="!editProfile">
+                    <div class="edit-info" *ngIf="!editProfile" [formGroup]="userProfileForm">
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="general-info">
@@ -136,7 +145,15 @@
                                       <td>
                                         <div class="input-group">
                                           <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-user"></i></label></span>
-                                          <input type="text" class="form-control" placeholder="Full Name" value="{{userData.firstName}} {{userData.lastName}}">
+                                          <input type="text" class="form-control" placeholder="First Name" value="{{user.firstName}}" formControlName="firstName">
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <div class="input-group">
+                                          <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-user"></i></label></span>
+                                          <input type="text" class="form-control" placeholder="Last Name" value="{{user.lastName}}" formControlName="lastName">
                                         </div>
                                       </td>
                                     </tr>
@@ -144,14 +161,15 @@
                                       <td>
                                         <div class="form-radio">
                                           <div class="group-add-on">
+                                            <!-- formControlName="gender" -->
                                             <div class="radio radiofill radio-inline">
                                               <label>
-                                                <input type="radio" name="radio" [checked]="userData.gender == 'Male'"><i class="helper"></i> Male
+                                                <input type="radio" name="gender" value="Male" [checked]="user.gender == 'Male'" formControlName="gender"><i class="helper"></i> Male
                                               </label>
                                             </div>
                                             <div class="radio radiofill radio-inline">
                                               <label>
-                                                <input type="radio" name="radio" [checked]="userData.gender == 'FeMale'"><i class="helper"></i> Female
+                                                <input type="radio" name="gender" value="FeMale" [checked]="user.gender == 'FeMale'" formControlName="gender"><i class="helper"></i> Female
                                               </label>
                                             </div>
                                           </div>
@@ -160,16 +178,16 @@
                                     </tr>
                                     <tr>
                                       <td>
-                                        <input id="dropper-default" class="form-control" type="text" value="{{userData.dob}}" placeholder="Select Your Birth Date" />
+                                        <input id="dropper-default" class="form-control" type="text" value="{{user.dob}}" formControlName="dob" placeholder="Select Your Birth Date" />
                                       </td>
                                     </tr>
                                     <tr>
                                       <td>
-                                        <select id="hello-single" class="form-control">
+                                        <select id="hello-single" class="form-control"  formControlName="maritalStatus">
                                           <option value="">---- Marital Status ----</option>
-                                          <option value="married" [selected]="userData.maritalStatus == 'Married'">Married</option>
-                                          <option value="single" [selected]="userData.maritalStatus == 'Single'">Single</option>
-                                          <option value="unmarried" [selected]="userData.maritalStatus == 'Unmarried'">Unmarried</option>
+                                          <option value="Married" [selected]="user.maritalStatus == 'Married'">Married</option>
+                                          <option value="Single" [selected]="user.maritalStatus == 'Single'">Single</option>
+                                          <option value="Unmarried" [selected]="user.maritalStatus == 'Unmarried'">Unmarried</option>
                                         </select>
                                       </td>
                                     </tr>
@@ -177,7 +195,7 @@
                                       <td>
                                         <div class="input-group">
                                           <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-location-pin"></i></label></span>
-                                          <input type="text" class="form-control" placeholder="Address" value="{{userData.location}}">
+                                          <input type="text" class="form-control" placeholder="Address" value="{{user.location}}" formControlName="location">
                                         </div>
                                       </td>
                                     </tr>
@@ -190,38 +208,54 @@
                                 <div class="table-responsive">
                                   <table class="table">
                                     <tbody>
-                                    <tr>
-                                      <td>
-                                        <div class="input-group">
-                                          <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-mobile-phone"></i></label></span>
-                                          <input type="text" class="form-control" value="{{userData.mobile}}" placeholder="Mobile Number">
-                                        </div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="input-group">
-                                          <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-social-twitter"></i></label></span>
-                                          <input type="text" class="form-control" value="{{userData.twitter}}" placeholder="Twitter Id">
-                                        </div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="input-group">
-                                          <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-social-skype"></i></label></span>
-                                          <input type="email" class="form-control" value="{{userData.skype}}" placeholder="Skype Id">
-                                        </div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td>
-                                        <div class="input-group">
-                                          <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-earth"></i></label></span>
-                                          <input type="text" class="form-control" value="{{userData.website}}" placeholder="website">
-                                        </div>
-                                      </td>
-                                    </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-user"></i></label></span>
+                                            <input type="text" class="form-control" placeholder="Email" value="{{user.email}}" formControlName="email" disabled>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-mobile-phone"></i></label></span>
+                                            <input type="text" class="form-control" value="{{user.mobile}}" placeholder="Mobile Number" formControlName="mobile">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-social-twitter"></i></label></span>
+                                            <input type="text" class="form-control" value="{{user.twitter}}" placeholder="Twitter Id" formControlName="twitter">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-social-skype"></i></label></span>
+                                            <input type="email" class="form-control" value="{{user.skype}}" placeholder="Skype Id" formControlName="skype">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-earth"></i></label></span>
+                                            <input type="text" class="form-control" value="{{user.website}}" placeholder="website" formControlName="website">
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <!-- <tr>
+                                        <td>
+                                          <div class="input-group">
+                                            <input type="file" name="image" id="" formControlName="image"
+                                             accept="images/*" #fileInput (change)="readUrl($event)" required>
+                                          </div>
+                                        </td>
+                                      </tr> -->
                                     </tbody>
                                   </table>
                                 </div>
@@ -230,7 +264,7 @@
                             </div>
                             <!-- end of row -->
                             <div class="text-center">
-                              <a href="javascript:;" class="btn btn-primary waves-effect waves-light m-r-20">Save</a>
+                              <a href="javascript:;" class="btn btn-primary waves-effect waves-light m-r-20" (click)="onSubmitSaveProfile(user._id)">Save</a>
                               <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect" (click)="toggleEditProfile()">Cancel</a>
                             </div>
                           </div>
@@ -433,7 +467,7 @@
                       <li class="media" *ngFor="let review of allReviews">
                         <div class="media-left">
                           <a href="javascript:;">
-                            <img class="media-object img-radius comment-img" src="{{review.senderImage}}" alt="{{review.senderFirstName}}">
+                            <img class="media-object img-radius comment-img" src="{{review?.senderImage}}" alt="{{review?.senderFirstName}}">
                           </a>
                         </div>
                         <div class="media-body">
@@ -447,23 +481,23 @@
                           </div>
                           <p class="m-b-0">{{review.message}}</p>
                           <div class="m-b-25">
-                            <span><a href="javascript:;" class="m-r-10 f-12" (click)="settingOpenReplyChat()">Reply</a></span><span *ngIf="userData?.id == review?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
-                            <div>
-                              <div class="input-group input-group-button input-group-primary" id="reveiw.parentId">
-                                <span class="input-group-prepend"><label class="input-group-text" (click)="sendReply(review.parentId)"><i class="icofont icofont-comment"></i></label></span>
-                                <form [formGroup]="sendReplyForm">
-                                  <input type="text" class="form-control" placeholder="Write Reply" formControlName="replyMessage" style="height:60px;width:930px">
-                                </form>
+                            <span><a href="javascript:;" class="m-r-10 f-12" (click)="settingOpenReplyChat()">Reply</a></span><span *ngIf="user?._id == review?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
+                            <div *ngIf="openReplyChat == true">
+                              <div class="input-group input-group-button input-group-primary" id="reveiw._id">
+                                <span class="input-group-prepend"><label class="input-group-text" (click)="sendReply(review._id)"><i class="icofont icofont-comment"></i></label></span>
+                                <div [formGroup]="sendReplyForm" novalidate>
+                                  <input type="text" class="form-control" placeholder="Write Reply" formControlName="replyMessage" style="height:60px;width:930px" name="replyMessage">
+                                </div>
                               </div>
                             </div>
                           </div>
                           <hr>
                           <!-- Nested media object -->
                           <div class="media mt-2" *ngFor="let replies of allReplies">
-                            <a class="media-left" href="javascript:;" *ngIf="replies.parentId == review.parentId">
+                            <a class="media-left" href="javascript:;" *ngIf="replies._id == review._id">
                               <img class="media-object img-radius comment-img" src="{{replies.senderImage}}" alt="{{replies.senderFirstName}}">
                             </a>
-                            <div class="media-body" *ngIf="replies.parentId == review.parentId">
+                            <div class="media-body" *ngIf="replies._id == review._id">
                               <h6 class="media-heading">{{replies.senderFirstName}} <span class="f-12 text-muted m-l-5">{{replies.sendAt | date:'hh:mm a'}}</span></h6>
                               <div class="stars-example-css review-star">
                                 <i class="icofont icofont-star"></i>
@@ -474,18 +508,15 @@
                               </div>
                               <p class="m-b-0">{{replies.message}}</p>
                               <div class="m-b-25">
-                                <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span *ngIf="userData?.id == replies?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
-                                <!-- <div *ngIf="openReplyChat == true">
-                                  <div class="input-group input-group-button input-group-primary">
-                                    <span class="input-group-prepend"><label class="input-group-text" (click)="sendReview()"><i class="icofont icofont-comment"></i></label></span>
-                                    <form [formGroup]="sendReplyForm">
-                                      <input type="text" class="form-control" placeholder="Write Comment" formControlName="message" style="height:60px;width:930px">
-                                    </form>
-                                    <span class="input-group-append"><label class="input-group-text">
-                                                   <button type="button" class="btn btn-primary"><i class="icofont icofont-plus"></i>note</button>
-                                    </label></span>
+                                <span><a href="javascript:;" class="m-r-10 f-12" (click)="settingOpenReplyChat()">Reply</a></span><span *ngIf="this.user?._id == replies?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
+                                <div *ngIf="openReplyChat == true">
+                                  <div class="input-group input-group-button input-group-primary" id="reveiw._id">
+                                    <span class="input-group-prepend"><label class="input-group-text" (click)="sendReply(review._id)"><i class="icofont icofont-comment"></i></label></span>
+                                    <div [formGroup]="sendReplyForm" novalidate>
+                                      <input type="text" class="form-control" placeholder="Write Reply" formControlName="replyMessage" style="height:60px;width:930px" name="replyMessage">
+                                    </div>
                                   </div>
-                                </div> -->
+                                </div>
                               </div>
                               <hr>
   
@@ -499,9 +530,9 @@
                       <div class="md-group-add-on p-relative col-lg-12">
                         <div class="input-group input-group-button input-group-primary">
                           <span class="input-group-prepend"><label class="input-group-text" (click)="sendReview()"><i class="icofont icofont-comment"></i></label></span>
-                          <form [formGroup]="sendReviewForm">
-                            <input type="text" class="form-control" placeholder="Write Comment" formControlName="message" style="height:60px;width:930px">
-                          </form>
+                          <div [formGroup]="sendReviewForm" novalidate>
+                            <input type="text" class="form-control" placeholder="Write Comment" formControlName="message" style="height:60px;width:930px" name="message">
+                          </div>
                           <span class="input-group-append"><label class="input-group-text">
                                          <button type="button" class="btn btn-primary"><i class="icofont icofont-plus"></i>note</button>
                           </label></span>

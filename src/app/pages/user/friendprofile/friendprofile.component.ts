@@ -26,40 +26,61 @@ export class FriendprofileComponent implements OnInit {
   userData:any;
   allUsers:any;
   sendReviewForm:any;
+  user:any;
+  openReplyChat:any= false;
+
   constructor(private service:AuthService,private formBuilder:FormBuilder) {
   }
 
   ngOnInit() {
-    this.userData = JSON.parse(localStorage.getItem('user'));
+    this.getUser();
+    this.getAllUserss();
+    // this.userData = JSON.parse(localStorage.getItem('user'));
     this.routedUser = this.service.routedUser;
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
+    // this.allUsers = JSON.parse(localStorage.getItem('users'));
     this.sendReviewForm=this.formBuilder.group({
       message:['']
-    })
+    });
+    setInterval(()=>{
+      this.getUser();
+      this.getAllUserss();
+    },2000);
+  }
+
+  settingOpenReplyChat(){
+    this.openReplyChat=this.openReplyChat == true ? false : true;
+  }
+
+  async getUser(){
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    this.service.getUserById(this.service.user ? this.service.user.id : localUser.id).subscribe(res=>{
+      this.user = res;
+    });
   }
 
   sendReview(){
-    this.userData = JSON.parse(localStorage.getItem('user'));
+    // this.userData = JSON.parse(localStorage.getItem('user'));
     let _date = new Date();
     let tmpReview={
-      sentTo : this.routedUser.id,
-      sentBy : this.userData.id,
-      senderFirstName: this.userData.firstName,
+      sentTo : this.routedUser._id,
+      sentBy : this.user._id,
+      senderFirstName: this.user.firstName,
       message:this.sendReviewForm.value.message,
       rating : 3,
-      senderImage : this.userData.image,
+      senderImage : this.user.image,
       category : 'review',
       sendAt: _date.toUTCString()
     }
-    this.service.sendReview(tmpReview);
+    this.service.sendReview(tmpReview).subscribe(res=>{});
     this.sendReviewForm.controls['message'].setValue('');
   }
 
   public get allReplies(){
-    this.userData = JSON.parse(localStorage.getItem('user'));
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
+    // this.userData = JSON.parse(localStorage.getItem('user'));
+    // this.allUsers = JSON.parse(localStorage.getItem('users'));
     let tmpReviews:any;
     tmpReviews= this.routedUser.reviews;
+    // console.log("tmpReviews",tmpReviews);
     let tmpReplies=[];
     for(let review of tmpReviews){
       for(let i=0;i<review.replies.length;i++){
@@ -69,13 +90,21 @@ export class FriendprofileComponent implements OnInit {
     return tmpReplies;
   }
 
+  getAllUserss(){
+    this.service.getAllUsers().subscribe(res=>{
+      this.allUsers = res;
+    },err=>{
+      console.log('error',err)
+    });
+  }
+
   public get allReviews(){
-    this.userData = JSON.parse(localStorage.getItem('user'));
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
+    // this.userData = JSON.parse(localStorage.getItem('user'));
+    // this.allUsers = JSON.parse(localStorage.getItem('users'));
     let tmpReviews:any;
-    for(let user of this.allUsers){
-      if(this.routedUser.id == user.id){
-        tmpReviews= user.reviews;
+    for(let _user of this.allUsers){
+      if(this.routedUser._id == _user._id){
+        tmpReviews= _user.reviews;
       }
     }
     return tmpReviews;

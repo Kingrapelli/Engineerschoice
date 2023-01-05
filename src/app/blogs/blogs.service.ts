@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -44,9 +47,18 @@ export class BlogsService {
       dislikes:[]
     },
   ];
-  constructor() { }
+  constructor(private router:Router,private http:HttpClient) { }
 
   addBlog(payload){
-    this.blogs.unshift(payload)
+    // this.blogs.unshift(payload)
+    return this.http.post(`${environment.nodeUri}/uploadblog`,payload);
+  }
+
+  getAllBlogs(){
+    return this.http.get(`${environment.nodeUri}/getallblogs`);
+  }
+
+  performLikesForBlog(payload){
+    return this.http.post(`${environment.nodeUri}/likes`,payload);
   }
 }

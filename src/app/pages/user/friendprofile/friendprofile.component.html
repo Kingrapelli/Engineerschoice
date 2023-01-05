@@ -446,15 +446,23 @@
                             </div>
                             <p class="m-b-0">{{review.message}}</p>
                             <div class="m-b-25">
-                              <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span *ngIf="userData?.id == review?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
+                              <span><a href="javascript:;" class="m-r-10 f-12" (click)="settingOpenReplyChat()">Reply</a></span><span *ngIf="this.user?._id == review?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
+                              <div *ngIf="openReplyChat == true">
+                                <div class="input-group input-group-button input-group-primary" id="reveiw._id">
+                                  <span class="input-group-prepend"><label class="input-group-text" (click)="sendReply(review._id)"><i class="icofont icofont-comment"></i></label></span>
+                                  <div [formGroup]="sendReplyForm" novalidate>
+                                    <input type="text" class="form-control" placeholder="Write Reply" formControlName="replyMessage" style="height:60px;width:930px" name="replyMessage">
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                             <hr>
                             <!-- Nested media object -->
                             <div class="media mt-2" *ngFor="let replies of allReplies">
-                              <a class="media-left" href="javascript:;" *ngIf="replies.parentId == review.parentId">
+                              <a class="media-left" href="javascript:;" *ngIf="replies._id == review._id">
                                 <img class="media-object img-radius comment-img" src="{{replies.senderImage}}" alt="{{replies.senderFirstName}}">
                               </a>
-                              <div class="media-body" *ngIf="replies.parentId == review.parentId">
+                              <div class="media-body" *ngIf="replies._id == review._id">
                                 <h6 class="media-heading">{{replies.senderFirstName}} <span class="f-12 text-muted m-l-5">{{replies.sendAt | date:'hh:mm a'}}</span></h6>
                                 <div class="stars-example-css review-star">
                                   <i class="icofont icofont-star"></i>
@@ -465,7 +473,15 @@
                                 </div>
                                 <p class="m-b-0">{{replies.message}}</p>
                                 <div class="m-b-25">
-                                  <span><a href="javascript:;" class="m-r-10 f-12">Reply</a></span><span *ngIf="userData?.id == replies?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
+                                  <span><a href="javascript:;" class="m-r-10 f-12" (click)="settingOpenReplyChat()">Reply</a></span><span *ngIf="this.user?._id == replies?.sentBy"><a href="javascript:;" class="f-12">Edit</a> </span>
+                                  <div *ngIf="openReplyChat == true">
+                                    <div class="input-group input-group-button input-group-primary" id="reveiw._id">
+                                      <span class="input-group-prepend"><label class="input-group-text" (click)="sendReply(review._id)"><i class="icofont icofont-comment"></i></label></span>
+                                      <div [formGroup]="sendReplyForm" novalidate>
+                                        <input type="text" class="form-control" placeholder="Write Reply" formControlName="replyMessage" style="height:60px;width:930px" name="replyMessage">
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                                 <hr>
     

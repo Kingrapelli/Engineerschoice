@@ -4,6 +4,10 @@ import {MenuItems} from '../../shared/menu-items/menu-items';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+declare var $:any;
+import { ViewportScroller } from "@angular/common";
 
 @Component({
   selector: 'app-admin',
@@ -114,9 +118,14 @@ export class AdminComponent implements OnInit {
   from = new Date();
   date = this.from.toUTCString();
   // date = this.from.toLocaleTimeString();
-
+  ipAddress:any;
+  userImage:any;
+  user:any;
+  formData = new FormData();
+  @ViewChild('chatscroll') private myScrollContainer: ElementRef;
   constructor(public menuItems: MenuItems,private service:AuthService,
-    private router:Router,private fb:FormBuilder,private cdRef:ChangeDetectorRef) {
+    private router:Router,private fb:FormBuilder,private cdRef:ChangeDetectorRef,
+    private http:HttpClient, private el:ElementRef, private scroller: ViewportScroller) {
     this.navType = 'st5';
     this.themeLayout = 'vertical';
     this.vNavigationView = 'view1';
@@ -174,20 +183,11 @@ export class AdminComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.getUser();
+    this.getAllUserss();
+    this.scrollToBottom();
     this.userData = JSON.parse(localStorage.getItem('user'));
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
-    this.chat = JSON.parse(localStorage.getItem('chat'));
-    // this.notifications = JSON.parse(localStorage.getItem('notifications'));
-    // console.log(this.notifications);
-    // this.chat.sort(function(a,b){
-    //   return b.sentAt - a.sentAt;
-    // });
-    console.log(this.chat);
-    console.log(this.userData.loggedin);
-    if(this.userData.loggedin != true){
-      this.router.navigate(['/login']);
-    }
     this.setBackgroundPattern('pattern2');
     this.contactUsForm = this.fb.group({
       textInput:this.userData.firstName,
@@ -198,26 +198,88 @@ export class AdminComponent implements OnInit {
     this.chatForm = this.fb.group({
       messageText : ['']
     })
+    setInterval(() => {
+      this.getUser();
+    }, 5000);
+    setInterval(() => {
+      this.getAllUserss();
+    }, 2000);
+  }
+
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  }
+
+  scrollToBottom(): void {
+    // const _el: HTMLDivElement = this.el.nativeElement;
+    // _el.scrollTop = Math.max(0, _el.scrollHeight - _el.offsetHeight); 
+    // this.scroller.scrollToAnchor("endscroll");   
+  }
+
+  getProfilePic() {
+    if(this.user._id){
+      this.formData.append('id', this.user._id);
+      this.service.getProfilePic(this.formData.get('id')).subscribe(
+        (res) => {
+          this.userImage = res[0].image;
+          this.cdRef.detectChanges();
+        }, (err) => {
+          console.log(err);
+        }
+      )
+    }
+    else{
+      let _user=JSON.parse(localStorage.getItem('user'));
+      this.service.getUserById(_user.id).subscribe((res:any)=>{
+        this.service.getProfilePic(res._id).subscribe(
+          (res) => {
+            this.userImage = res[0].image;
+            // this.cdRef.detectChanges();
+          }, (err) => {
+            console.log(err);
+          }
+        )
+      });
+    }
+  }
+
+  getAllUserss(){
+    this.service.getAllUsers().subscribe(res=>{
+      this.allUsers = res;
+    },err=>{
+      console.log('error',err)
+    });
+  }
+
+  async getUser(){
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    this.service.getUserById(this.service.user ? this.service.user.id : localUser.id).subscribe(res=>{
+      this.user = res;
+      this.getProfilePic();
+    });
+  }
+
+  getDimensionsByFind(id){
+    return this.allUsers.find(x => x.id === id);
   }
 
   public get allNotifications(){
     this.notifications = JSON.parse(localStorage.getItem('notifications'));
-    // console.log(this.notifications);
     let tmpNotifications=[];
-    for (let notification of this.notifications){
-      if(this.userData.id == notification.sentTo){
-        tmpNotifications.push(notification);
+    if(this.notifications != null && this.notifications != undefined){
+      for (let notification of this.notifications){
+        if(this.userData.id == notification.sentTo){
+          tmpNotifications.push(notification);
+        }
       }
     }
-    // console.log(tmpNotifications);
-    // return this.notifications;
     return (tmpNotifications || '');
   }
 
   getUserId(id:any){
     let routerUser ;
     for(let user of this.allUsers){
-      if(id == user.id){
+      if(id == user._id){
         routerUser=user;
       }
     }
@@ -270,11 +332,6 @@ export class AdminComponent implements OnInit {
       this.toggleOn = this.verticalNavType === 'offcanvas' ? true : this.toggleOn;
     }
     this.verticalNavType = this.verticalNavType === 'expanded' ? 'offcanvas' : 'expanded';
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
-    // this.chat = JSON.parse(localStorage.getItem('chat'));
-    // this.chat.sort(function(a,b){
-    //   return b.sentAt - a.sentAt;
-    // });
     this.cdRef.detectChanges();
   }
 
@@ -283,13 +340,12 @@ export class AdminComponent implements OnInit {
       this.toggleOn = true;
       this.verticalNavType = 'offcanvas';
     }
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
+    // this.allUsers = JSON.parse(localStorage.getItem('users'));
     this.cdRef.detectChanges();
   }
 
   onMobileMenu() {
     this.isCollapsedMobile = this.isCollapsedMobile === 'yes-block' ? 'no-block' : 'yes-block';
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
     this.cdRef.detectChanges();
   }
 
@@ -303,12 +359,10 @@ export class AdminComponent implements OnInit {
     this.chatToggleInverse = this.chatToggleInverse === 'out' ? 'in' : 'out';
     this.chatInnerToggle = 'off';
     this.chatInnerToggleInverse = 'off';
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
     this.cdRef.detectChanges();
   }
 
   toggleChatInner(id:any) {
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
     this.chatInnerToggle = this.chatInnerToggle === 'off' ? 'on' : 'off';
     this.chatInnerToggleInverse = this.chatInnerToggleInverse === 'off' ? 'on' : 'off';
     if(id && this.chatInnerToggle){
@@ -323,7 +377,7 @@ export class AdminComponent implements OnInit {
 
   sendMessage(userId,openChatUserId){
     console.log(userId,this.chatForm.value.messageText,openChatUserId);
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
+    // this.allUsers = JSON.parse(localStorage.getItem('users'));
     let tmpMsg :any;
     let category = 'message';
     tmpMsg = {
@@ -333,21 +387,27 @@ export class AdminComponent implements OnInit {
       "sentAt" : this.from.toUTCString()
     }
     if(this.chatForm.value.messageText != (null || undefined)){
-      for(let user of this.allUsers){
-        if(user.id === userId){
-          user.chat.push(tmpMsg);
-          this.userData.chat.push(tmpMsg);
-        }
-      }
-      for(let user of this.allUsers){
-        if(user.id === openChatUserId){
-          user.chat.push(tmpMsg);
-        }
-      }
+      this.service.pushMessageChat(tmpMsg).subscribe(res=>{
+        this.getUser();
+        this.cdRef.detectChanges();
+      });
+      // for(let user of this.allUsers){
+      //   if(user.id === userId){
+      //     user.chat.push(tmpMsg);
+      //     this.userData.chat.push(tmpMsg);
+      //   }
+      // }
+      // for(let user of this.allUsers){
+      //   if(user.id === openChatUserId){
+      //     user.chat.push(tmpMsg);
+      //   }
+      // }
     }
-    console.log(this.allUsers);
+    this.scrollToBottom();
+    $(".chatscroll").animate({ scrollTop: $(".chatscroll endscroll").height() }, "fast");
+    console.log("this.allUsers",this.allUsers);
     this.chatForm.reset();
-    localStorage.setItem('users',JSON.stringify(this.allUsers));
+    // localStorage.setItem('users',JSON.stringify(this.allUsers));
     let openChatUser;
     for(let user of this.allUsers){
       if(user.id == openChatUserId){
@@ -357,6 +417,7 @@ export class AdminComponent implements OnInit {
     if(openChatUser.notifications.chats === true){
       this.service.sendingMessageToAdmin(tmpMsg,userId,openChatUserId,category);
     }
+    this.getAllUserss();
     this.cdRef.detectChanges();
   }
 
@@ -427,11 +488,12 @@ export class AdminComponent implements OnInit {
 
   logout(){
     console.log('at logout..')
-    // localStorage.clear();
-    this.userData = JSON.parse(localStorage.getItem('user'));
-    this.userData.loggedin=false;
-    this.userData.active=false;
-    localStorage.setItem('user',JSON.stringify(this.userData));
+    localStorage.removeItem('auth');
+    this.user.loggedin=false;
+    this.user.active=false;
+    let params = {id : this.user.id, status : false};
+    this.service.updateStatus(params).subscribe();
+    this.router.navigate(['/login']);
   }
 
 }

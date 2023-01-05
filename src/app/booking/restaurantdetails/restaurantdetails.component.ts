@@ -1,6 +1,7 @@
 import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { FoodService } from '../food.service';
 
 @Component({
@@ -69,10 +70,12 @@ export class RestaurantdetailsComponent implements OnInit {
   CGST=0;
   SGST=0;
   serviceCharges=0;
+  payments:any;
   @ViewChild('searchFoods') searchFoods: ElementRef;
 
-  constructor(private foodService:FoodService,private activatedRoute:ActivatedRoute) { 
+  constructor(private foodService:FoodService,private activatedRoute:ActivatedRoute, private authservice:AuthService) { 
     this.verticalPlacement = 'left';
+    this.chatToggleInverse = 'in';
     this.orderDetailsToggle = 'out';
   }
   
@@ -94,7 +97,7 @@ export class RestaurantdetailsComponent implements OnInit {
     const search = (this.searchFoods.nativeElement.value).toLowerCase();
     let search_input: string;
     let search_parent: any;
-    const restaurantsList = document.querySelectorAll('.card .card-body');
+    const restaurantsList = document.querySelectorAll('.card .card-body .card-title:first-child');
   
     Array.prototype.forEach.call((restaurantsList), function(elements, index) {
       search_input = (elements.innerHTML).toLowerCase();
@@ -164,7 +167,10 @@ export class RestaurantdetailsComponent implements OnInit {
   }
 
   navigateToPaymentGateway(){
-
+    alert("Food ordered successfully");
+    this.closeBookingDetails();
+    this.bookings=[];
+    this.authservice.getWidgetCardsData((this.totalCost/100)*10);
   }
 
   ngOnDestroy(){

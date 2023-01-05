@@ -65,7 +65,7 @@
   <!-- card4 end -->
 
   <!-- Statistics Start -->
-  <div class="col-md-12 col-xl-8">
+  <!-- <div class="col-md-12 col-xl-8">
     <app-card [title]="'Statistics'" [classHeader]="true">
       <span class="code-header"><span class="text-muted">Get 15% Off on <a href="https://www.amcharts.com/" target="_blank">amCharts</a> licences. Use code "codedthemes" and get the discount.</span></span>
       <div id="line-example" class="line-example">
@@ -96,7 +96,7 @@
       <chart [type]="'line'" [data]="totalValueGraphData2" [options]="totalValueGraphOption" style="width: 100%; height: 100px;"></chart>
     </div>
 
-  </div>
+  </div> -->
 
   <!-- Statistics End -->
 
@@ -164,16 +164,16 @@
   <!-- Statistics card end -->
 
   <!-- email Sent Start -->
-  <div class="col-md-12">
+  <!-- <div class="col-md-12">
     <app-card [title]="'Email sent'" [cardClass]="'email-sent-card'" [classHeader]="true">
       <span class="code-header"><span class="text-muted">Get 15% Off on <a href="https://www.amcharts.com/" target="_blank">amCharts</a> licences. Use code "codedthemes" and get the discount.</span></span>
       <div id="email-sent" style="max-width:100%;height:400px;"></div>
     </app-card>
-  </div>
+  </div> -->
   <!-- email Sent End -->
 
   <!-- data widget start -->
-  <div class="col-md-12 col-xl-6">
+  <!-- <div class="col-md-12 col-xl-6">
     <app-card [title]="'Time spent : project &amp; task'" [cardClass]="'project-task'" [blockClass]="'p-b-10'">
       <div class="table-responsive">
         <table class="table table-hover">
@@ -263,8 +263,9 @@
         </table>
       </div>
     </app-card>
-  </div>
-  <div class="col-md-12 col-xl-6">
+  </div> -->
+
+  <div class="col-md-12 col-xl-4">
     <app-card [title]="'To do list'" [cardClass]="'add-task-card'" [blockClass]="'p-b-0'">
       <div class="to-do-list">
         <div class="checkbox-fade fade-in-primary d-block">
@@ -278,17 +279,6 @@
               <a href="javascript:"><img src="assets/images/avatar-1.jpg" placement="top" ngbTooltip="Lary Doe" class="img-40"></a>
               <a href="javascript:"><img src="assets/images/avatar-2.jpg" placement="top" ngbTooltip="Alia" class="img-40 m-l-10"></a>
             </div>
-          </label>
-        </div>
-      </div>
-      <div class="to-do-list">
-        <div class="checkbox-fade fade-in-primary d-block">
-          <label class="check-task d-block">
-            <input type="checkbox" value="" (change)="onTaskStatusChange($event)">
-            <span class="cr">
-                <i class="cr-icon icofont icofont-ui-check txt-default"></i>
-            </span>
-            <span><h6>Meeting With HOD's and borad</h6><p class="text-muted m-l-30">23 january 2003</p></span>
           </label>
         </div>
       </div>
@@ -329,6 +319,7 @@
 
     </app-card>
   </div>
+  
   <!-- data widget End -->
 
   <!-- weather Start -->
@@ -380,7 +371,7 @@
   <!-- weather End -->
 
   <!-- browser Start -->
-  <div class="col-md-6 col-xl-4">
+  <!-- <div class="col-md-6 col-xl-4">
     <app-card [title]="'Browser Stats'">
       <div class="browser-card p-b-15 ">
         <p class="d-inline-block m-0 ">Google Crome</p>
@@ -407,7 +398,7 @@
         <button class="btn bg-c-yellow btn-round float-right btn-browser ">28%</button>
       </div>
     </app-card>
-  </div>
+  </div> -->
   <!-- browser End -->
 
   <!-- profile Start -->
@@ -415,14 +406,14 @@
     <div class="card card-contact-box ">
       <div class="card-block ">
         <div class="card-contain text-center ">
-          <img src="{{userData.image}}" alt=" " height="100px" width="100px">
-          <h6 class="f-w-600 f-20 p-b-5 m-0 p-t-15 ">{{userData.firstName}}(You)</h6>
-          <a href="javascript:">{{userData.email}}</a>
-          <p class="text-muted p-b-25 m-0 p-t-5 ">{{userData.designation}}</p>
+          <img src="{{userImage}}" alt=" " height="100px" width="100px">
+          <h6 class="f-w-600 f-20 p-b-5 m-0 p-t-15 ">{{user.firstName}}(You)</h6>
+          <a href="javascript:">{{user.email}}</a>
+          <p class="text-muted p-b-25 m-0 p-t-5 ">{{user.designation}}</p>
           <div class="contain-card p-t-30 p-b-10 ">
-            <span *ngFor="let user of allUsers">
-              <a href="javascript:" *ngIf="userData.id != user.id"><img src="{{user.image}}" (click)="getUserId(user.id)"
-                 placement="top" ngbTooltip="{{user.firstName}}" class="img-40" style="margin:2px"></a>
+            <span *ngFor="let _user of allUsers">
+              <a href="javascript:" *ngIf="user._id != _user._id"><img src="{{_user.image}}" (click)="getUserId(_user._id)"
+                 placement="top" ngbTooltip="{{_user.firstName}}" class="img-40" style="margin:2px"></a>
             </span>
             <!-- <a href="javascript:"><img src="assets/images/avatar-3.jpg" placement="top" ngbTooltip="Suzen" class="img-40 m-l-5"></a>
             <a href="javascript:"><img src="assets/images/avatar-4.jpg" placement="top" ngbTooltip="Lary Doe" class="img-40 m-l-5"></a>
@@ -451,7 +442,7 @@
   <!-- profile End -->
 
   <!-- project overview Start -->
-  <div class="col-md-12 col-xl-8">
+  <!-- <div class="col-md-12 col-xl-8">
     <app-card [title]="'Recent Comments'" [blockClass]="'p-0'">
       <div class="card-comment ">
         <div class="card-block-small">
@@ -529,8 +520,9 @@
         </div>
       </div>
     </app-card>
-  </div>
-  <div class="col-md-12 col-xl-4">
+  </div> -->
+
+  <!-- <div class="col-md-12 col-xl-4">
     <div class="card fb-card">
       <div class="card-header">
         <i class="icofont icofont-social-facebook"></i>
@@ -594,6 +586,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- project overview End -->
 </div>

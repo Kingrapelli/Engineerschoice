@@ -1,5 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +21,6 @@ export class AuthService {
   img5:any;
   img6:any;
   img7:any;
-  chat = [  ];
   count:any =  0;
   parentId=1;
   widgetCardsData:any={
@@ -30,7 +33,10 @@ export class AuthService {
   allBookings:any =[];
   routedUser:any = '';
   from = new Date();
-  constructor(private router:Router) { 
+  user:any;
+  // = JSON.parse(localStorage.getItem('user'))
+  headers=new HttpHeaders().set('content-type','application/json');
+  constructor(private router:Router,private http:HttpClient) { 
     this.img1='/assets/images/avatar-1.jpg';
     this.img2='/assets/images/avatar-2.jpg';
     this.img3='/assets/images/avatar-3.jpg';
@@ -225,32 +231,44 @@ export class AuthService {
       }
     ]
     localStorage.setItem('users',JSON.stringify(this.users));
-    localStorage.setItem('chat',JSON.stringify(this.chat));
     localStorage.setItem('notifications',JSON.stringify(this.notifications));
     localStorage.setItem('allBookings',JSON.stringify(this.allBookings));
+    // this.add();
   }
 
-  signIn(username:any,password:any){
-    let _users = JSON.parse(localStorage.getItem('users'));
-    let validated = null;
-    for(let user of _users){
-      if(username === user.email && password === user.password){
-        this.isUserLoggedIn=true;
-        user.active=true;
-        user.loggedin=true;
-        this.userData = user;
-        validated = true;
-        break;
-      }
-    }
-    if(validated == true){
-      localStorage.setItem('user',JSON.stringify(this.userData));
+  // public get allUsers(){
+  //   let users =
+  //   console.log('users',users)
+  //   return users
+  // }
+
+  public get UserLoggedIn(){
+    return !!(localStorage.getItem('auth'));
+  }
+
+  public get userDetails(){
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+  public get allUserDetails(){
+    return JSON.parse(localStorage.getItem('users'));
+  }
+
+  signIn(email:any,password:any){
+    // if (password) {
+    //   const salt = bcrypt.genSaltSync(10)
+    //   password = bcrypt.hashSync(password, salt)
+    // }
+    this.http.post(`${environment.nodeUri}/signin`,{email,password},{headers:this.headers}).subscribe((res:any)=>{
+      this.user = res.user;
+      localStorage.setItem('user',JSON.stringify(res.user));
+      localStorage.setItem('auth',JSON.stringify(res));
+      console.log(res);
       this.router.navigate(['/dashboard']);
-    }
-    else{
-      this.isUserLoggedIn=false;
-      alert("invalid credentials");
-    }
+    },(error)=>{
+      console.log('Error occuring while calling login()',error.message);
+      localStorage.clear();
+    })
   }
 
   sendingMessageToAdmin(payload,id,sendTo,category){
@@ -310,10 +328,10 @@ export class AuthService {
   }
 
   sendReview(payload){
-    let userData = JSON.parse(localStorage.getItem('user'));
-    let allUsers = JSON.parse(localStorage.getItem('users'));
+    // let userData = JSON.parse(localStorage.getItem('user'));
+    // let allUsers = JSON.parse(localStorage.getItem('users'));
 
-    let tmpParentId=userData.reviews.length+this.parentId;
+    // let tmpParentId=userData.reviews.length+this.parentId;
     let tmpReview = {
       sentTo : payload.sentTo,
       sentBy : payload.sentBy,
@@ -323,42 +341,34 @@ export class AuthService {
       senderImage : payload.senderImage,
       category : 'review',
       sendAt: payload.sendAt,
-      parentId : tmpParentId,
       replies: []
     }
-    for(let user of allUsers){
-      if(payload.sentTo == user.id)
-        user.reviews.push(tmpReview);
-    }
-    userData.reviews.push(tmpReview);
-    console.log(userData);
-    localStorage.setItem('user',JSON.stringify(userData));
-    localStorage.setItem('users',JSON.stringify(allUsers));
-    if(payload.sentTo != userData.id){
-      let category = 'Review';
-      let tmpMessage={
-        message:payload.message
-      }
-      for(let user of allUsers){
-        if(payload.sentTo == user.id){
-          if(user.notifications.reviews == true){
-            this.sendingMessageToAdmin(tmpMessage,userData.id,payload.sentTo,category);
-          }
-        }
-      }
-    }
-  }
+    return this.http.post(`${environment.nodeUri}/addreview`,{tmpReview});
 
-  public get userDetails(){
-    return JSON.parse(localStorage.getItem('user'));
-  }
-
-  public get allUserDetails(){
-    return JSON.parse(localStorage.getItem('users'));
+    // for(let user of allUsers){
+    //   if(payload.sentTo == user.id)
+    //     user.reviews.push(tmpReview);
+    // }
+    // userData.reviews.push(tmpReview);
+    // console.log(userData);
+    // localStorage.setItem('user',JSON.stringify(userData));
+    // localStorage.setItem('users',JSON.stringify(allUsers));
+    // if(payload.sentTo != userData.id){
+    //   let category = 'Review';
+    //   let tmpMessage={
+    //     message:payload.message
+    //   }
+    //   for(let user of allUsers){
+    //     if(payload.sentTo == user.id){
+    //       if(user.notifications.reviews == true){
+    //         this.sendingMessageToAdmin(tmpMessage,userData.id,payload.sentTo,category);
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   sendingReplyToReview(payload,parentId){
-    console.log(this.allUserDetails);
     let tmpReview = {
       sentTo : payload.sentTo,
       sentBy : payload.sentBy,
@@ -370,11 +380,8 @@ export class AuthService {
       sendAt: payload.sendAt,
       parentId : parentId
     }
-    // console.log(tmpReview);
     for(let user of this.allUserDetails){
-      if(user.id == tmpReview.sentBy){
-        // console.log(user.reviews)
-        
+      if(user.id == tmpReview.sentBy){ 
       }
     }
   }
@@ -402,4 +409,41 @@ export class AuthService {
     this.sendingMessageToAdmin(tmpPayload,userData.id,3,payload.category);
   }
 
+  getIpCliente(){
+    return this.http.get('http://api.ipify.org/?format=jsonp&callback=JSONP_CALLBACK')
+  }
+
+  uploadProfileById(data: any) {
+    return this.http.post(`${environment.nodeUri}/file`,data);
+  }
+
+  // Get All EMployees Data
+  getProfilePic(data:any) {
+    return this.http.get(`${environment.nodeUri}/getprofilepic/${data}`);
+  }
+
+  getUserById(id:any){
+    return this.http.get(`${environment.nodeUri}/getuserbyid/${id}`);
+  }
+
+  getAllUsers(){
+    return this.http.get(`${environment.nodeUri}/getallusers`);
+  }
+
+  updateStatus(data:any){
+    // return this.http.post(`${environment.nodeUri}/updateactivestatus`,status);
+    return this.http.post(`${environment.nodeUri}/updateactivestatus/${data.id}/${data.status}`,null);
+  }
+
+  pushMessageChat(data:any){
+    return this.http.post(`${environment.nodeUri}/pushmessage/${data.sentBy}/${data.message}/${data.sentTo}/${data.sentAt}`,null);
+  }
+
+  updateProfile(id:any,data:any){
+    return this.http.post(`${environment.nodeUri}/updateprofile/${id}`,{data});
+  }
+
+  commonParams(params){
+    return arguments[0];
+  }
 }

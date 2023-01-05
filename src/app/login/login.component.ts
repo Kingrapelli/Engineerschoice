@@ -18,13 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router,private cdRef:ChangeDetectorRef,private authService:AuthService,private formBuilder:FormBuilder) { }
 
   ngOnInit() {
-    this.localData = JSON.parse(localStorage.getItem('user'));
-    console.log(this.localData);
-    // console.log(this.localData.loggedin);
-    if(this.localData != null){
-      if(this.localData.loggedin == true){
+    this.localData = JSON.parse(localStorage.getItem('auth')) || null;
+    if(this.localData){
         this.router.navigate(['/dashboard']);
-      };
     }
     document.querySelector('body').setAttribute('themebg-pattern', 'theme1');
     this.logInForm = this.formBuilder.group({
@@ -40,8 +36,8 @@ export class LoginComponent implements OnInit {
     // this.cdRef.detectChanges();
     // this.authService.signIn(this.email.value,this.password.value);
     this.sampleData = this.logInForm.value;
-    console.log(this.sampleData);
-    localStorage.setItem('sampleData',JSON.stringify(this.sampleData));
+    // console.log(this.sampleData);
+    // localStorage.setItem('sampleData',JSON.stringify(this.sampleData));
     this.authService.signIn(this.sampleData.email,this.sampleData.password);
   }
 

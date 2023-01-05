@@ -130,21 +130,21 @@
                         <div class="form-group row">
                           <label for="example-text-input" class="col-3 col-form-label">Name</label>
                           <div class="col-9">
-                            <input class="form-control" type="text" value="{{userData.firstName}}" id="example-text-input" formControlName="textInput" disabled>
+                            <input class="form-control" type="text" id="example-text-input" formControlName="textInput" disabled>
                             <!-- <input class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input"> -->
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="example-search-input-email" class="col-3 col-form-label">Email</label>
                           <div class="col-9">
-                            <input class="form-control" type="email" value="{{userData.email}}" disabled id="example-search-input-email" formControlName="inputMail">
+                            <input class="form-control" type="email" disabled id="example-search-input-email" formControlName="inputMail">
                             <!-- <input class="form-control" type="email" placeholder="Enter your E-mail Id" id="example-search-input-email"> -->
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="example-search-input-content" class="col-3 col-form-label">Contact</label>
                           <div class="col-9">
-                            <input class="form-control" type="number" value="{{userData.mobile}}" disabled id="example-search-input-content" formControlName="inputContact">
+                            <input class="form-control" type="number" disabled id="example-search-input-content" formControlName="inputContact">
                             <!-- <input class="form-control" type="number" placeholder="+91-9898989898" id="example-search-input-content"> -->
                           </div>
                         </div>
@@ -222,11 +222,25 @@
               </li>
               <li class="user-profile header-notification">
                 <a [routerLink]="['/']">
-                  <img src="{{userData.image}}" class="img-radius" alt="User-Profile-Image">
-                  <span>{{userData.firstName}}</span>
+                  <img src="{{userImage}}" class="img-radius" alt="User-Profile-Image">
+                  <span>{{user?.firstName}}</span>
                   <i class="ti-angle-down"></i>
                 </a>
                 <ul class="show-notification profile-notification">
+                  <li>
+                    <!-- {{ipAddress}} -->
+                    <select class="form-control">
+                      <option value="Hyderabad" class="form-control">
+                        Hyderabad
+                      </option>
+                      <option value="Bangalore" class="form-control">
+                        Bangalore
+                      </option>
+                      <option value="Mumbai" class="form-control">
+                        Mumbai
+                      </option>
+                    </select>
+                  </li>
                   <li>
                     <a [routerLink]="['/settings']">
                       <i class="ti-settings"></i> Settings
@@ -278,70 +292,25 @@
             </div>
             <div class="main-friend-list scroll-window">
               <perfect-scrollbar [style.max-width]="'100%'" [config]="config">
-                <div *ngFor="let user of allUsers">
-                  <div *ngIf="user.id != userData.id" class="show">
-                    <div (click)="toggleChatInner(user.id)" class="media userlist-box" data-id="1" placement="left" ngbTooltip="{{user.firstName}}">
+                <div *ngFor="let _user of allUsers">
+                  <div *ngIf="_user.id != this.user.id" class="show">
+                    <div (click)="toggleChatInner(_user.id)" class="media userlist-box" data-id="1" placement="left" ngbTooltip="{{_user.firstName}}">
                       <a class="media-left" href="javascript:;">
-                        <img class="media-object " src="{{user.image}}" alt="Generic placeholder image">
+                        <img class="media-object " src="{{_user.image}}" alt="Generic placeholder image">
                         <!-- <div class="{user.active} ? live-status bg-success : live-status bg-danger"></div> -->
-                        <div *ngIf="user.active == true">
+                        <div *ngIf="_user.active == true">
                           <div class="live-status bg-success"></div>
                         </div>
-                        <div *ngIf="user.active == false">
+                        <div *ngIf="_user.active == false">
                           <div class="live-status bg-danger"></div>
                         </div>
                       </a>
                       <div class="media-body">
-                        <div class="f-13 chat-header">{{user.firstName}}</div>
+                        <div class="f-13 chat-header">{{_user.firstName}}</div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- <div (click)="toggleChatInner()" class="media userlist-box" data-id="2" data-status="online" data-username="Lary Doe" placement="left" ngbTooltip="Lary Doe">
-                  <a class="media-left" href="javascript:;">
-                    <img class="media-object " src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                    <div class="live-status bg-success"></div>
-                  </a>
-                  <div class="media-body">
-                    <div class="f-13 chat-header">Lary Doe</div>
-                  </div>
-                </div>
-                <div (click)="toggleChatInner()" class="media userlist-box" data-id="3" data-status="online" data-username="Alice" placement="left" ngbTooltip="Alice">
-                  <a class="media-left" href="javascript:;">
-                    <img class="media-object " src="assets/images/avatar-5.jpg" alt="Generic placeholder image">
-                    <div class="live-status bg-success"></div>
-                  </a>
-                  <div class="media-body">
-                    <div class="f-13 chat-header">Alice</div>
-                  </div>
-                </div>
-                <div (click)="toggleChatInner()" class="media userlist-box" data-id="4" data-status="offline" data-username="Alia" placement="left" ngbTooltip="Alia">
-                  <a class="media-left" href="javascript:;">
-                    <img class="media-object " src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                    <div class="live-status bg-danger"></div>
-                  </a>
-                  <div class="media-body">
-                    <div class="f-13 chat-header">Alia</div>
-                  </div>
-                </div>
-                <div (click)="toggleChatInner()" class="media userlist-box" data-id="5" data-status="online" data-username="Suzen" placement="left" ngbTooltip="Suzen">
-                  <a class="media-left" href="javascript:;">
-                    <img class="media-object " src="assets/images/avatar-5.jpg" alt="Generic placeholder image">
-                    <div class="live-status bg-success"></div>
-                  </a>
-                  <div class="media-body">
-                    <div class="f-13 chat-header">Suzen</div>
-                  </div>
-                </div>
-                <div (click)="toggleChatInner()" class="media userlist-box" data-id="6" data-status="offline" data-username="Michael Scofield" placement="left" ngbTooltip="Michael Scofield">
-                  <a class="media-left" href="javascript:;">
-                    <img class="media-object " src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                    <div class="live-status bg-danger"></div>
-                  </a>
-                  <div class="media-body">
-                    <div class="f-13 chat-header">Michael Scofield</div>
-                  </div>
-                </div> -->
               </perfect-scrollbar>
             </div>
           </div>
@@ -353,14 +322,15 @@
       <div class="media chat-inner-header">
         <a class="back_chatBox">
           <i class="icofont icofont-rounded-left" (click)="toggleChatInner()"></i> {{openChatUser.firstName}} 
-          <i class="ti-info-alt" (click)="getUserId(openChatUser.id); toggleChat()" style="margin-left: 240px;"></i>
+          <i class="ti-info-alt" (click)="getUserId(openChatUser._id); toggleChat()" style="margin-left: 240px;"></i>
         </a>
       </div>
       <div style="overflow-x: visible;overflow-y: visible;">
-        <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 230px)'" [config]="config" 
-           style="overflow-x: visible;overflow-y: visible;">
-          <div *ngFor="let chatData of this.userData.chat">
-            <div class="media chat-messages"  *ngIf="(openChatUser.id === chatData.sentBy) && (userData.id === chatData.sentTo)">
+        <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 230px)'" [config]="config" id="endscroll"
+           style="overflow-x: visible;overflow-y: visible;" >
+           <!-- #scrollMe [scrollTop]="scrollMe.scrollHeight" -->
+          <div *ngFor="let chatData of this.user.chat">
+            <div class="media chat-messages"  *ngIf="(openChatUser.id === chatData.sentBy) && (this.user.id === chatData.sentTo)">
                 <a class="media-left photo-table" href="javascript:;">
                   <img class="media-object  m-t-5" src="{{openChatUser.image}}" alt="Generic placeholder image">
                 </a>
@@ -373,7 +343,7 @@
                   </div>
                 </div>
             </div>
-            <div class="media chat-messages" *ngIf="(openChatUser.id === chatData.sentTo) && (userData.id === chatData.sentBy)">
+            <div class="media chat-messages" *ngIf="(openChatUser.id === chatData.sentTo) && (this.user.id === chatData.sentBy)">
                 <div class="media-body chat-menu-reply">
                   <div class="">
                     <div>
@@ -384,18 +354,21 @@
                 </div>
                 <div class="media-right photo-table">
                   <a href="javascript:;">
-                    <img class="media-object  m-t-5" src="{{userData.image}}" alt="Generic placeholder image">
+                    <img class="media-object  m-t-5" src="{{this.user.image}}" alt="Generic placeholder image">
                   </a>
                 </div>
             </div>
           </div>
+          <span ></span>
         </perfect-scrollbar>
-        <div class="chat-reply-box p-b-20">
+        <div class="chat-reply-box p-b-20 ">
           <div class="right-icon-control">
             <form [formGroup]="chatForm">
               <input type="text" class="form-control search-text" placeholder="Share Your Thoughts" formControlName="messageText">
-              <div class="form-icon" (click)='sendMessage(userData.id,openChatUser.id)'>
-                <i class="icofont icofont-paper-plane"></i>
+              <div class="form-icon" (click)='sendMessage(this.user.id,openChatUser.id)'>
+                <button class="btn btn-link" style="height: 20px;">
+                  <i class="icofont icofont-paper-plane" style="position: absolute; right:7.5px;bottom:2.5px"></i>
+                </button>
               </div>
             </form>
           </div>
@@ -411,10 +384,10 @@
           <div class="pcoded-inner-navbar main-menu" appAccordion>
             <div class="">
               <div class="main-menu-header">
-                <img class="img-40 img-radius" src="{{userData.image}}" alt="User-Profile-Image">
+                <img class="img-40 img-radius" src="{{userImage}}" alt="User-Profile-Image">
                 <div class="user-details">
-                  <span>{{userData.firstName}}</span>
-                  <span id="more-details" (click)="toggleOpenedSidebar()">{{userData.designation}}<i class="ti-angle-down"></i></span>
+                  <span>{{this.user?.firstName}}</span>
+                  <span id="more-details" (click)="toggleOpenedSidebar()">{{this.user?.designation}}<i class="ti-angle-down"></i></span>
                 </div>
               </div>
               <div class="main-menu-content">

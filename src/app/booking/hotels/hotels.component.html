@@ -71,7 +71,7 @@
               </div>
               
               <div style="margin-top:5px">
-                <button class="btn btn-primary btn-sm btn-block">Book</button>
+                <button class="btn btn-primary btn-sm btn-block" [disabled]="!this.hotelBookingForm.valid">Book</button>
               </div>
             </form>
           </div>

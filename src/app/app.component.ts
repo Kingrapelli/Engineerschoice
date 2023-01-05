@@ -20,5 +20,15 @@ export class AppComponent implements OnInit {
       window.scrollTo(0, 0);
     });
     this.authService.isUserLoggedIn=false;
+
+    // window.indexedDB = window.indexedDB;
+    window.IDBTransaction = window.IDBTransaction;
+    window.IDBKeyRange = window.IDBKeyRange;
+    
+    if (!window.indexedDB) {
+      window.alert("Your browser doesn't support a stable version of IndexedDB.")
+    }
+    else{
+    }
   }
 }

@@ -29,9 +29,15 @@ export class DashboardDefaultComponent implements OnInit {
   notifications:any;
   userData:any;
   allUsers:any;
-  constructor(private router:Router,private service:AuthService,private cdRef:ChangeDetectorRef) { }
-
-  ngOnInit() {
+  userImage:any;
+  formData = new FormData();
+  constructor(private router:Router,private service:AuthService,private cdRef:ChangeDetectorRef) {
+  }
+  
+  async ngOnInit() {
+    await this.getAllUserss();
+    let params = {id : this.user.id, status : true};
+    this.service.updateStatus(params).subscribe();
     
     AmCharts.makeChart('statistics-chart', {
       type: 'serial',
@@ -301,7 +307,49 @@ export class DashboardDefaultComponent implements OnInit {
       ]
     });
     this.userData = JSON.parse(localStorage.getItem('user'));
-    this.allUsers = JSON.parse(localStorage.getItem('users'));
+    // this.allUsers = JSON.parse(localStorage.getItem('users'));
+    this.getProfilePic();
+  }
+
+  getAllUserss(){
+    this.service.getAllUsers().subscribe(res=>{
+      this.allUsers = res;
+    },err=>{
+      console.log('error',err)
+    });
+  }
+
+  getProfilePic() {
+    // console.log('this.user._id',this.user._id);
+    if(this.user._id){
+      this.formData.append('id', this.user._id);
+      this.service.getProfilePic(this.formData.get('id')).subscribe(
+        (res) => {
+          this.userImage = res[0].image;
+        }, (err) => {
+          console.log(err);
+        }
+      )
+    }
+    else{
+      let _user=JSON.parse(localStorage.getItem('user'));
+      this.service.getUserById(_user.user.id).subscribe((res:any)=>{
+        this.service.getProfilePic(res._id).subscribe(
+          (res) => {
+            this.userImage = res[0].image;
+          }, (err) => {
+            console.log(err);
+          }
+        )
+      });
+    }
+  }
+
+  public get user(){
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    const auth:any = this.service.user ? this.service.user : localUser;
+    // ? this.service.user : this.service.getUserById(localUser.user.id);
+    return  auth;
   }
 
   public get widgetCardsData(){
@@ -316,7 +364,7 @@ export class DashboardDefaultComponent implements OnInit {
   getUserId(id:any){
     let routerUser ;
     for(let user of this.allUsers){
-      if(id == user.id){
+      if(id == user._id){
         routerUser=user;
       }
     }
