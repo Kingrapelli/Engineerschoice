@@ -4,6 +4,7 @@
     </div>
     <div *ngFor="let blog of allBlogs" style="float: center;">
         <div class="card mb-3" style="max-width:600px !important">
+            <i class="ti-trash" style="color:red;position: absolute;right: 4px;top: 4px; cursor: pointer;" *ngIf="blog.senderId== this.user?._id" (click)="onClickDeleteBlog(blog._id)"></i>
             <img class="card-img-top" src="{{blog.image}}" alt="Card image cap" height="220px" width="300px">
             <div class="card-body" style="padding:10px !important">
                 <div class="row">

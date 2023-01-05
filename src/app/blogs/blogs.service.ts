@@ -61,4 +61,8 @@ export class BlogsService {
   performLikesForBlog(payload){
     return this.http.post(`${environment.nodeUri}/likes`,payload);
   }
+
+  deleteBlogById(id){
+    return this.http.delete(`${environment.nodeUri}/removeblogbyid/${id}`);
+  }
 }

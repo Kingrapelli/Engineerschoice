@@ -172,4 +172,12 @@ export class BlogsComponent implements OnInit {
       this.getAllBlogs();
     })
   }
+
+  onClickDeleteBlog(id){
+    this.blogsService.deleteBlogById(id).subscribe(res=>{
+      console.log("res..",res);
+      if(res['status'] == true) alert("blog deleted...");
+      this.getAllBlogs();
+    })
+  }
 }
